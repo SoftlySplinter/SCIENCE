@@ -83,8 +83,6 @@ Over time the sales of desktops (PCs & Laptops) is decreasing while the sale of 
 * OS vendors
 * Device vendors
 
-
-
 ### Fragmentation and Differentiation
 
 Issue of fragmentation and differentiation, related to:
@@ -97,6 +95,163 @@ Issue of fragmentation and differentiation, related to:
 Top 25 ranked apps in 2012 take 15% of all revenue. Only 2% of App Store newcomers get into the top 250 apps.
 
 Free apps are becoming more of a norm, especially with the saturation of android.
+
+### Mobile Network Operators
+
+Revenues are decreasing due to over-the-top services (i.e. using online services over SMS or phone calls).
+
+Operators will push, via their shop sales-assistant commission, those devices they gain the biggest discounts on.
+
+High profile phones promoted, often Android.
+
+Apple disrupts this model due to a locked mindshare.
+
+Psychological hook of "cheap" contract phones. Free now, pay later ideology.
+
+Billing relationship with the customer. Paying for things using your mobile account rather than via a bank account (directly). Small transaction fee for this service to generate revenue.
+
+* 48% of the world's population do not have a bank account.
+
+Something for the future, not quite so prevalent at the moment.
+
+### Rich Communication Service
+
+Threat of over the top (OTT) services such as Skype. Quality of service is currently an issue here, but voice call is growing very slowly (13% in 2008 to 4% 2012).
+
+GSMA responded by developing a Rich Communication Service specification. Only aimed at long term evolution (LTE) networks (4G). Aims to provide this as a universal service. 17 different implementations by MNOs including AT&T, Telefonica, Verizon and Verdafon.
+
+### Device Vendors (OEMs)
+
+Nokia sales falling. Haven't kept up with the trends.
+
+Samsung now the major player. Mainly due to their adoption of Android.
+
+Apple improving with mobiles.
+
+RIM/Blackberry are focusing on development.
+
+Building an Android smartphone involves:
+
+* Choosing an OS.
+* OEMs design phone (HW, UX, required changes to the Android OS UX) plus apps to include.
+* Marketing.
+* Negotiations with MNOs to arrange bulk discounts.
+* Production test units sent to MNOs, app developers and Google.
+* Phone is shipped to MNOs and independent stores
+* MNOs customise with their own apps.
+* Sales to public plus marketing.
+
+Can also go down the stock phone route.
+
+Inception to market is approximately around 6 months when based on an existing OS.
+
+Apple is a little easier to to the locked-in syndrome.
+
+### Types of Phone
+
+* Basic Phones
+  * Call and SMS support only.
+* Feature Phones
+  * No touch screen
+  * Browser becoming standardised.
+* Smart Phones
+  * Definition changes year-on-year.
+  * Expectations change a lot.
+  * More sensors and technology.
+* Phablets
+  * Large smartphones.
+* Tablets
+  * Same functionality as smartphones, often without SIM.
+* Slates
+  * Large tablets.
+* Non-phone devices
+  * iPod touch
+  * eBook readers
+  * Google Glass
+  * Watches like the Apple Pebble.
+  * Rely on bluetooth or similar.
+
+### Operating System Vendors
+
+Android leading market player.
+
+iOS popular.
+
+Symbian (dead now) and Blackberry not doing well.
+
+Windows Phone a late starter.
+
+### Android Fragmentation
+
+There are 24 listed Android device manufacturers but at least 259 different device models currently on sale.
+
+Lots of different screen sizes, resolutions, hardware capability, etc.
+
+There is only one manufacturer for Apple products.
+
+Version 4.1+ *Jelly Bean* most prevalent, but versions 4.0, 3.0 and 2.3 are still a large market share.
+
+Security problems, most malware attacks on Android.
+
+iOS is mostly all the same version. However, companies often prescribe a 2-3 purchase cycle. Corporate world might need to take into account older versions.
+
+Google allow fragmentation to make Android more interesting to OEMs, However this can get in the way of updates.
+
+Webkit configuration varies; browser fragmentation.
+
+Tried to stop fragmentation in version 3, but this lead to new forks. So this has been re-introduced in version 4.
+
+### Fragmentation and Differentiation
+
+Differentiation gives a unique selling point (USP) for vendors. Sticking with the same model.
+
+Fragmentation leads to security issues and makes the OS more complex to handle screen sizes, etc. More testing needed. Therefore increased cost.
+
+### Windows Phone 8
+
+Microsoft and Nokia. A closed environment (or "walled garden").
+
+No fragmentation/differentiation. Very few OEMs interested.
+
+### How to join the OS game?
+
+Buy into it.
+
+Web as OS platform. Firefox OS is trying hard with cheap alternatives. HTML5, JS, CSS3 and APIs to access hardware.
+
+Very fragmented, depending on rendering engine.
+
+### Mobile Webkits are not always the same
+
+Can be configured differently. Must be careful with mobile websites.
+
+Depends on location too (UC Browser more popular than Android in Asia).
+
+### Proxy versus full browsers.
+
+Opera mini, for example.
+
+* HTTP request (encrypted)
+* Proxy Server
+  * Target HTTP Server resources
+  * Renders page
+  * Compresses into an image map
+* Image map returned to Opera mini (encrypted).
+
+Cheaper and faster over a slow network. Very popular in certain developing countries with low bandwidth.
+
+Cheap in terms in processing too.
+
+JS is handled by the proxy server. Not always perfect and may not be enabled.
+
+### Content Providers
+
+App Stores
+
+* Apple App Store is a walled garden. 70% developer revenue.
+* Google Play. 70% developer revenue.
+* Amazon Android Appstore.
+* Others (apk) security issues with this.
 
 ## Objective-C
 
