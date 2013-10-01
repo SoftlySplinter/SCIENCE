@@ -436,3 +436,4 @@ name.myName = @"Value";
 ## Bringing it all together
 
 *Legal, social, ethical and professional issues. Selecting platforms and delivery methods, getting the interface right. (3 lectures)*
+
