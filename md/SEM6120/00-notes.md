@@ -115,6 +115,31 @@ Problems of AI:
 
 *The backbone of knowledge representation (4 hours).*
 
+### Types of Knowledge
+
+* Declarative - Facts
+* Procedural
+* Meta - knowledge about knowledge
+* Heuristic - rules of thumb
+
+### Representing Knowledge: Object-attribute-value
+
+Encoding a fact in three pieces of information; the object, it's attributes and the values of these attributes.
+
+The facts a human knows are not obvious to a computer; needs to be encoded.
+
+e.g.: `Tree(species, oak)`
+
+The encoding doesn't matter, so long as its uniform to the system.
+
+Can include an uncertainty factors is a number which can be taken into account by the system when making decisions.
+
+The final conclusion of any program where uncertainty was used in the input is likely to also have an uncertainty factor (if you're not sure of the facts, can can the result be certain?)
+
+Encoding uncertainty might be encoded something like this: `Tree(species, oak, 0.8)` (the certainty that the tree is an oak tree is 80%).
+
+Again encoding doesn't matter, so long as its uniform to the system.
+
 ## Programming for Intelligent Systems
 
 *Practical introduction to programming for Intelligent Systems, used to illustrate search, KR and first-order logic (3 hours).*
