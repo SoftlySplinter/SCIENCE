@@ -51,6 +51,54 @@ Two ways of looking at this:
 
 Many definitions, all potentially valid.
 
+Problem: what is intelligence and how do we prove a system is intelligent.
+
+### Strong versus Weak AI
+
+* Strong AI can actually think intelligently.
+* Weak AI can possibly act intelligently.
+
+### Turing Test
+
+Human interrogator talks to another system (human or AI), if the interrogator cannot tell the difference then the argument is we must acknowledge it is able to think like a human.
+
+Has not yet been passed.
+
+### The Chinese Room
+
+Behaving intelligently may not be enough.
+
+Computers are just a symbol manipulation device and therefore cannot have mental states.
+
+### Ethics and AI
+
+We have investigated whether we *can* develop AI, but not whether we *should*.
+
+Problems of AI:
+
+* Job losses
+* Too much/little leisure
+* Privacy rights
+* Accountability
+* End of the human race?
+  * Harm in the wrong hands
+
+### Branches of AI
+
+* Logical AI
+* Search
+* Pattern recognition
+* Representation
+* Inference
+* Common-sense knowledge and reasoning
+* Learning from experience
+* Planning
+* Epistemology
+* Ontology
+* Heuristics
+* Genetic Programming
+
+
 ## Search
 
 *Why search is important in AI and how to go about it. This includes both informed and uninformed strategies. Evolutionary search (6 hours)*.
