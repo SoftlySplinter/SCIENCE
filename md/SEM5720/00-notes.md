@@ -8,9 +8,9 @@ The Internet is a complex, multi-organisation network reaching nearly all parts 
 
 ### Staff
 
-- Dave Price (dap) *co-ordinator*
-- Nitin Naik (nkn)
-- Stephen Kingston (spk)
+- **[Dave Price](mailto:dap@aber.ac.uk)**
+- [Nitin Naik](mailto:nkn@aber.ac.uk)
+- [Stephen Kingston](mailto:spk@aber.ac.uk)
 
 ### Learning Outcomes
 
@@ -27,8 +27,37 @@ The Internet is a complex, multi-organisation network reaching nearly all parts 
 
 ### Assessment
 
+- Assignment **40%** *??/??/2013 to ??/??/????*
 - Exam **60%**
-- Assignment **40%**
+
+### Commitment
+
+20 credits = 200 hours of work.
+
+44 hours of lectures, around 20 hours of practicals.
+
+This leaves about 140 hours of personal study, including extra practical work.
+
+There is an assignment worth 40% of the marks (2000 word report).
+
+Text book study and revision.
+
+2 hour exam.
+
+### Recommended Reading
+
+* TCP/IP Protocol Suite - *Foruzan B., Fegan S.*
+* RFC or internet drafts available online from [IEFT](http://www.ietf.org/)
+* Other textbooks and journals
+* [The Internet Protocol Journal](http://cisco.com/ipj/) by Cisco Systems
+
+## Practicals
+
+*Practical work sessions focusing mainly on the electronics and hardware of network issues.*
+
+### Practical 1
+
+Using the computer connected digital oscilloscopes or *picoscopes*.
 
 ## Basic Issues in Data Communication
 
@@ -72,7 +101,7 @@ The Internet is a complex, multi-organisation network reaching nearly all parts 
 
 ## Security Issues
 
-*The inherent risks within networks such as the Internet, hacking, viruses, trojans, worms and denial of service attacks. The role of the Firewall and the problems it can bring.*
+*The inherent risks within networks such as the Internet, cracking, viruses, trojans, worms and denial of service attacks. The role of the Firewall and the problems it can bring.*
 
 ## Current and Future Issues
 
