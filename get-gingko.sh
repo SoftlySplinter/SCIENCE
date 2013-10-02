@@ -13,12 +13,10 @@ TEMP=".temp"
 echo "HTTP GET ${URL}"
 wget --quiet $URL
 
-if grep "^# ${1}" $FILE
+if grep --silent "^# ${1}" $FILE
 then
   LINESTART=`grep --line-number "^# ${1}" $FILE | awk --field-separator=: '{print $1}'`
-  echo $LINESTART
   START=`expr $LINESTART + 1`
-  echo $START
   sed -n "${START},\$p" $FILE > $TEMP
   LINEEND=`grep --max-count 1 --line-number "^# .*" $TEMP | awk --field-separator=: '{print $1}'`
   rm ${TEMP}
@@ -28,7 +26,6 @@ then
   else
     LINEEND=`expr $LINEEND + $LINESTART - 1`
   fi
-  echo $LINEEND
   sed -n "${LINESTART},${LINEEND}p" $FILE > md/${1}/00-notes.md
 else
   echo "Module ${1} not found."

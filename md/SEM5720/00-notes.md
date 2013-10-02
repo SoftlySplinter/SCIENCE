@@ -63,6 +63,48 @@ Using the computer connected digital oscilloscopes or *picoscopes*.
 
 *A revision of the basic issues in data communication.*
 
+### Protocol Models and Frameworks
+
+In the 1970s there was no master plan, overall structure nor agreements on application protocols.
+
+Proprietary protocols and architectures lead to a large amount of anarchy.
+
+### ISO Committees
+
+In 1977 ISO establishes committees and subcommittees and so on and so forth.
+
+Not just ISO doing this, telecommunications (CCITT) also got involved.
+
+### OSI Reference Model - IS 7498
+
+Provides a basic framework using a "divide and conquer" principle.
+
+Uses layering to reduce complexity, where each layer handles one (group of) problem(s).
+
+1. Keep things simple.
+2. Choose boundaries at places that minimise interaction between adjacent layers.
+3. Functions of a different nature or purpose in different layers
+4. Similar function in same layer.
+5. Use all part knowledge and experience.
+6. Hide implementation within layers
+7. Special hardware/processors
+8. Data abstraction levels.
+9. Internal changes do not affect other layers
+10. Only create interfaces to directly surrounding layers (controversial).
+
+### OSI Reference Model Layers
+
+1. Physical - wires, radio frequency
+2. Data Link - direct link from one to another
+3. Network - global issues like addressing
+4. Transport - methods for ensuring quality of service.
+5. Session - availability of resources, "checkpoints", etc.
+6. Presentation - Language/character set encoding
+7. Application - Not supposed to contain or control whole applications, just the useful parts to applications, e.g. directory service
+
+### Exercise
+Discuss the statement: *The existence of a communications framework like the OSI model promotes competition between companies*.
+
 ## Local Area Networks
 
 *A detailed study of variants of the technologies collectively known as Ethernet.*
