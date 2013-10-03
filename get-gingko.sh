@@ -32,3 +32,8 @@ else
 fi
 
 rm ${FILE}
+
+
+git add .
+git commit -m "Add notes from `date`"
+git push
