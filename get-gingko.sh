@@ -29,11 +29,12 @@ then
   sed -n "${LINESTART},${LINEEND}p" $FILE > md/${1}/00-notes.md
 else
   echo "Module ${1} not found."
+  exit 254
 fi
 
 rm ${FILE}
 
 
 git add .
-git commit -m "Add notes from `date`"
+git commit -m "[auto] Add notes from `date`"
 git push
