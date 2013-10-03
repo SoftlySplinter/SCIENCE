@@ -173,7 +173,93 @@ Organised in octlets as bytes didn't used to be just 8 bits long.
 
 IPv4 designed for 32 bits.
 
-![](http://misc.alexanderdbrown.com/ipv4.png)
+![IPv4 Header from wikipedia](http://misc.alexanderdbrown.com/ipv4.png)
+
+Version indicates the version of the IP protocol
+
+Time to live stops network loops.
+
+Header checksum to check the integrity of the header but not the data. Very basic checksum which is used by the router to ensure the packet has not be damaged. 
+
+This does add significant load to the router, not only this, but due to TTL it has to create a new checkum without much gain. There are better checksums to be used and they do not appear in IPv6.
+
+### Loopback Interface
+
+Most TCP implementations have a loopback interface with the IP address `127.0.0.1` (`127.X`) and name localhost (or anything else in `/etc/hosts` which specifies `127.X` as an address).
+
+The localhost behaves as a separate data link interface,
+
+A packet that is sent to the loopback interface moves down the protocol stack and is returned back by the driver software for the localhost "device".
+
+Used for debugging.
+
+Loopback is done in software, never appears on the network.
+
+### The IP Address
+
+Tied to an interface, not an actual machine.
+
+Common to have multiple interfaces (eth0, wlan0, etc.)
+
+Can have multiple addresses on a single interface.
+
+### Classes of Network
+
+5 classes.
+
+* Class A - `0, 7 bits netid, 24 bits hostid` many host.
+* Class B - `10, 14 bits netid, 16 bits hostid`
+* Class C - `110, 21 bits netid, 8 bits hostid` many network.
+* Class D
+* Class E - intended for future use
+
+Class Es will never be used because of Microsoft and lack of value.
+
+### Special Addresses
+
+* `X.X.255.255` = Broadcast Address
+* `X.X.0.0` = Network
+* `255.255.255.255` = Limited broadcast address, used in auto-configuration (e.g. DHCP)
+
+### Network masks
+
+IF you own the address:
+
+`10.0.0.0`
+
+But want to share the address so that:
+
+`10.1.0.0` and `10.2.0.0` are different networks.
+
+`10.0.0.0` is a class A address. therefore is is actually: `10.0.0.0/8`.
+
+So if we change the networks to: `10.1.0.0/16` the network id will be expanded to the first 16 bits.
+
+### Subnets: An example
+
+Take the university address:
+
+`144.124.76.0`
+
+Say we want a network per department, can't use a 24 bit address as that doesn't leave enough addresses.
+
+So they can use a 22 bit network id.
+
+`144.124.76.30/22` or `144.124.76.30/255.255.252.0`
+
+Apply the mask `255.255.252.0` to the IP address to get the host id. Invert for the host address.
+
+Network address is: `144.124.76.0`
+
+But what's the broadcast address?
+
+`144.124.79.255`
+
+*(Look at the bits for this)*
+
+Here, `255.255.252.0` is the subnet mask.
+
+Used to be allowed to have subnet masks like `255.0.255.255` as it doesn't add anything.
 
 ## Naming and Directory Services
 
