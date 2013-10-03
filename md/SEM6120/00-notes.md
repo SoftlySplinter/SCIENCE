@@ -140,6 +140,265 @@ Encoding uncertainty might be encoded something like this: `Tree(species, oak, 0
 
 Again encoding doesn't matter, so long as its uniform to the system.
 
+### Rules
+
+A knowledge base may have rules associated.
+
+`IF` premises `THEN` conclusion. There may be more than one premises and may contain logical function
+
+* `AND`, `OR` and `NOT` for example
+
+If a premise evaluates to `TRUE` the rule *fires*.
+
+e.g. 
+
+`IF tree(species, oak) THEN tree(type, deciduous)`
+
+Rules may contradict another rule. Different strategies can be applied to choose the most specific or most relevant rules.
+
+### Meta Rules
+
+<pre>
+IF
+    tree is conifer
+THEN
+    load conifer data
+ELSE
+    load deciduous data
+</pre>
+
+### Logic
+
+We can represent knowledge using logic. There are two types: *propositional* and *predicate* (or first-order logic or predicate calculus)
+
+### Propositional Logic
+
+In propositional logic formulas are constructed using variables, `TRUE` and `FALSE` constants and connectors:
+
+* `AND` (`∧`)
+* `OR` (`∨`)
+* `NOT` (`¬`)
+* `IMPLIES` (`→`)
+
+### Predicate Logic
+
+Prolog is based on this.
+
+A predicate is like a function that returns `TRUE` or `FALSE`
+
+`Tree(a)` is true if `a` is oak, false if `a` is daffodil.
+
+### Implication
+
+`Oak(a) → Tree(a)`
+
+If the first clause is satisfied, the second clause is also satisfied.
+
+### Assertions
+
+The symbol `∀` can be read as "for all".
+
+`∀a(Oak(a) → Tree(a)`
+
+### Existence
+
+The symbol `∃` can be read as "exists"
+
+`∃a(Beech(a) ∧ ¬Green(a))`
+
+### The Atomic Formula
+
+`beech(a)` is known as an atomic formula.
+
+Can have multiple parameters.
+
+### Human Reasoning
+
+We use two standard rules:
+
+* Deductive
+  1. Modus Ponens - if we know `P→Q` then if `P` is true, `Q` must also be true
+  2. Modus Tollens - if we know `P→Q` then if `Q` is false, `P` must also be false
+* Inductive
+  * Difficult for machines
+  * Observations:
+    * Oak trees have green leaves
+    * Pine trees have green leaves
+  * Induce
+    * All trees have green leaves
+  * Unfortunately, that's not true, but it is useful.
+
+### Non-monotonic
+
+Classic monotonic reasoning cannot contain contradictions
+
+Put formally:
+
+`X ⊆ Y → Deriv(X) ⊆ Deriv(Y)` where `Deriv(X)` is a set of facts derived from `X`
+
+### Temporal Reasoning
+
+Reasoning changes over time. Can introduce this into machines by introducing a concept of time.
+
+### Machine Inference
+
+Machine inference is used to deduce new facts from a knowledge base which is held in working memory.
+
+`Knowledge Base -> Inference Engine -> Working memory`
+
+Can be very complex
+
+### Deducing New Facts
+
+Two principal methods
+
+1. Forwards chaining - based on modus ponens.
+2. Backwards chaining - based on modus tollens.
+
+### Forward Chaining
+
+Modens Ponens:
+
+`student(S) ∧ studies(S, ai) → studies(S, prolog)`
+`student(T) ∧ studies(S, expsys) → studies(T, ai)`
+`student(joe)`
+`studies(joe, expsys)`
+
+Therefore we can deduce:
+
+`studies(joe, prolog)`
+
+Proof:
+
+`student(joe) ∧ studies(joe, expsys) → studies(joe, ai)`
+`student(joe) ∧ studies(joe, ai) → studies(joe, prolog)`
+
+Q.E.D.
+
+Forwards chaining can fire any rules which match the knowledge held in its working memory. This can potentially come up with a huge amount of new knowledge, most of which is probably completely irrelevant.
+
+### Backwards chaining
+
+Backwards chaining sets out to prove a piece of information.
+
+The information will either be true or false, but doesn't generate unwanted results.
+
+Use the *resolution* proof method for now.
+
+Say we have:
+
+`A1 ∨ A2 ∨ ... ∨ An ∨ B` and ` ¬B ∨ C1 ∨ C2 ∨ ... ∨ Cm`
+
+Resolvent of clauses is:
+
+`A1 ∨ .. ∨ An ∨ C1 ∨ ... ∨ Cm`
+
+### Resolution
+
+Now take the two clauses:
+
+`A1 ∨ A2 ∨ ... ∨ An ∨ B` and `D ∨ C1 ∨ C2 ∨ ... ∨ Cm`
+
+If there is some subset where `B` and `D` are negations of each other `Theta`
+
+If we have two clauses `Clause1` and `Clause2`, and these both have a resolvant `R`, then if `Clause1` and `Clause2` are both satisfiable, so must `R` be.
+
+The idea: take a clause, containing a goal we want to prove, and negate that goal. If we then resole this with other clauses, over and over and we get to the empty clause (which is never satisfiable), we have proved our goal.
+
+### Clause form
+
+We can express any predicate calculus statement in clause form.
+
+This enables us to work with OR and NOT rather than any other clause.
+
+`p → q ≡ ¬p ∨ q`
+
+`A ∧ B ≡ ¬(¬A ∨ ¬B)`
+
+### Example of Resolution
+
+Use a previous example in clause form:
+
+1. `¬student(S) ∨ ¬studies(S, ai) ∨ studies(S, prolog)`
+2. `¬student(T) ∨ ¬studies(T, expsys) ∨ studies(T, ai)`
+3. `student(joe)`
+4. `studies(joe, expsys)`
+
+Solution to `studies(S, prolog)` means we must negate it:
+
+`¬studies(S, prolog)`
+
+Resolve the clause 1:
+
+`¬student(S) ∨ ¬studies(S, ai)`
+
+Resolve with clause (2) (`S=T`)
+
+`¬student(S) ∨ ¬studies(S, expsys)`
+
+Resolve with clause (4) (`S = joe`):
+
+`¬student(joe)`
+
+Resolve with clause (3):
+
+`Ø`
+
+Therefore `studies(joe, prolog)` is true.
+
+Q.E.D.
+
+### Horn Clauses
+
+The same thing, but expressed differently. This is how Prolog does it.
+
+A horn clause is a series of disjuncts (ORs)
+
+We can take:
+
+`A ∨ ¬B ∨ ¬C`
+
+and write it:
+
+`A ← B ∧ C`
+
+If `B` and `C` then `A`
+
+All the same thing:
+
+1. `studies(S, prolog) ← student(S) and studies(S, ai)`
+2. `studies(T, ai) ← student(T and studies(T, expsys)`
+3. `student(joe) ←`
+4. `studies(joe, expsys) ←`
+
+### Resolving Horn Clauses
+
+All the negatives are one side of the `←` sign.
+
+`← studiest(S, prolog)`
+`studies(S, prolog) ← student(S) ∧ studies(S, ai)`
+
+`← student(S) ∧ studies(S, ai)`
+`studies(T, ai) ← student(T) ∧ studies(T, expsys)`
+
+`S = T`
+
+`← student(S) ∧ studies(S, expsys)`
+`student(joe) ←`
+
+`S = joe`
+
+`← studies(joe, expsys)`
+`studiest(joe, expsys) ←`
+
+`←`
+
+Q.E.D.
+
+### Prolog Example
+
+[Prolog Tutorial](http://users.aber.ac.uk/ais/Prolog/)
+
 ## Programming for Intelligent Systems
 
 *Practical introduction to programming for Intelligent Systems, used to illustrate search, KR and first-order logic (3 hours).*
