@@ -2,6 +2,8 @@
 
 The Internet is a complex, multi-organisation network reaching nearly all parts of the world. The functioning of this network and the applications running upon it depend on a complex set of protocols. This module addresses the fundamental aspects of the most important issues that permit the network and its applications to operate successfully. The module also addresses the current threats to the Internet and topics still emerging from R&D studies around the world.
 
+*Postal service analogies: 2*
+
 ## Introduction
 
 *This module discusses the detailed underlying operation of the Internet and its constituent components and is an essential topic in its own right as well as providing a solid foundation for much of the other material covered in the MEng.*
@@ -132,6 +134,46 @@ Discuss the statement: *The existence of a communications framework like the OSI
 ## Transport Level Protocols
 
 *An in-depth study addressing the behaviour of TCP and UDP. Connection establishment and termination, flow control under various load conditions, timeouts and retransmission, newer features and performance.*
+
+### Demultiplexing
+
+Layered like the OSI model (but pre-dates the OSI model).
+
+Ethernet driver captures the incoming frame, strips the Ethernet header and passes to IP
+
+IP layer strips out the IP header and passes it to the transport layer, etc.
+
+Levels:
+
+* Application
+* Transport
+* Network
+* Link
+* Physical
+
+The process of moving things up and down layers is demultiplexing and multiplexing.
+
+### Data Encapsulation
+
+Don't sent arbitrary length methods, to allow the multiplexing of networking.
+
+(In TCP) Data is encapsulated into frames, frames have a frame header, trailer and a datagram.
+
+This datagram contains an IP Header and a segment or protocol data unit (PDU)
+
+The PDU has the (TCP) protocol header and the actual data.
+
+The frame header is used to drop the packet onto the local link. The address used in the frame header is embedded in the hardware in the network card (MAC address), this is why the IP address is not used. This is for efficiency.
+
+Frame headers are: source address, destination address, protocol and checksum.
+
+### IP Headers
+
+Organised in octlets as bytes didn't used to be just 8 bits long.
+
+IPv4 designed for 32 bits.
+
+![](http://misc.alexanderdbrown.com/ipv4.png)
 
 ## Naming and Directory Services
 
