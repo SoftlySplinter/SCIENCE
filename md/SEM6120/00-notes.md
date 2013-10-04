@@ -111,6 +111,26 @@ Problems of AI:
 
 *We can find solutions using search, but how can we remember solutions, learn from them and adapt them to new situations? This will cover perceptrons, single-layer and multi-layer networks (5 hours).*
 
+### Symbolic Learning
+
+When we use some sort of rule-based system, we generally have to understand the rules. This means we understand the conclusions it draws, because it can tell us.
+
+When a system learns from such rules, it processes in a way which can be understood.
+
+### Subsymbolic Learning
+
+Don't really understand, or have control over, the way in which solutions are found.
+
+ANNs, GAs, GP and sometimes statistical methods.
+
+Might be related to the randomness factor.
+
+### Artificial Neural Networks
+
+*(A: time to not understand backprop again)*
+
+Inputs (variables) -> network -> Outputs (results).
+
 ## Propositional and First-Order Logic
 
 *The backbone of knowledge representation (4 hours).*
@@ -375,7 +395,7 @@ All the same thing:
 
 All the negatives are one side of the `←` sign.
 
-`← studiest(S, prolog)`
+`← studies(S, prolog)`
 `studies(S, prolog) ← student(S) ∧ studies(S, ai)`
 
 `← student(S) ∧ studies(S, ai)`
@@ -389,7 +409,7 @@ All the negatives are one side of the `←` sign.
 `S = joe`
 
 `← studies(joe, expsys)`
-`studiest(joe, expsys) ←`
+`studies(joe, expsys) ←`
 
 `←`
 
@@ -398,6 +418,12 @@ Q.E.D.
 ### Prolog Example
 
 [Prolog Tutorial](http://users.aber.ac.uk/ais/Prolog/)
+
+### Prolog
+
+**Pro**gramming with **log**ic.
+
+Uses backwards chaining through horn clauses.
 
 ## Programming for Intelligent Systems
 
@@ -410,3 +436,22 @@ Q.E.D.
 ## Knowledge Acquisition
 
 *Knowledge Acquisition and its importance in KR and RBS (2 hours).*
+
+## Statistical Methods
+
+*Multivariate analysis and statistical methods for solving problems.*
+
+### Multivariate Analysis
+
+Analysis of high-dimensional data. Often not possible to identify or quantify an object from one dimension.
+
+Two methods:
+
+1. Statistical
+2. AI methods
+
+### Statistical Models
+
+Always produces the same result from a given set of data.
+
+Will always find the best result within the constraints of their abilities.
