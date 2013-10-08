@@ -425,6 +425,86 @@ name.myName = @"Value";
 
 *Basic tools, responsive web, matching platform expectations, testing, delivery. (5 lectures plus practicals)*
 
+### Objectives
+
+* To be able to build some simple mobile web sites/applications and view them via desktop browsers, mobile browsers and as mobile applications (hybrid apps).
+* To gain an insight into design issues especially multiple screen sizes and browser support.
+* To use a common mobile web framework to help build a mobile web application.
+* To user PhoneGap™ to turn a webb application into a "native" application which can be deployed.
+* To use some common testing technologies for mobile web.
+
+### Overview
+
+* Is mobile web being exploited?
+* Three main approaches:
+  1. Web site
+  2. Hybrid App
+  3. Native App
+* Challenges for mobile web developers
+* Standards are a moving target.
+* How can we be informed what support there is?
+* Given a complex situation, how can we make testing tractable?
+
+#### Core philosophy 
+Progressive enhancement and not graceful degradation.
+
+### Web site/app Approach
+
+#### Pros
+* One codebase
+* Cross platform
+* Familiar technology
+* Easy to distribute to both mobile and non-mobile
+
+#### Cons
+* Lack app store distributions
+* Weak access to device services
+* Performance (JS interpretation).
+* Not as slick as a native app
+
+### Hybrid Applications
+
+Native wrapper around HTML and CSS and JS.
+
+#### Pros
+* One codebase
+* Cross platform
+* Better accesses to device services
+* Can distribute via app stores
+* Familiar technologies
+
+#### Cons
+* No full access to device services
+* Performance
+* Not as slick as native apps
+
+### Native Applications
+
+#### Pros
+* Highly polished
+* Good performance (potentially)
+* Good developer support platform
+* App store distribution.
+
+#### Cons
+* Platform specific
+* Multiple codebases
+
+### Progressive Enhancement not Graceful Degradation
+
+Graceful degradation (of a website):
+
+* Focus is on building a great experience for the latest browsers, testing one browser version back.
+* Old browsers provide poor, but passable, experience, only show-stopped bugs fixed.
+
+Progressive enhancement (of website):
+
+* Focus on content, not browsers.
+
+### Responsive Web Design (RWD)
+
+
+
 ## IOS Native Apps
 
 *Objective-C, relevant design patterns, platform design considerations, handling data, using sensors and location (5 lectures plus practicals)*
