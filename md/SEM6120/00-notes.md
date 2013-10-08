@@ -131,6 +131,48 @@ Might be related to the randomness factor.
 
 Inputs (variables) -> network -> Outputs (results).
 
+X and Y matrices of the statistical models are analogous to the training inputs and outputs of ANNs.
+
+### Backpropagation
+
+Most common learning rule for ANNs.
+
+Connections between nodes given random initial weights.
+
+We therefore get a value at the output node(s) which happens when these random weights are applied to the data at the input.
+
+### Epoch
+
+An iteration, that is, finding the error then adjusting weighting, is called an epoch.
+
+There may be many thousands of epochs in one training.
+
+### Overfitting
+
+Need to be able to *generalise* the model to unseen data.
+
+Too much training will lead to a lack of generalisation.
+
+### Kohonen Neural Networks
+
+Self-organising neural networks.
+
+Random initialisation of a grid, see which nodes best match the input and change nodes around it.
+
+### Genetic Algorithms
+
+Encode solutions in Chromosomes.
+
+Mutate and crossover chromosomes.
+
+Evaluate the new population and select the best.
+
+### Genetic Programming
+
+A branch of genetic algorithms which uses programming statements as genes.
+
+Easy to do in LISP.
+
 ## Propositional and First-Order Logic
 
 *The backbone of knowledge representation (4 hours).*
@@ -455,3 +497,45 @@ Two methods:
 Always produces the same result from a given set of data.
 
 Will always find the best result within the constraints of their abilities.
+
+### X Values
+
+All the factors which might affect the outcome so that the analysis can find some form of *correlation*.
+
+### Y Values
+
+The set of objects and associated variables.
+
+### Realigning Axes.
+
+Usually statistics are in high-dimensional space. No way of visualising this data.
+
+In a 3D space, can fit a plane to any 3 points to make the problem a 2D one.
+
+Can approximate the plane to more than 3 points and fit the best plane using root mean square error. This is done using regression, but does mean there will be **error** in the model.
+
+Can do this with a 3D plane, but the idea is to keep the model as simple as possible.
+
+### Principal Component Analysis
+
+The line through multi-dimensional space which describes the most variation in the data (the one with the widest space) is the First Principal Component.
+
+The following Principal Components are always perpendicular and are ordered by the amount of variation from the data and have less importance.
+
+Can analyse the principal components to see which of the original X values contributed most.
+
+Principal components help understand the data better.
+
+### Principal Components Regression
+
+The main principal components help to explain what factors had most bearing on the results.
+
+They form a model that could be used for predicting results.
+
+Using a PCA model to predict is known as Principal Components Regression (PRC).
+
+Closely related is PCL.
+
+### Principal of Parsimony
+
+Fewer variables, if they produce a model just as good in testing, should be preferred.
