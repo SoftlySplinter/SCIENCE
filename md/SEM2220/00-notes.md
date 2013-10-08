@@ -503,7 +503,59 @@ Progressive enhancement (of website):
 
 ### Responsive Web Design (RWD)
 
+* Fluid grids
+* Media queries - use `em` over `px`.
 
+
+
+### Mobile virtual viewports
+
+Mobiles have a virtual viewport which bypass the media queries.
+
+Use the viewport meta-tag to ask the viewport width to be the same as the actual width.
+
+### Breakpoints
+
+Research suggest lines of text should be between 45-75 characters for comfortable reading. Columns help with this.
+
+### Mobile-first progressive enhancement.
+
+Design site for the mobile device. If media queries are supported and on a bigger screen, add to the existing CSS for mobile to add for the styling rules and changing font sizes.
+
+Simplification of complex designs is harder than making a simple design more complex.
+
+### Server-side Detection of Device Capabilities
+
+Client side RWD alone may not be sufficient.
+
+There are some server-side approaches:
+
+* User-agent sniffing.
+* Client-side reconnaissance missions.
+
+Classes of "device".
+
+**RESS** (Responsibe Web Design and Server-side Components).
+
+### The problem
+
+Some services will only run on a mobile device (Phone calls, accelerometer).
+
+Some services are more significant on a mobile device (location awareness, etc.), be careful not to run into the *Hide and Cry* anti-pattern.
+
+Some classes of device are very different (feature versus smart phone).
+
+What we spit out is so different that RWD alone won'y help. Need variants of the website.
+
+Image sizing issues that RWD won't solve.
+
+### User-agent sniffing
+
+Can use HTTP User-Agent request header with a device description repository to work out:
+
+* Device hardware characteristics
+* Operating System
+* Browser characteristics
 
 ## IOS Native Apps
 
