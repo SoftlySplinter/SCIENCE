@@ -103,6 +103,134 @@ Problems of AI:
 
 *Why search is important in AI and how to go about it. This includes both informed and uninformed strategies. Evolutionary search (6 hours)*.
 
+### Defining the Problem
+
+Many AI problems can be framed in terms of a search problem.
+
+Representation is very important.
+
+The search strategy is the way in which searching is performed:
+
+* Uninformed
+* Informed (Heuristic)
+
+Can't always evaluate all the search space. Massive search space (e.g. Chess) or even infinite.
+
+### Terminology
+
+#### Search State
+Summarises the state of search.
+
+May not lead to a solution.
+
+*e.g. Representation of a chess board.*
+
+#### Initial State
+The first search state.
+
+#### Solution
+A special example of a search state. It solves the problem.
+
+#### Goal State
+The state trying to be reached.
+
+#### State Space
+All possible search states.
+
+#### Successor Function
+Ways to move around in the state space (action/operators).
+
+#### Goal Function
+To check if the goal has been reached.
+
+#### Cost Function
+Measures the path cost.
+
+### Search Trees
+
+Visualise the progression of a particular algorithm.
+
+Shouldn't evaluate every possibility of the state space.
+
+Initial state is the root, goal is a leaf.
+
+Don't store the whole search tree. Requires a lot of space. Can discard explored nodes.
+
+Store the frontier of search (i.e. nodes in search tree with some unexplored children).
+
+### Evaluation
+
+#### Time Complexity
+In big O notation. Number of nodes generated during a search (worst case).
+
+#### Space complexity
+In big O notation. Maximum number of nodes stored in memory.
+
+#### Optimality
+Is it guaranteed to find the optimal solution?
+
+#### Completeness
+If there is a solution, will it be found?
+
+#### Branching Factor `b`
+Maximum number of successors of any node
+
+#### Depth of shallowest goal `d`
+
+#### Maximum length of any path in the state space `m`
+
+### Breadth First Search
+
+Branching factor `b` and depth of solution `d`.
+
+* Time complexity: `O(b^d)`
+* Space complexity: `O(b^d)`
+* Optimal (given step costs are identical)
+* Complete (provided `b` is finite)
+
+
+### Depth First Search
+
+Branching factor `b`, depth of solution `d` and maximum depth `m`.
+
+* Time complexity: `O(b^m)`
+* Space complexity: `O(bm)`
+* Not optimal
+* Not complete (complete if no loops)
+
+### Depth Limited Search
+
+A Depth First Search with a limited maximum depth.
+
+Depth limit `l`.
+
+* Time Complexity: `O(b^l)`
+* Space Complexity: `O(bl)`
+* Complete if `l >= d`
+* Not optimal
+
+### Uniform Cost Search
+
+A form of Breadth First Search, using a Priority Queue.
+
+Node with the lowest total path cost is expanded.
+
+If all the cost steps are equal, it is exactly the same as BFS.
+
+
+Complete and Optimal if no negative path costs.
+
+### Iterative Deepening
+
+A depth-limited search where the limit is increased iteratively.
+
+Avoids the space complexity of BFS.
+
+* Time Complexity: `O(b^d)`
+* Space Complexity: `O(bd)`
+* Optimal
+* Complete
+
 ## Knowledge Representation
 
 *Ways of representing knowledge in a computer-understandable way. Semantic networks, rules. Examples of the importance of KR (4 hours).*
