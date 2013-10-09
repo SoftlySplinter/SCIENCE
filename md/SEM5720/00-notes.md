@@ -107,9 +107,62 @@ Uses layering to reduce complexity, where each layer handles one (group of) prob
 ### Exercise
 Discuss the statement: *The existence of a communications framework like the OSI model promotes competition between companies*.
 
+#### For
+* Companies spend more time actually building products than on firmware to deal with communications. 
+* Standardised method of communication allow products to be linked: more scope for different products.
+
+
+#### Against
+* No competition to improve the network process.
+* No differentiation.
+
 ## Local Area Networks
 
 *A detailed study of variants of the technologies collectively known as Ethernet.*
+
+### 802.3 CSMA/CD Bus (Ethernet)
+
+Derived from work by:
+
+* Xerox
+* Intel
+* Digital (DEC)
+
+Publised in Ethernet (DIS Blue Book) V1.0 September 30th 1980.
+
+802.3 Revision D dated December 1982 publish by IEEE.
+
+Revision F published July 1984 and also issued as draft proposal 8802/3 by ISO.
+
+### Operation: Carrier Sense Multiple Access with Collision Detection (CSMA/CD)
+
+*Distributed Control*
+
+* Contend for use
+* Acquire access and send a data packet
+* No priority
+
+Simple Algorithm:
+
+```
+1.
+if(network active)
+  goto 1
+transmit(data)
+check for collision
+if(collision)
+  transmit(JAM)
+  delay(a random time)
+  goto 1
+transmission complete
+```
+
+Checking for collision is the difficult part. Can check:
+
+1. I'm transmitting a `1`, is there a `1` on the wire.
+2. Do the signals on the wire look like the output of one station and one station only.
+
+Delay must be random to avoid future collisions and not have priority.
 
 ## Other Network Technologies
 
@@ -118,6 +171,12 @@ Discuss the statement: *The existence of a communications framework like the OSI
 ## Standards
 
 *The ISO OSI model.*
+
+### IEEE 802 Standards
+
+![IEEE 802](http://misc.alexanderdbrown.com/ieee802.png "IEEE 802")
+
+Encapsulation at each level.
 
 ## Unicast Network Level Protocols
 
