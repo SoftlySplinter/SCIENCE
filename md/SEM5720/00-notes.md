@@ -2,7 +2,7 @@
 
 The Internet is a complex, multi-organisation network reaching nearly all parts of the world. The functioning of this network and the applications running upon it depend on a complex set of protocols. This module addresses the fundamental aspects of the most important issues that permit the network and its applications to operate successfully. The module also addresses the current threats to the Internet and topics still emerging from R&D studies around the world.
 
-*Postal service analogies: 2*
+*Postal service analogies: 3*
 
 ## Introduction
 
@@ -182,6 +182,30 @@ Encapsulation at each level.
 
 *Unicast Network Level Protocols in use in today's Internet. Including further study of protocols such as IPv4, ICMP, ARP, RARP used in unicast applications and IPv4 and IGMP used in multicast applications.*
 
+### Address Resolution Protocol (ARP)
+
+IPv4 has the problem that we know *our* IP address and the ones which we want to talk to, either router or machines on the link.
+
+Very first header is the Ethernet header, need this because every machine would need to look at the IP header, which is a process which needs to be done in software. Other network protocols exist too.
+
+Ethernet headers can be processed in hardware.
+
+Ethernet headers don't contain much, but the machines can automate the process of deciding to ignore the packet in firmware not by the CPU.
+
+There is a problem of mapping IPv4 address to Ethernet address. There's no direct link between IP addresses and Ethernet addresses so we need more at the data link layer.
+
+### MAC Addresses (IEEE 802)
+
+![MAC Address](http://misc.alexanderdbrown.com/mac.png "MAC Address")
+
+* Gotcha: each Octet of MAC frame transmitted low order first (back-to-front).
+* I/G - Individual (`0`), Group (`1`) - Unicast or Multicast
+* U/L - Universal (`0`), Local (`1`) 
+
+### ARP Packets
+
+![ARP Packet](http://misc.alexanderdbrown.com/arp.png "ARP Packet")
+
 ## Unicast Routing in the Internet
 
 *Example routing problems. Interior and exterior routing protocols. Protocols covered will include RIP, OSPF and BGP.*
@@ -320,6 +344,40 @@ Here, `255.255.252.0` is the subnet mask.
 
 Used to be allowed to have subnet masks like `255.0.255.255` as it doesn't add anything.
 
+### Classless Interdomain Routing (CIDR) - Supernetting
+
+Treat two contiguous class C networks as a single network.
+
+This eases routing (supernets). For example supernet on geographic locations to make routing tables easier at a router level.
+
+Usual class C is /24, we make them a /23 if we have to contiguous networks
+
+This is the answer to the 192 soup.
+
+Non-contiguous versions of this are disallowed. Must choose numbers for which the maths works.
+
+### Private Address Space
+
+There are some special IP addresses
+
+* e.g. loopback
+
+RFC 1918 written when started IP addresses to reserve certain IP addresses:
+
+These can be used for private addressing schemes, but not routable on the internet.
+
+* 10.0.0.0 - 10.255.255.255 (10/8)
+* 172.16.0.0 - 172.31.255.255 (172.16/12)
+* 192.168.0.0 - 192.168.255.255 (192.168/16)
+
+
+
+### Network Address Translation
+
+Router has a pool of public IP addresses, when a private IP address attempts to access an external resource. The router maps the private IP address to a public IP address which accesses the resource and returns. The public IP address is then translated back to the private IP address and routed.
+
+In industry the pool may be a class C network. In home networks there is only a pool of one. They also do port address translation.
+
 ## Naming and Directory Services
 
 *Including the DNS and LDAP and their use.*
@@ -335,4 +393,44 @@ Used to be allowed to have subnet masks like `255.0.255.255` as it doesn't add a
 ## Current and Future Issues
 
 *The (still) emerging IPv6 protocol and other active issues.*
+
+### Internet Protocol Version 6 (IPv6)
+
+Problems with IPv4 is that 32 bit addresses is too small.
+
+* 128 bit address space solves the problem for the long term.
+* Large space allows addresses to be more structured.
+
+### An IPv6 Address
+
+`fe80::2c0:dfff:fee4:bd87/10`
+
+Loopback address: `::1/128`
+
+`::` is a string of `0`s of indeterminate length.
+
+IPv4 addresses are encapsulated in IPv6 are expressed with dotted decimal for last four octlets: ``::194.123.1.2`
+
+IPv6 addresses are leased (possibly infinitely).
+
+#### Current Allocation
+
+* `0000 0000` - Reserved
+* `0000 001 ` - NSAP Allocation 
+* `001       ` - Aggregatable Global Unicast
+* `1111 1110 10` - Link-Local Unicast
+* `1111 1110 11` - Site-Local Unicast
+*  `1111 1111` -  Multicast
+
+### Link-Local Addresses
+
+Format Prefix: `1111 1110 10` or `FE80::/64`
+
+Postfix is usually the last 24 bits of MAC address. middle byte is `fffe` due to IEEE standards.
+
+`fe80::00ff:fe00:0000` for MAC address: `00:00:00:00:00:00`
+
+### Site-Local Addresses
+
+Format Prefix `1111 1110 11` or `FEC0`
 
