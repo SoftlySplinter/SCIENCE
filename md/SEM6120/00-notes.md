@@ -231,6 +231,38 @@ Avoids the space complexity of BFS.
 * Optimal
 * Complete
 
+### Heuristics
+
+A rule of thumb.
+
+### Iterative Improvement
+
+Paths not retained - low memory
+
+### Hill Climbing
+
+Heuristic best child chosen at each point until goal reached or no change in current state.
+
+No backtracking.
+
+### Best First Search
+
+Priority queue based on heuristic. Like BFS other than that.
+
+### A*
+
+A best first search which takes into account current path cost.
+
+`f(n) = g(n) + h(n)`
+
+### Greedy Best First Search
+
+`f(n) = h(n)`
+
+### Dominance/Informedness
+
+If `h2(n) >= h1(n)` then `h2` dominates `h1`.
+
 ## Knowledge Representation
 
 *Ways of representing knowledge in a computer-understandable way. Semantic networks, rules. Examples of the importance of KR (4 hours).*
