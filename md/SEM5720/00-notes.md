@@ -164,6 +164,91 @@ Checking for collision is the difficult part. Can check:
 
 Delay must be random to avoid future collisions and not have priority.
 
+### Coaxial cable
+
+Very rigorous specifications. Maximum length of 500m and limits on bend.
+
+These are to stop the electric current being interfered with.
+
+Hard limit on propagation: `c` (speed of light).
+
+Transceiver (MAU) to link devices to co-ax conveniently.
+
+Terminators absorb the signal at the ends of the cable.
+
+Repeaters repeat the signal onto other cables, repeat a perfect version of the signal (if possible).
+
+### Broadcast Networks
+
+If data is inserted into the network, it should reach every member on the network.
+
+Need to know how long it will take for data to get across the network.
+
+Rules tend to be the distance between two extremes in the network is 5 of the co-ax cables and 4 repeaters. 2 of the co-ax cables must be point to point without any devices attached.
+
+Bridges, switches, hubs and routers help build larger networks.
+
+### Co-ac Medium Options 802.3
+
+* Original (10BASE5)
+  * 10Mbps
+  * Baseband coaxial cable
+  * segment length 500m
+  * Max 10 taps per segment
+  * Max 4 repeaters
+* 10BASE2
+  * 10Mbps
+  * Thinner coaxial cable
+  * 185m segments
+  * Max 30 taps per segment.
+
+### Slot Time
+
+Worst case:
+
+`B` stars transmitting when `A`s packet has nearly reached `B`.
+
+`B` must corrupt, at least, the last bit of `A`s packet.
+
+Therefore, packet length must be such that time to transmit is greater than twice the **transmission delay** for longest route in the network.
+
+For a 2.5km network, 10MBit/sec, the slot time is 51.2 micro seconds.
+
+Smallest allowed packet needs to be the number of bits it takes to reach from one end of the network to the other, times 2, plus a little extra for luck.
+
+512 bit packets capture the network for 10BASE5.
+
+> *"Your bits are now all over the network"* - Dave Price, 10/10/2013
+
+### Calculatng Slot Time
+
+Slot time `s`.
+
+Path time `p`.
+
+`s > 2p`
+
+* 3 coax (with stations) = 21.65 bits
+* 2 links (no stations) = 25.65 bits
+* 4 repeater delays = 7.5 bits
+* Transceiver delays = 6.0 bits
+* Transceiver cable delays = 2.57 bits
+* etc.
+
+Total about 499 bits worst case. Specified as 512 bits to give a safety margin.
+
+### Network JAMs
+
+* Repeaters required to propagate JAMs.
+* Must make sure all repeaters see JAMs.
+* Time delay of 500m coax about 2.165 micoseconds
+* 32 bits JAM
+...
+
+### MAC Frame Format for 802.3
+
+<table><tr><th>Number of Octets</th><th>Field Usage</th></tr><tr><td>7</td><td>Preamble</td></tr><tr><td>1</td><td>Start of frame delimiter</td></tr><tr><td>6</td><td>Destination Address</td></tr><tr><td>6</td><td>Source Address</td></tr><tr><td>2</td><td>Length in 802.3</td></tr><tr><td>1500</td><td>LLC data and padding</td></tr><tr><td>4</td><td>Frame Check Sequence</td></tr></table>
+
 ## Other Network Technologies
 
 *A brief look at fast and wireless network technologies.*
