@@ -118,6 +118,8 @@ Can't always evaluate all the search space. Massive search space (e.g. Chess) or
 
 ### Terminology
 
+
+
 #### Search State
 Summarises the state of search.
 
@@ -172,12 +174,16 @@ Is it guaranteed to find the optimal solution?
 #### Completeness
 If there is a solution, will it be found?
 
-#### Branching Factor `b`
+#### Branching Factor 
+`b`
+
 Maximum number of successors of any node
 
-#### Depth of shallowest goal `d`
+#### Depth of shallowest goal 
+`d`
 
-#### Maximum length of any path in the state space `m`
+#### Maximum length of any path in the state space 
+`m`
 
 ### Breadth First Search
 
@@ -231,13 +237,13 @@ Avoids the space complexity of BFS.
 * Optimal
 * Complete
 
-### Heuristics
-
-A rule of thumb.
-
 ### Iterative Improvement
 
 Paths not retained - low memory
+
+### Heuristic Search
+
+Heuristic is a sort of rule of thumb.
 
 ### Hill Climbing
 
@@ -249,19 +255,94 @@ No backtracking.
 
 Priority queue based on heuristic. Like BFS other than that.
 
+### Greedy Best First Search
+
+`f(n) = h(n)`
+
 ### A*
 
 A best first search which takes into account current path cost.
 
 `f(n) = g(n) + h(n)`
 
-### Greedy Best First Search
-
-`f(n) = h(n)`
-
 ### Dominance/Informedness
 
 If `h2(n) >= h1(n)` then `h2` dominates `h1`.
+
+### Genetic Algorithms
+
+Encode solutions in Chromosomes.
+
+Mutate and crossover chromosomes.
+
+Evaluate the new population and select the best.
+
+### Genetic Programming
+
+A branch of genetic algorithms which uses programming statements as genes.
+
+Easy to do in LISP.
+
+Usually represented as trees.
+
+#### Koza's Algorithms
+
+* Tree consists of functions and terminals
+* Choose a set of functions and terminals
+  * e.g.: `{+,-,*,/,sqrt},{A,B}`
+* Generate random population which are syntactically correct.
+* Follow GA-like procedure.
+
+### Ant Colony Optimisation
+
+In nature, ants could solve complex problems unsupervised. Capable of finding the shortest route between a food source and the nest.
+
+Can react to changes in the environment,
+
+* Each ant moves "randomly"
+* Pheromone is deposited on path
+* Ants detect lead ant's path, inclined to follow.
+* More pheromone on a path increases the probability of that path being followed.
+* Pheromone decays over time.
+
+#### Mechanics of ACO
+
+* Graph Representation
+* Heuristic desirability of edges
+* Construction of feasible solutions
+* Pheromone update rule (attached to edges).
+
+#### Algorithm for one ant
+
+* Select starting node at random.
+* While not finished:
+  * Evaluate all edges from this node.
+  * Select the best-looking edge via probabilistic transition rule
+  * Deposite artificial pheromon on the chosen edge.
+* Finished path is a potential solution, analysed for optimality.
+
+### Particle Swarm Optimisation
+
+Each particle is searching for the optimum and encodes a solution (like a GA).
+
+Each particle is *moving* (can't search otherwise), and hence has a *velocity*. It also maintains the position it was in where it had its best result so far (its *personal best*).
+
+The particles co-operate, exchanging information about what they've discovered in the places they've visited.
+
+This co-operation only needs to be very simple;
+
+* A particle has a *neighbourhood* associated with it
+* A particle knows the fitness of those in its neighbourhood, and uses the *position* of the one with the best fitness.
+* Adjusts using this.
+
+### Multi-objective Optimisation
+
+Sometimes an answer has to be optimal in several aspects.
+
+Examples:
+
+* Quickest and cheapest flights
+* Lightest and strongest construction material.
 
 ## Knowledge Representation
 
@@ -318,20 +399,6 @@ Too much training will lead to a lack of generalisation.
 Self-organising neural networks.
 
 Random initialisation of a grid, see which nodes best match the input and change nodes around it.
-
-### Genetic Algorithms
-
-Encode solutions in Chromosomes.
-
-Mutate and crossover chromosomes.
-
-Evaluate the new population and select the best.
-
-### Genetic Programming
-
-A branch of genetic algorithms which uses programming statements as genes.
-
-Easy to do in LISP.
 
 ## Propositional and First-Order Logic
 
