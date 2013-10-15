@@ -557,6 +557,52 @@ Can use HTTP User-Agent request header with a device description repository to w
 * Operating System
 * Browser characteristics
 
+### Example: Detecting viewport width
+
+```javascript
+var width = (winder.innerWidth > 0) ? Window.innderWidth : screen.width;
+document.cookie = "sitewidth="width;
+document.location.reload();
+```
+
+```php
+if(isset($_COOKIE["sitewidth"]) {
+  $_SESSION["screenwidth"] = $_COOKIE["sitewidth"];
+}
+// ...
+if($_SESSION["screenwidth"] <= "380") {
+  include("includes/mobile-nav.inc.php");
+} else {
+  include("includes/desktop-nav.inc.php");
+}
+```
+
+### Herding Devices into Device Classes
+
+**Device Class**: An abstract collection of common characteristics of similar devices and their browsers.
+
+Why? Because we don't want our server-side code to have to deal with every device (this isn't scalable).
+
+### Typical Classes
+
+* Higher Mobile (WebKit-based, >= 320px width)
+* Simpler Mobile (minimal JS support, >176px width)
+* Tablets
+* Desktop
+* Unsupported (if no SLL, Cookies, JS, or < 176px width)
+
+Does unsupported break progressive enhancement?
+
+### What to send?
+
+* Stylesheets and Code based on class
+* Sometimes single codebase is too small (watch out for duplication of common code).
+* RESS can help with codebase maintenance.
+
+### Responsive Web Design and Server Side Components
+
+Combine client-side RWD with templating in the codebase for different classes of device.
+
 ## IOS Native Apps
 
 *Objective-C, relevant design patterns, platform design considerations, handling data, using sensors and location (5 lectures plus practicals)*
