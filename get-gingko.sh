@@ -5,13 +5,13 @@ then
   exit 255
 fi
 
-FILE="aber-level-m.txt"
+FILE=".notes"
+EXT_FILE="aber-level-m.txt"
 BASE="https://gingkoapp.com/"
-URL="${BASE}${FILE}"
+URL="${BASE}${EXT_FILE}"
 TEMP=".temp"
 
-echo "HTTP GET ${URL}"
-wget --quiet $URL
+wget --quiet --output-document=${FILE} -- ${URL}
 
 if grep --silent "^# ${1}" $FILE
 then
@@ -34,7 +34,6 @@ fi
 
 rm ${FILE}
 
-
-git add .
-git commit -m "[auto] Add notes from `date`"
-git push
+#git add .
+#git commit -m "[auto] Add notes from `date`"
+#git push

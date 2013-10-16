@@ -28,3 +28,6 @@ html/
 *.maf
 *.mtc
 *.mtc0
+
+.notes
+.temp
