@@ -249,6 +249,98 @@ Total about 499 bits worst case. Specified as 512 bits to give a safety margin.
 
 <table><tr><th>Number of Octets</th><th>Field Usage</th></tr><tr><td>7</td><td>Preamble</td></tr><tr><td>1</td><td>Start of frame delimiter</td></tr><tr><td>6</td><td>Destination Address</td></tr><tr><td>6</td><td>Source Address</td></tr><tr><td>2</td><td>Length in 802.3</td></tr><tr><td>1500</td><td>LLC data and padding</td></tr><tr><td>4</td><td>Frame Check Sequence</td></tr></table>
 
+* Preamble synchronises.
+
+### Ethernet Addresses
+
+48 bits long. Designed to be globally unique.
+
+![](http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/MAC-48_Address.svg/475px-MAC-48_Address.svg.png)
+
+Globally unique should be completely unique, not always though.
+
+Not expected to be able to be changed, can now be programmed (simply, apparently; `nmap --spoof-mac 0`)
+
+### Frame details
+
+Minimum frame size is 512 bits, not including the preamble.
+
+Maximum frame size is 1518 octets (1500 octets of data).
+
+Above assumes 48 bit addresses which IEEE 302.3 says "shall be used" for 10 Mbps networks.
+
+9.6&micro;s inter-frame gap to allow desynchronisation.
+
+Time for frame is 51.2&micro;s plus 6.4&micro;s for preamble.
+
+### Collision Backoff and Retransmission
+
+Transmitter tries to send for a maximum of 16 attempts to send a frame.
+
+The transmitter waits for an integer multiple slot times determined by the following algorithm prior to each retry.
+
+Rescheduling of each transmission uses "truncated binary exponential backoff"
+
+This ensures a random but increasing delay if many collisions occur:
+
+`DelaySlots = rand[0 <= r < 2^k]`
+
+Where `k = min(n, 10)` for the `n`<sup>th</sup> retansmission
+
+### Probabilistic Characteristics of CSMA/CD
+
+All access to the 802.3 LAN only completes with some probability. It is thus impossible to guarantee transfer rates. When the net is very busy collisions might go on forever.
+
+Debates often take place on the usability of CSMA/CD LANs for real time use. The answer depends on the true use intended rather than the LAN.
+
+### Bridges
+
+Partition LAN to segregate load, add reliability, add security.
+
+Combine remote LAN segments into a single logical network.
+
+Combine separately developed and controlled LANs.
+
+IEEE 802 LANs often include bridges.
+
+Repeaters clean and forward all data.
+
+Bridges selectively forward data. It will store and forward complete packets.
+
+Forwarding based on header information,
+
+Sometimes known as *MAC level relay*.
+
+#### Source Routing Bridges
+
+Hosts discover the route to each other host and are very aware of the presence of multiple LANs couple by bridges.
+
+Needs identifiers for bridges and LANs.
+
+Data is transmitted with routing attached.
+
+Bridges obey the routing.
+
+
+
+#### Transparent Bridges
+
+Bridge learns (or is told) the LAN on which each address exists. Hosts need not to know anything about the location of other hosts and indeed are not even aware of the presence of the bridges.
+
+Frames which arrive are handled in one of 3 different ways:
+
+1. Same LAN
+2. Different LAN
+3. Unknown destination.
+
+##### Same LAN
+
+If destination address on same LAN as source address then discard the packet
+
+##### Differnet LAN
+
+If destination address on different LAN, forward packet.
+
 ## Other Network Technologies
 
 *A brief look at fast and wireless network technologies.*
