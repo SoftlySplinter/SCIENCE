@@ -383,6 +383,96 @@ There is a problem of mapping IPv4 address to Ethernet address. There's no direc
 
 ![ARP Packet](http://misc.alexanderdbrown.com/arp.png "ARP Packet")
 
+ARP is cached for a limited amount of time.
+
+If no reply, retransmit after stand-off.
+
+#### Hardware Type
+
+Which type of hardware are we using
+
+#### Protocol Type
+
+ARP can be used with other protocols (other than IP).
+
+#### Hardware Size & Protocol Size
+
+Size of the addresses (hardware and protocol).
+
+Doesn't map just MAC addresses, etc.
+
+#### Sender Hardware/IP Address
+
+Hardware address is repeated as the Ethernet header is harder to access in software.
+
+#### Operation
+
+Code to differentiate request/reply.
+
+1. ARP Request
+2. ARP Reply
+3. RARP Request
+4. RARP Reply
+
+RARP - Reverse ARP (looking up IP from MAC). Can be used to discover the machine's own IP address, for example.
+
+Used before DHCP.
+
+#### Target Hardware Address
+
+If unknown to the sender, filled with `0`s, otherwise the actual address
+
+#### Target IP Address
+
+The address being looked for
+
+### ARP Delay
+
+First packet:
+
+1. ARP Request.
+2. Processing Time
+3. ARP Reply
+4. ICMP Echo Request
+5. ICMP Echo Reply
+
+Following packets:
+
+1. ICMP Echo Request
+2. ICMP Echo Reply
+
+### Fooling ARP
+
+Locate an interface in promiscuous mode, ARP request not broadcast, a dummy address is used.
+
+Some TCP/IP stacks pass the ARP request up the line.
+
+A reply indicates a machine is in promiscuous mode.
+
+`neped`
+
+### Why switched networks are not safe
+
+Man-in-the-Middle attacks.
+
+![](http://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Man_in_the_middle_attack.svg/200px-Man_in_the_middle_attack.svg.png)
+
+ARP allows for MITMA as the IP and MAC are learned by the switch. Sending out a false ARP reply **last** will allow you to to spoof the IP address to your MAC address.
+
+### Gratuitous ARP
+
+A host sends a request for its own MAC.
+
+The sender's IP and MAC address are broadcast, and other hosts will insert this mapping into their ARP tables.
+
+Useful to detect duplicate IP addresses (should be no reply).
+
+Causes other hosts to update their ARP cache (useful if the network adapter has been changed or if this is a hot spare).
+
+### Proxy ARP
+
+Same problems with MITMA
+
 ## Unicast Routing in the Internet
 
 *Example routing problems. Interior and exterior routing protocols. Protocols covered will include RIP, OSPF and BGP.*
