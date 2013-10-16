@@ -34,6 +34,6 @@ fi
 
 rm ${FILE}
 
-#git add .
-#git commit -m "[auto] Add notes from `date`"
-#git push
+git add .
+git commit -m "[auto] Add notes from `date`"
+git push
