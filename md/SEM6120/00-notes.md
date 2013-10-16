@@ -348,6 +348,128 @@ Examples:
 
 *Ways of representing knowledge in a computer-understandable way. Semantic networks, rules. Examples of the importance of KR (4 hours).*
 
+### What is Knowledge?
+
+AI Agents deal with knowledge (data).
+
+* Facts
+* Procedures
+* Meaning
+
+### Logic Representation
+
+### Non-logical Representation
+
+Logical representations have restrictions which can be hard to work with.
+
+#### Classes Ignored in Logic
+
+Objects in the world tend to be related to each other:
+
+* Classes, super- and sub- classes.
+* Part or whole hierarchies
+* Properties which are inherited.
+
+The state of the world changing over time.
+
+* Explicit representation of time.
+* Frame problem.
+* Non-monotonic reasoning.
+
+Closed world assumption.
+
+Uncertainty or fuzzy knowledge.
+
+#### Classes and Object-Orientated Representations
+
+Classes define Objects, Objects are instances of Classes.
+
+Object &isin; Class
+
+Class &sub; Superclass
+
+Facts and rules can be encoded.
+
+#### Semantic Networks
+
+Essentially a generalisation of inheritance hierarchies.
+
+Each node is an object, class, concept or event.
+
+Each link is a relationship which makes sense in context.
+
+Inheritance is as expected.
+
+Example:
+
+![](http://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Semantic_Net.svg/320px-Semantic_Net.svg.png)
+
+**Note:** pre-dated OOP.
+
+#### Frames
+
+Incorporates certain valuable human thinking characteristics:
+
+* Expectations
+* Assumptions
+* Stereotypes
+* Exceptions
+* Fuzzy boundaries
+
+Represent what is *typical* unless an *exception* is known.
+
+Frames allow more convenient "packaging" of facts about an object.
+
+Frames often allow things which are typical of a class and which are definitional and can't be overridden.
+
+Frames also support multiple inheritance.
+
+Frames are represented as semantic networks where nodes have structure. A frame has a number of slots (age, height, etc.), each of these slots stores specific information.
+
+When new information is gained slots can be filled in, this can cause the triggering of actions, which may trigger the retrieval of other frames.
+
+#### Scripts
+
+Can fill in missing detail that is assumed.
+
+### Non-monotonic Logic
+
+Once `true` doesn't mean always `true`.
+
+As information arrives, truth values can change.
+
+A number of implementations for this,
+
+* Circumscription:
+  * `Brid(x) and not abnormal(x) -> flies(x)`
+  * We can assume `not abnormal(x)` unless we know `abnormal(x)`.
+* Default logic:
+  * "`x` is true given `x` does not conflict with anything we already know."
+
+#### Truth Maintenance Systems
+
+These systems allow truth values to be changed during reasoning (belief revision).
+
+When retracting to a fact, must also retract to any other fact derived from it.
+
+<pre>
+Penelope is a bird    (can fly)
+Penelope is a penguin (cannot fly)
+Penelope is magical   (can fly)
+Retract magical       (cannot fly)
+Retract penguin       (can fly)
+</pre>
+
+##### Justification-based TMS
+
+For each fact, track its justification
+
+When a fact is retracted, retract all facts that have justifications leading back to that fact, unless they have independent justifications.
+
+##### Assumption-based TMS
+
+Represent all possible states simultaneously
+
 ## Neural Networks and subsymbolic learning
 
 *We can find solutions using search, but how can we remember solutions, learn from them and adapt them to new situations? This will cover perceptrons, single-layer and multi-layer networks (5 hours).*
@@ -702,6 +824,16 @@ Uses backwards chaining through horn clauses.
 
 *How can human expertise be automated? How to build an expert system - system concepts and architectures. Rule-based systems: design, operation, reasoning, backward and forward chaining (3 hours).*
 
+### RBS
+
+Knowledge base contains the rules.
+
+Database contains the facts.
+
+Inference engine uses both of these to match facts to rules to derive new facts, etc.
+
+Justifiable and transparent.
+
 ## Knowledge Acquisition
 
 *Knowledge Acquisition and its importance in KR and RBS (2 hours).*
@@ -766,3 +898,9 @@ Closely related is PCL.
 ### Principal of Parsimony
 
 Fewer variables, if they produce a model just as good in testing, should be preferred.
+
+## Fuzzy Logic
+
+Not clear cut for a definite value. (i.e. not boolean logic).
+
+![](http://upload.wikimedia.org/wikipedia/commons/6/61/Fuzzy_logic_temperature_en.svg)
