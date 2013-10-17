@@ -473,6 +473,74 @@ Causes other hosts to update their ARP cache (useful if the network adapter has 
 
 Same problems with MITMA
 
+### Internet Control Message Protocol (ICMP)
+
+The Internet Control Message Protocol (ICMP) is the protocol used for error and control messages in the Internet
+
+ICMP provides an error reporting mechanism of routers to the sources.
+
+All ICMP packets are encapsulated as IP datagrams.
+
+#### ICMP Message Types
+ICMP messages are either query messages or error messages. 
+
+* ICMP query messages:
+  * Echo request / Echo reply
+  * Router advertisement / Router solicitation
+  * Timestamp request / Timestamp reply
+  * Address mask request / Address mask reply
+* ICMP error messages:
+  * Host unreachable
+  * Source quench
+  * Time exceeded 
+  * Parameter problem
+
+#### Message Codes
+
+Specific to message type.
+
+E.g. for message type 3 (destination unreachable):
+
+* 0 = network unreachable
+* 1 = host unreachable
+* 3 = port unreachable 
+* 4 = fragmentation needed but don’t fragment bit is set
+* Etc
+
+#### ICMP Error Codes
+
+Each ICMP error message contains the header and at least the first 8 bytes of the IP datagram payload that triggered the error message.
+
+To avoid too many ICMP messages, ICMP error messages are not sent
+
+* for multiple fragments of the same IP datagrams
+* in response to an error message
+* in response to a broadcast packet
+
+#### ICMP Codes
+
+![](http://misc.alexanderdbrown.com/icmp-codes.png)
+
+#### Echo Request/Reply Message Format
+
+Identifier is set to process the ID of querying process.
+
+Sequence numbers are created for each new echo request.
+
+#### Port unreachable error
+
+Reply telling that a port is not available.
+
+Network scanners may make use of this, e.g. NMAP.
+
+Many hosts will not reply.
+
+### Traceroute
+
+Sends out ICMP ping messages with increasing TTL starting at 1. For each host that isn't the target, an ICMP time exceeded message is sent back.
+
+On UNIX uses the port unreachable message instead (using a UDP packet) by default.
+
 ## Unicast Routing in the Internet
 
 *Example routing problems. Interior and exterior routing protocols. Protocols covered will include RIP, OSPF and BGP.*
