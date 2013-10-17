@@ -332,6 +332,7 @@ Frames which arrive are handled in one of 3 different ways:
 1. Same LAN
 2. Different LAN
 3. Unknown destination.
+4. Broadcast address.
 
 ##### Same LAN
 
@@ -340,6 +341,86 @@ If destination address on same LAN as source address then discard the packet
 ##### Differnet LAN
 
 If destination address on different LAN, forward packet.
+
+##### Unknown Destination
+
+If location of destination address is not known then 'flood'.
+
+##### Broadcast Address
+
+'flood'.
+
+##### Flood
+
+Forward the packet to every other network attached to the bridge.
+
+##### Address Learning
+
+Bridges listen to the traffic and can learn where machines where by looking at the source addresses in the packets.
+
+##### Address Tables
+
+Need to be quite large depending on the network.
+
+Generally there is a time-out associated with the addresses known.
+
+##### Bridge Cycles
+
+Address Learning works well if there are no alternative routes in the internetwork connections (i.e. a tree structure).
+
+However there often are alternative routes, so bridges might cause loops.
+
+
+
+##### Solution to Bridge Cycles
+
+Need a protocol to avoid cycles.
+
+Result for graph theory states:
+
+> For any connected graph, there is a *spanning tree* of edges which maintains the connectivity but contains no closed loop.
+
+Each LAN represents a graph node and each bridge corresponds to an edge.
+
+###### Spanning Tree
+
+1. Bridges have numbers
+2. Broadcast number every few seconds
+3. One bridge becomes the *root bridge*
+4. Bridges discover route to *root* via *root port*.
+5. Routes might have costs.
+6. A *designated bridge* is determined for each LAN (minimum cost of path to root).
+7. Only the designated bridge can forward to and from its LAN.
+8. Bridges communicate with a Bridge Protocol Data Unit (BPDU) consisting of:
+  * The originating bridge number
+  * The number of the bridge thought to be the root
+  * The path cost to root.
+
+Initially every bridge thinks it is the root and it broadcasts a BPDU to assert this fact.
+
+If a bridge gets a BPDU indicated a 'superior' bridge exists it assigns its root port and the path cost to root.
+
+If a bridge gets a BPDU from a bridge with a shorter root path it releases any claim to be the designated bridge for the segment.
+
+The lowest numbered bridge becomes the root.
+
+Bridge ports which are not root or designated ports are blocks.
+
+#### Local Bridge
+
+Connect two (or more) adjacent LANs. Throughput is likely to be high. Hosts not likely to notice much performance degradation unless waiting for each packet to be acknowledged.
+
+#### Remote Bridge
+
+Connect two (or more) LANs which are widely separated. Bridge consists of two 'half bridges' connected by a WAN type link. Link typically 64Kbps to 2Mbps.
+
+#### Managed Bridges
+
+Bridges often available in a managed form. These are managed from a station and can load the bridges with lots of things.
+
+Lots of monitoring, etc.
+
+Another protocol needed and this needs to be standardised.
 
 ## Other Network Technologies
 
