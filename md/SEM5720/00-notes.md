@@ -436,6 +436,101 @@ Another protocol needed and this needs to be standardised.
 
 Encapsulation at each level.
 
+![IEEE 802 Standards](http://misc.alexanderdbrown.com/802-standards.png "IEEE 802 Standards")
+
+
+### Data Link and Physical Layer
+
+More hardware-based layers.
+
+Data Link layer could be divided into two sub-layers:
+
+1. Logical Link Control (LLC)
+2. Media Access Control (MAC)
+
+LLC is more software orientated and interacts with higher layers.
+
+MAC is more hardware orientated and interacts with lower layer.
+
+(R)ARP protocol links hardware addresses to logical addresses at the Network layer.
+
+#### Physical Layer
+
+Defines:
+
+* Physical and electrical properties of the media
+* Mechanical properties of the connectors
+* Bit representation by the signals (encoding)
+* Transmission rate
+* Physical topology
+* Transmission mode
+
+
+
+#### Data Link Layer
+
+Defines:
+
+* Encoding bits into packets prior to transmission
+* Decoding the packets back into bits at the destination
+* Flow control
+* Error control (**A**utomatic **r**epeat re**q**uest (ARQ))
+* Access control
+* Hardware addressing
+* Defining physical layer standards
+
+
+##### Logical Link Control
+
+* Frames the Network layer packet
+* Identifies the Network layer protocol.
+
+Provides multiplexing and demultiplexing to and from the network layer.
+
+Manages flow control and error control.
+
+##### Media Access Control
+
+* Addresses the frame
+* Marks the beginning and ending of the frame
+
+Managed access control.
+
+Related to the MAC address.
+
+#### LAN Technologies
+
+* Ethernet
+* Fast Ethernet
+* Gig Ethernet
+* 10 Gig Ethernet
+* WiFi
+* FDDI
+* Token Ring
+* ATM LANE
+
+#### WAN Technologies
+
+* X.25
+* Frame Relay
+* T-carrier
+* ISDN
+* DSL Technologies
+* SONET/SDH
+* ATM
+
+### OSI Layers
+
+Protocol Data Unit (PDU) is a term to define any one of the following:
+
+* Data (at Application, Presentation and Session layers)
+* Segment (at Transport layer)
+* Packet (at Network layer)
+* Frame (at Data Link Layer)
+* Bits (at Physical Layer)
+
+Each layer, with the exception of the physical layer, adds its own header. This is done because each layer has its own specific function.
+
 ## Unicast Network Level Protocols
 
 *Unicast Network Level Protocols in use in today's Internet. Including further study of protocols such as IPv4, ICMP, ARP, RARP used in unicast applications and IPv4 and IGMP used in multicast applications.*
