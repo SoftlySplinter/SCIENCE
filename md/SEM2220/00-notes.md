@@ -603,6 +603,16 @@ Does unsupported break progressive enhancement?
 
 Combine client-side RWD with templating in the codebase for different classes of device.
 
+### Sometimes HTML5, CSS3 and JS isn't enough
+
+Many HTML5 features aren't widely supported.
+
+Can't publish to application stores.
+
+Perhaps go for a hybridge: part native, part HTML.
+
+PhoneGap/Cordova is the best known hybrid technology.
+
 ## IOS Native Apps
 
 *Objective-C, relevant design patterns, platform design considerations, handling data, using sensors and location (5 lectures plus practicals)*
