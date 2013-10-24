@@ -2,7 +2,7 @@
 
 The Internet is a complex, multi-organisation network reaching nearly all parts of the world. The functioning of this network and the applications running upon it depend on a complex set of protocols. This module addresses the fundamental aspects of the most important issues that permit the network and its applications to operate successfully. The module also addresses the current threats to the Internet and topics still emerging from R&D studies around the world.
 
-*Postal service analogies: 3*
+*Postal service analogies: 4*
 
 ## Introduction
 
@@ -535,6 +535,136 @@ Each layer, with the exception of the physical layer, adds its own header. This 
 
 *Unicast Network Level Protocols in use in today's Internet. Including further study of protocols such as IPv4, ICMP, ARP, RARP used in unicast applications and IPv4 and IGMP used in multicast applications.*
 
+### Internet Protocol version 4 (IPv4)
+
+#### IP Headers
+
+Organised in octlets as bytes didn't used to be just 8 bits long.
+
+IPv4 designed for 32 bits.
+
+![IPv4 Header from wikipedia](http://misc.alexanderdbrown.com/ipv4.png)
+
+Version indicates the version of the IP protocol
+
+Time to live stops network loops.
+
+Header checksum to check the integrity of the header but not the data. Very basic checksum which is used by the router to ensure the packet has not be damaged. 
+
+This does add significant load to the router, not only this, but due to TTL it has to create a new checkum without much gain. There are better checksums to be used and they do not appear in IPv6.
+
+#### The IP Address
+
+Tied to an interface, not an actual machine.
+
+Common to have multiple interfaces (eth0, wlan0, etc.)
+
+Can have multiple addresses on a single interface.
+
+#### Classes of Network
+
+5 classes.
+
+* Class A - `0, 7 bits netid, 24 bits hostid` many host.
+* Class B - `10, 14 bits netid, 16 bits hostid`
+* Class C - `110, 21 bits netid, 8 bits hostid` many network.
+* Class D
+* Class E - intended for future use
+
+Class Es will never be used because of Microsoft and lack of value.
+
+#### Special Addresses
+
+* `X.X.255.255` = Broadcast Address
+* `X.X.0.0` = Network
+* `255.255.255.255` = Limited broadcast address, used in auto-configuration (e.g. DHCP)
+
+#### Network masks
+
+IF you own the address:
+
+`10.0.0.0`
+
+But want to share the address so that:
+
+`10.1.0.0` and `10.2.0.0` are different networks.
+
+`10.0.0.0` is a class A address. therefore is is actually: `10.0.0.0/8`.
+
+So if we change the networks to: `10.1.0.0/16` the network id will be expanded to the first 16 bits.
+
+#### Loopback Interface
+
+Most TCP implementations have a loopback interface with the IP address `127.0.0.1` (`127.X`) and name localhost (or anything else in `/etc/hosts` which specifies `127.X` as an address).
+
+The localhost behaves as a separate data link interface,
+
+A packet that is sent to the loopback interface moves down the protocol stack and is returned back by the driver software for the localhost "device".
+
+Used for debugging.
+
+Loopback is done in software, never appears on the network.
+
+#### Subnets: An example
+
+Take the university address:
+
+`144.124.76.0`
+
+Say we want a network per department, can't use a 24 bit address as that doesn't leave enough addresses.
+
+So they can use a 22 bit network id.
+
+`144.124.76.30/22` or `144.124.76.30/255.255.252.0`
+
+Apply the mask `255.255.252.0` to the IP address to get the host id. Invert for the host address.
+
+Network address is: `144.124.76.0`
+
+But what's the broadcast address?
+
+`144.124.79.255`
+
+*(Look at the bits for this)*
+
+Here, `255.255.252.0` is the subnet mask.
+
+Used to be allowed to have subnet masks like `255.0.255.255` as it doesn't add anything.
+
+#### Classless Interdomain Routing (CIDR) - Supernetting
+
+Treat two contiguous class C networks as a single network.
+
+This eases routing (supernets). For example supernet on geographic locations to make routing tables easier at a router level.
+
+Usual class C is /24, we make them a /23 if we have to contiguous networks
+
+This is the answer to the 192 soup.
+
+Non-contiguous versions of this are disallowed. Must choose numbers for which the maths works.
+
+#### Private Address Space
+
+There are some special IP addresses
+
+* e.g. loopback
+
+RFC 1918 written when started IP addresses to reserve certain IP addresses:
+
+These can be used for private addressing schemes, but not routable on the internet.
+
+* 10.0.0.0 - 10.255.255.255 (10/8)
+* 172.16.0.0 - 172.31.255.255 (172.16/12)
+* 192.168.0.0 - 192.168.255.255 (192.168/16)
+
+
+
+#### Network Address Translation
+
+Router has a pool of public IP addresses, when a private IP address attempts to access an external resource. The router maps the private IP address to a public IP address which accesses the resource and returns. The public IP address is then translated back to the private IP address and routed.
+
+In industry the pool may be a class C network. In home networks there is only a pool of one. They also do port address translation.
+
 ### Address Resolution Protocol (ARP)
 
 IPv4 has the problem that we know *our* IP address and the ones which we want to talk to, either router or machines on the link.
@@ -547,15 +677,7 @@ Ethernet headers don't contain much, but the machines can automate the process o
 
 There is a problem of mapping IPv4 address to Ethernet address. There's no direct link between IP addresses and Ethernet addresses so we need more at the data link layer.
 
-### MAC Addresses (IEEE 802)
-
-![MAC Address](http://misc.alexanderdbrown.com/mac.png "MAC Address")
-
-* Gotcha: each Octet of MAC frame transmitted low order first (back-to-front).
-* I/G - Individual (`0`), Group (`1`) - Unicast or Multicast
-* U/L - Universal (`0`), Local (`1`) 
-
-### ARP Packets
+#### ARP Packets
 
 ![ARP Packet](http://misc.alexanderdbrown.com/arp.png "ARP Packet")
 
@@ -563,25 +685,25 @@ ARP is cached for a limited amount of time.
 
 If no reply, retransmit after stand-off.
 
-#### Hardware Type
+##### Hardware Type
 
 Which type of hardware are we using
 
-#### Protocol Type
+##### Protocol Type
 
 ARP can be used with other protocols (other than IP).
 
-#### Hardware Size & Protocol Size
+##### Hardware Size & Protocol Size
 
 Size of the addresses (hardware and protocol).
 
 Doesn't map just MAC addresses, etc.
 
-#### Sender Hardware/IP Address
+##### Sender Hardware/IP Address
 
 Hardware address is repeated as the Ethernet header is harder to access in software.
 
-#### Operation
+##### Operation
 
 Code to differentiate request/reply.
 
@@ -594,15 +716,15 @@ RARP - Reverse ARP (looking up IP from MAC). Can be used to discover the machine
 
 Used before DHCP.
 
-#### Target Hardware Address
+##### Target Hardware Address
 
 If unknown to the sender, filled with `0`s, otherwise the actual address
 
-#### Target IP Address
+##### Target IP Address
 
 The address being looked for
 
-### ARP Delay
+#### ARP Delay
 
 First packet:
 
@@ -627,14 +749,6 @@ A reply indicates a machine is in promiscuous mode.
 
 `neped`
 
-### Why switched networks are not safe
-
-Man-in-the-Middle attacks.
-
-![](http://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Man_in_the_middle_attack.svg/200px-Man_in_the_middle_attack.svg.png)
-
-ARP allows for MITMA as the IP and MAC are learned by the switch. Sending out a false ARP reply **last** will allow you to to spoof the IP address to your MAC address.
-
 ### Gratuitous ARP
 
 A host sends a request for its own MAC.
@@ -645,9 +759,25 @@ Useful to detect duplicate IP addresses (should be no reply).
 
 Causes other hosts to update their ARP cache (useful if the network adapter has been changed or if this is a hot spare).
 
-### Proxy ARP
+#### Why switched networks are not safe
+
+Man-in-the-Middle attacks.
+
+![](http://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Man_in_the_middle_attack.svg/200px-Man_in_the_middle_attack.svg.png)
+
+ARP allows for MITMA as the IP and MAC are learned by the switch. Sending out a false ARP reply **last** will allow you to to spoof the IP address to your MAC address.
+
+#### Proxy ARP
 
 Same problems with MITMA
+
+### MAC Addresses (IEEE 802)
+
+![MAC Address](http://misc.alexanderdbrown.com/mac.png "MAC Address")
+
+* Gotcha: each Octet of MAC frame transmitted low order first (back-to-front).
+* I/G - Individual (`0`), Group (`1`) - Unicast or Multicast
+* U/L - Universal (`0`), Local (`1`) 
 
 ### Internet Control Message Protocol (ICMP)
 
@@ -717,6 +847,58 @@ Sends out ICMP ping messages with increasing TTL starting at 1. For each host th
 
 On UNIX uses the port unreachable message instead (using a UDP packet) by default.
 
+### Fragmentation
+
+If a packet needs to be split then a flag is set to say "more fragments". Identification is the same through the fragments. More fragments flag is not set for the last fragment, but is known to be a fragment due to the fragmentation offset.
+
+If a part of a fragment is missing, after an amount of time packet loss is assumed.
+
+Occurs if MTU < datagram size to be sent out on an interface, "Don't fragment" flag allowed: causes ICMP "Destination unreachable: fragmentation needed but don't fragment bit set".
+
+Reassembly takes place at destination.
+
+Fragments may be fragmented.
+
+Experience shows that fragmentation is best avoided.
+
+#### Avoiding Fragmentation
+
+* Never send a datagram which is greater than the minimum MTU maximum size it can be sent wholly.
+* Path MTU discovery to make sure you never send a datagram which is grater than the smallest MTU maximum size.
+
+### Path MTU Discovery
+
+Intermediate routers may have lower MTUs.
+
+Uses ICMP uncreachable Error: Fragmentation Required
+
+`ping -s n -M do`:
+
+* Set packet size and "do not fragment" bi
+* Returns "message too long" is `s > MTU`.
+* RFC 1191 has likely values
+
+`traceroute.pmtu`
+
+* Version of tracerout that automates discovery.
+
+Firewalls can break PMTU discovery.
+
+### Sock Traffic Generator
+
+Sock is a test program which can be run as a client or as a server.
+
+### Ping
+
+TTL doesn't always start at 255, might be around 64 but not standardised.
+
+
+#### Ping through a router
+
+Routers have many different interfaces. This means, with traceroute, only the nearside interface can be found.
+
+There is a record route option which can find this: `ping -R`
+
 ## Unicast Routing in the Internet
 
 *Example routing problems. Interior and exterior routing protocols. Protocols covered will include RIP, OSPF and BGP.*
@@ -728,6 +910,66 @@ On UNIX uses the port unreachable message instead (using a UDP packet) by defaul
 ## Transport Level Protocols
 
 *An in-depth study addressing the behaviour of TCP and UDP. Connection establishment and termination, flow control under various load conditions, timeouts and retransmission, newer features and performance.*
+
+### User Datagram Protocol (UDP)
+
+RFC 768
+
+* Datagram orientated
+* Unreliable, connectionless
+* Simple
+* Unicast and multicast
+* Useful for only a few application
+* Used a lot for services
+
+No handshake required which allows it to be fast, especially for many short connections.
+
+Applications must handle failures.
+
+#### UDP Header
+
+![UDP Header](http://misc.alexanderdbrown.com/udp-header.png "UDP Header")
+
+Checksum is the same as the IPv4 checksum, but is over the UDP header, the data, and the UDP pseudo header
+
+##### IPv4 UDP Pseudo Header
+
+![IPv4 UDP Pseudo Header](http://misc.alexanderdbrown.com/udp-pseudo-header.png "IPv4 UDP Pseudo Header")
+
+##### IPv6 UDP Pseudo Header
+
+![IPv6 UDP Pseudo Header](http://misc.alexanderdbrown.com/ipv6-udp-pseudo-header.png "IPv6 UDP Pseudo Header")
+
+#### Example: Trivial File Transfer Protocol (TFTP)
+
+TFTP used UDP, uses a stop-and-wait flow window control algorithm:
+
+* Stop for ACK before sending the next data packet
+* A lost packet causes timeout and retransmission.
+
+Designed for diskless systems to download configuration files during bootstrapping.
+
+Does waste a lot of network time.
+
+### Transmission Control Protocol (TCP)
+
+* Stream orientated
+* Reliable, connection-orientated
+* Complex
+* Only unicast
+* Used for most internet applications
+
+Done by creating connections between two points and aim to provide data integrity.
+
+Also provides flow control.
+
+#### TCP Header
+
+![TCP Header](http://misc.alexanderdbrown.com/tcp-header.png "TCP Header")
+
+### Port Numbers
+
+...
 
 ### Demultiplexing
 
@@ -760,134 +1002,6 @@ The PDU has the (TCP) protocol header and the actual data.
 The frame header is used to drop the packet onto the local link. The address used in the frame header is embedded in the hardware in the network card (MAC address), this is why the IP address is not used. This is for efficiency.
 
 Frame headers are: source address, destination address, protocol and checksum.
-
-### IP Headers
-
-Organised in octlets as bytes didn't used to be just 8 bits long.
-
-IPv4 designed for 32 bits.
-
-![IPv4 Header from wikipedia](http://misc.alexanderdbrown.com/ipv4.png)
-
-Version indicates the version of the IP protocol
-
-Time to live stops network loops.
-
-Header checksum to check the integrity of the header but not the data. Very basic checksum which is used by the router to ensure the packet has not be damaged. 
-
-This does add significant load to the router, not only this, but due to TTL it has to create a new checkum without much gain. There are better checksums to be used and they do not appear in IPv6.
-
-### Loopback Interface
-
-Most TCP implementations have a loopback interface with the IP address `127.0.0.1` (`127.X`) and name localhost (or anything else in `/etc/hosts` which specifies `127.X` as an address).
-
-The localhost behaves as a separate data link interface,
-
-A packet that is sent to the loopback interface moves down the protocol stack and is returned back by the driver software for the localhost "device".
-
-Used for debugging.
-
-Loopback is done in software, never appears on the network.
-
-### The IP Address
-
-Tied to an interface, not an actual machine.
-
-Common to have multiple interfaces (eth0, wlan0, etc.)
-
-Can have multiple addresses on a single interface.
-
-### Classes of Network
-
-5 classes.
-
-* Class A - `0, 7 bits netid, 24 bits hostid` many host.
-* Class B - `10, 14 bits netid, 16 bits hostid`
-* Class C - `110, 21 bits netid, 8 bits hostid` many network.
-* Class D
-* Class E - intended for future use
-
-Class Es will never be used because of Microsoft and lack of value.
-
-### Special Addresses
-
-* `X.X.255.255` = Broadcast Address
-* `X.X.0.0` = Network
-* `255.255.255.255` = Limited broadcast address, used in auto-configuration (e.g. DHCP)
-
-### Network masks
-
-IF you own the address:
-
-`10.0.0.0`
-
-But want to share the address so that:
-
-`10.1.0.0` and `10.2.0.0` are different networks.
-
-`10.0.0.0` is a class A address. therefore is is actually: `10.0.0.0/8`.
-
-So if we change the networks to: `10.1.0.0/16` the network id will be expanded to the first 16 bits.
-
-### Subnets: An example
-
-Take the university address:
-
-`144.124.76.0`
-
-Say we want a network per department, can't use a 24 bit address as that doesn't leave enough addresses.
-
-So they can use a 22 bit network id.
-
-`144.124.76.30/22` or `144.124.76.30/255.255.252.0`
-
-Apply the mask `255.255.252.0` to the IP address to get the host id. Invert for the host address.
-
-Network address is: `144.124.76.0`
-
-But what's the broadcast address?
-
-`144.124.79.255`
-
-*(Look at the bits for this)*
-
-Here, `255.255.252.0` is the subnet mask.
-
-Used to be allowed to have subnet masks like `255.0.255.255` as it doesn't add anything.
-
-### Classless Interdomain Routing (CIDR) - Supernetting
-
-Treat two contiguous class C networks as a single network.
-
-This eases routing (supernets). For example supernet on geographic locations to make routing tables easier at a router level.
-
-Usual class C is /24, we make them a /23 if we have to contiguous networks
-
-This is the answer to the 192 soup.
-
-Non-contiguous versions of this are disallowed. Must choose numbers for which the maths works.
-
-### Private Address Space
-
-There are some special IP addresses
-
-* e.g. loopback
-
-RFC 1918 written when started IP addresses to reserve certain IP addresses:
-
-These can be used for private addressing schemes, but not routable on the internet.
-
-* 10.0.0.0 - 10.255.255.255 (10/8)
-* 172.16.0.0 - 172.31.255.255 (172.16/12)
-* 192.168.0.0 - 192.168.255.255 (192.168/16)
-
-
-
-### Network Address Translation
-
-Router has a pool of public IP addresses, when a private IP address attempts to access an external resource. The router maps the private IP address to a public IP address which accesses the resource and returns. The public IP address is then translated back to the private IP address and routed.
-
-In industry the pool may be a class C network. In home networks there is only a pool of one. They also do port address translation.
 
 ## Naming and Directory Services
 
