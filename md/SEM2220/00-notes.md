@@ -253,174 +253,6 @@ App Stores
 * Amazon Android Appstore.
 * Others (apk) security issues with this.
 
-## Objective-C
-
-*A quick primer on Obj-C*
-
-### Basic Syntax and Objects
-
-
-#### Logging and Strings
-
-```objc
-NSLog(@"Message");
-
-NSString *var = @"Some message";
-NSLog(@"Message: %@.", var);
-```
-
-#### Booleans
-
-```objc
-BOOL true = YES;
-BOOL false = NO;
-```
-
-#### Numbers
-
-```objc
-NSNumber *num = @10;
-
-// Conversion to unsigned int
-NSUInteger uInt = [num unsignedIntegerValue];
-```
-
-#### Arrays
-
-```objc
-NSArray *arr = @[...];
-
-// Accessing elements
-arr[index];
-
-// Something about NSArrays being immutable objects.
-```
-
-#### Dictionaries
-
-```objc
-NSDictionary *dict = @{@"key": @"value"};
-
-// Accessing
-NSString *val = dict[@"key"];
-```
-
-### Objects and Messages
-
-Messages are Objective-C's version of methods, where the Java syntax would be:
-
-```java
-ObjectName.methodName()
-```
-
-The Objective-C syntax is:
-
-```objc
-[objectName messageName]
-```
-
-Example:
-
-```objc
-NSArray *temp = @[@"Test", @"2"];
-
-NSLog(@"%@", [temp description]);
-// Logs information about temp
-```
-
-#### Storing the output of Messages
-
-Just need to worry about typing
-
-```objc
-NSArray *temp = @[@"Test", @"2"];
-NSString *result = [temp description]
-NSLog(result);
-```
-
-#### Parameters
-
-Messages can have parameters, however they may act differently than expected.
-
-```objc
-[object methodName:parameter namedParameter:value]
-```
-
-#### Initialisation
-
-```objc
-[[Class alloc] init];
-```
-
-### Conditionals and Loops
-
-```
-if(condition) {
-    // ...
-} else if(condition) {
-    // ...
-} else {
-    // ...
-}
-```
-
-```
-switch(thing) {
-    case value:
-        // ...
-        break;
-}
-```
-
-```
-for(Class *item in iterable) {
-    // ...
-}
-```
-
-### Blocks
-
-Blocks are like basic methods.
-
-```objc
-void (^block)(void) = ^{
-    // ...
-};
-```
-
-Inkoving a block:
-
-```objc
-block();
-```
-
-### Classes
-
-In a header file:
-
-```objc
-@interface Name : NSObject
-@property Type *name;
-@property NSString *myName;
-@end
-```
-
-Implementing the interface:
-
-```objc
-#import Name.h
-
-@implementation Name
-@end
-```
-
-Accessing properties
-
-```objc
-Name *name = [[Name alloc] init];
-name.myName = @"Value";
-```
-
 ## Mobile Web
 
 *Basic tools, responsive web, matching platform expectations, testing, delivery. (5 lectures plus practicals)*
@@ -616,6 +448,303 @@ PhoneGap/Cordova is the best known hybrid technology.
 ## IOS Native Apps
 
 *Objective-C, relevant design patterns, platform design considerations, handling data, using sensors and location (5 lectures plus practicals)*
+
+### Objective-C
+
+Based on C and Object-Orientation (based on Smalltalk), has basic rules of C but most of the syntax is smalltalk-based.
+
+Some repeated information is involved, but this is improving.
+
+Uses late binding (names are looked up at runtime, not compile time).
+
+Good, but unusual, object syntax with some useful extensions and libraries.
+
+Verbose (*A: yay boilerplate*), designed to be descriptive (*A: **yay** dot-enter programming*).
+
+Likely to change with each release (good and bad).
+
+#### Basic Syntax and Objects
+
+
+
+##### Logging and Strings
+
+```objc
+NSLog(@"Message");
+
+NSString *var = @"Some message";
+NSLog(@"Message: %@.", var);
+```
+
+
+##### Booleans
+
+```objc
+BOOL true = YES;
+BOOL false = NO;
+```
+
+
+##### Numbers
+
+```objc
+NSNumber *num = @10;
+
+// Conversion to unsigned int
+NSUInteger uInt = [num unsignedIntegerValue];
+```
+
+#### Arrays
+
+```objc
+NSArray *arr = @[...];
+
+// Accessing elements
+arr[index];
+
+// Something about NSArrays being immutable objects.
+```
+
+
+#### Dictionaries
+
+```objc
+NSDictionary *dict = @{@"key": @"value"};
+
+// Accessing
+NSString *val = dict[@"key"];
+```
+
+#### Objects and Messages
+
+Messages are Objective-C's version of methods, where the Java syntax would be:
+
+```java
+ObjectName.methodName()
+```
+
+The Objective-C syntax is:
+
+```objc
+[objectName messageName]
+```
+
+Example:
+
+```objc
+NSArray *temp = @[@"Test", @"2"];
+
+NSLog(@"%@", [temp description]);
+// Logs information about temp
+```
+
+##### Storing the output of Messages
+
+Just need to worry about typing
+
+```objc
+NSArray *temp = @[@"Test", @"2"];
+NSString *result = [temp description]
+NSLog(result);
+```
+
+#### Parameters
+
+Messages can have parameters, however they may act differently than expected.
+
+```objc
+[object methodName:parameter namedParameter:value]
+```
+
+
+##### Initialisation
+
+```objc
+[[Class alloc] init];
+```
+
+#### Conditionals and Loops
+
+```
+if(condition) {
+    // ...
+} else if(condition) {
+    // ...
+} else {
+    // ...
+}
+```
+
+```
+switch(thing) {
+    case value:
+        // ...
+        break;
+}
+```
+
+```
+for(Class *item in iterable) {
+    // ...
+}
+```
+
+#### Blocks
+
+Blocks are like basic methods.
+
+```objc
+void (^block)(void) = ^{
+    // ...
+};
+```
+
+Inkoving a block:
+
+```objc
+block();
+```
+
+#### Classes
+
+In a header file (.h):
+
+```objc
+@interface Name : NSObject
+@property Type *name;
+@property NSString *myName;
+@end
+```
+
+Implementing the interface (.m):
+
+```objc
+#import Name.h
+
+@implementation Name
+@end
+```
+
+Accessing properties
+
+```objc
+Name *name = [[Name alloc] init];
+name.myName = @"Value";
+```
+
+##### Method Signatures
+
+In many languages, you might see:
+
+``` java
+void m(int x, int y, String text)
+```
+
+A similar method in Obj-C is:
+
+``` objc
+- (void) mAtX: (NSInteger) x
+         atY: (NSInteger) y
+         withText: (NSString *) text
+```
+
+Calling this:
+
+``` objc
+[obj mAtX: 2 atY: 32 withText @"a message"]
+```
+
+The method name is: `mAtX:atY:withText`
+
+##### Properties
+
+Defined with the `@property` syntax.
+
+The attributes in the `()` control how the property manages the underlying data value.
+
+The `IBOutlet` is only used on properties that are linked to the user interface.
+
+`atomic` is used for multi-threading purposes (read locks, etc.).
+
+Under the bonnet, this is an instance variable (ivar).
+
+Good practise is to cover your ears and pretend they're just properties.
+
+##### Instances
+
+``` objc
+Example *inst;
+inst = [[Example alloc] init];
+// or
+inst = [Example new];
+```
+
+`alloc` and `init` is the typical Obj-C way as classes often have different initialisation techniques. `alloc` is a class method, `init` is an instance method.
+
+#### Protocols
+
+Similar to Java interfaces. There are some features where you can have required and optional methods.
+
+Optional methods act as empty methods if they are not implemented.
+
+Set in the header file (.h)
+
+#### Primitive Types
+
+Primitive types from C can be used in Obj-C, e.g. int, long, float, double.
+
+Additional types:
+
+1. `BOOL` (`YES` or `NO`)
+2. `NSInteger` (typedef to either long or int depending on architecture)
+3. `CGFloat` (typedef to either float or double depending on architecture)
+
+#### Memory Management
+
+Memory management is achieved by checking the number of references to an object.
+
+In older code, you needed to write lines of code to state when you wanted to keep an object in memory.
+
+Modern applications use ARC (Automatic Reference Counting).
+
+The compile tracks when objects should be kept in memory or removed from the application.
+
+### Application Structure
+
+Typical project implementations have a simple structure which corresponds to MVC
+
+`AppDelegate` accesses the model (if there is one).
+
+The storyboard is the view, describe many screens in a single file.
+
+`ControllerView` is the controller.
+
+### Developing an Application
+
+1. Make a new view-based progect,
+2. Add extra views in the Storyboard,
+3. Design the application by placing buttons, etc. *allows easy prototyping*
+4. Make new `ViewController` files and link them to the views
+5. Via drag and drop, define Actions and Outlets in the `ViewController` and link outlets and actions to interface (associate views to controllers)
+6. Implement model separately (if complex enough).
+
+### Rule of Thumb
+
+If your newly created app crashes when trying to load a new screen, then you usually have:
+
+1. Messed up linking the view to the view controller.
+2. Done something wrong when linking an outlet or action to a screen.
+
+The error message should give you a clue as to what is wrong.
+
+### Types of Interfaces
+
+* Tabbed screens
+* Tables
+* Linked Views
+* More examples from iOSDevUK
+
+You can put each of the views into the storyboard and define how you segue from screen to screen then write code to pass data between them.
 
 ## Android Native Apps
 
