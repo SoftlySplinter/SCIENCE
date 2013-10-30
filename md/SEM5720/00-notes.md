@@ -1025,6 +1025,89 @@ Also provides flow control.
 
 ![TCP Header](http://misc.alexanderdbrown.com/tcp-header.png "TCP Header")
 
+##### Source Port Number
+
+##### Destination Port Number
+
+##### Sequence Number
+
+Ensures ordering of packets (is actually a byte count of the first byte count in the packet of data).
+
+Doesn't start at 1.
+
+##### Acknowledgement Number
+
+Helps find missing packets, is the last byte of the packet.
+
+##### Header Length
+
+Describes the length of the header.
+
+##### Reserved
+
+##### Flags
+
+###### Urgent (URG)
+
+The value in the Urgent field is valid.
+
+###### Acknowledge (ACK)
+
+The value in the Acknowledge field is valid.
+
+###### Push (PSH)
+
+Push the data up to the application as quickly as possible.
+
+###### Reset (RST)
+
+Reset the connection
+
+###### Synchronise (SYN)
+
+Used to set up connections
+
+###### Finish (FIN)
+
+Used to tear down connections
+
+##### Window Size
+
+##### TCP Checksum
+
+Same as UDP Checksum
+
+##### Urgent Pointer
+
+##### Options
+
+#### Connections
+
+##### Connection Establishment
+
+1. **Server** listens on a given port (no network traffic).
+2. **Client** sends a TCP packet with the `SYN` flag set to a random number.
+3. **Server** receives the `SYN`, the 0 offset is the value of the `SYN` flag. Server goes into `SYN Received` state.
+4. **Server** sends a TCP packet with a different `SYN` flag and an `ACK` flag, returning the Client's `SYN` flag plus one*.
+5. **Client** returns an `ACK` flag.
+
+
+\* The `SYN` flag is assumed to have consumed 1 byte.
+
+If no `ACK` is received at `SYN Received` state then the `SYN` is resent after a timeout.
+
+Known as the *three way handshake*.
+
+##### Connection Termination
+
+1. **Client** sends a `FIN`
+2. **Server** sends an `AWK` and a `FIN`
+3. **Client** sends an `AWK`.
+
+*Three way closedown*.
+
+`ACK` and `FIN` might not be sent together (server might still be transmitting data).
+
 ### Port Numbers
 
 ...
