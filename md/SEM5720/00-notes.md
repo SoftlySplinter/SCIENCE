@@ -531,6 +531,64 @@ Protocol Data Unit (PDU) is a term to define any one of the following:
 
 Each layer, with the exception of the physical layer, adds its own header. This is done because each layer has its own specific function.
 
+### LAN Standards: 802.3, 802.4 and 802.5
+
+* 802.3 - Ethernet
+* 802.4 - Token Bus
+* 802.5 - Token Ring
+
+Standards differ at the physical layer
+
+Differ at MAC sublayer of Data Link Layer.
+
+Compatible at the LLC sublayer of the Data Link Layer.
+
+#### Ethernet
+
+See Ethernet section.
+
+#### Token Bus
+
+Uses a bus physical topology and ring logical topology. The physical order of nodes does not matter.
+
+Coaxial cable served as a common communication bus.
+
+Token was created bus the token bus protocol to manage access to the bus
+
+Any station that holds the token packet has permission to transmit data.
+
+The station releases the token when it is done communication or when a higher priority device needs to transmit.
+
+Two major problems:
+
+1. Bus failure leads to a network failure.
+2. Adding a new node is not simple.
+
+#### Token Ring
+
+Similar to token bus, but in a ring physical ring topology.
+
+Messages are transferred in one direction along the ring at all times.
+
+Token Ring networks sequentially pass a token to each connected device.
+
+When the token arrives at a particular node, the recipient is allowed to transmit data onto the network.
+
+Since only one device may be transmitting at any given time, no data collisions occur.
+
+Access to the network is guaranteed
+
+Time-sensitive applications can be supported.
+
+Still used for some real-time applications.
+
+Based initially for the mainframe infrastructure.
+
+Problems:
+
+1. Costly
+2. Complex.
+
 ## Unicast Network Level Protocols
 
 *Unicast Network Level Protocols in use in today's Internet. Including further study of protocols such as IPv4, ICMP, ARP, RARP used in unicast applications and IPv4 and IGMP used in multicast applications.*
