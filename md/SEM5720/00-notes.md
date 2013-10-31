@@ -120,6 +120,28 @@ Discuss the statement: *The existence of a communications framework like the OSI
 
 *A detailed study of variants of the technologies collectively known as Ethernet.*
 
+### Ethernet 
+
+A passive, contention-based broadcast technology that uses baseband signalling.
+
+#### Passive 
+
+No one device controlling the network.
+
+#### Contention-based
+
+Each device must compete with every other device for access to the network.
+
+#### Broadcast
+
+Ever device on a shared network fears broadcast transmissions.
+
+
+
+#### Baseband Signalling
+
+Entire bandwidth of a cable for a single transmission.
+
 ### 802.3 CSMA/CD Bus (Ethernet)
 
 Derived from work by:
@@ -426,6 +448,200 @@ Another protocol needed and this needs to be standardised.
 
 *A brief look at fast and wireless network technologies.*
 
+### Alternative LAN Technologies
+
+* 802.4 - Token Bus
+* 802.5 - Token Ring
+
+Standards differ at the physical layer
+
+Differ at MAC sublayer of Data Link Layer.
+
+Compatible at the LLC sublayer of the Data Link Layer.
+
+#### Token Bus
+
+Uses a bus physical topology and ring logical topology. The physical order of nodes does not matter.
+
+Coaxial cable served as a common communication bus.
+
+Token was created bus the token bus protocol to manage access to the bus
+
+Any station that holds the token packet has permission to transmit data.
+
+The station releases the token when it is done communication or when a higher priority device needs to transmit.
+
+Two major problems:
+
+1. Bus failure leads to a network failure.
+2. Adding a new node is not simple.
+
+#### Token Ring
+
+Similar to token bus, but in a ring physical ring topology.
+
+Messages are transferred in one direction along the ring at all times.
+
+Token Ring networks sequentially pass a token to each connected device.
+
+When the token arrives at a particular node, the recipient is allowed to transmit data onto the network.
+
+Since only one device may be transmitting at any given time, no data collisions occur.
+
+Access to the network is guaranteed
+
+Time-sensitive applications can be supported.
+
+Still used for some real-time applications.
+
+Based initially for the mainframe infrastructure.
+
+Problems:
+
+1. Costly
+2. Complex.
+
+### Quick notes on Ethernet
+
+A quick summary of 802.3
+
+### Why Ethernet is used
+
+* Inexpensive
+* Easy to install, maintain, troubleshoot and expand
+* Widely accepted industry standard.
+* Structured to allow compatibility with Network Operating Systems.
+* Reliable
+
+### Ethernet Versions
+
+1. Ethernet 10 BASE-T/F 802.3 (10 Mbps)
+2. Fast Ethernet 100 BASE-T/F 802.3u (100 Mbps)
+3. Gigabit Ethernet 1000 BASE-T/F 802.3z (1000 Mbps)
+4. 10 Gigabit Ethernet 10 GBASE-F 802.3ae (10 Gbps)
+
+
+#### Coding Convention
+
+* Network speed
+* Baseband Signalling
+* 2 or 5 stands for coaxial cable and length
+* T stands for Twisted Pair
+* F/FL/S/L Stands for Fiber-Optic
+* X stands for full duplex.
+
+### Ethernet Components
+
+* CSMA/CD (No protocol for 10 GigE) as 10 GigE is completely full duplex so it isn't needed.
+* Baseband Signalling.
+* Ethernet cables.
+* Ethernet card or adapter.
+* Ethernet devices.
+
+#### Ethernet Cables: Twisted Pair (CAT5/CAT5e)
+
+* CAT5: Ethernet and Fast Ethernet.
+* CAT5e: Gigabit Ethernet.
+
+Contains four pairs of copper wire.
+
+Cable runs are limited to a maximum run length of 100m.
+
+Operates at 100MHz.
+
+CAT5 comes in two main varieties, solid and stranded.
+
+Fast Ethernet communications only utilise 2 out of 4 pairs.
+
+CAT5 enhanced (CAT5e) uses all 4 pairs to support GigE over short distances.
+
+CAT5e is backwards compatible with CAT5.
+
+CAT6 (250MHz) and CAT7 (600MHz).
+
+### Baseband and Broadband Signalling
+
+Baseband is a single transmission involved (digital signal)
+
+Broadband can handle multiple transmissions with a modulated analogue signal.
+
+#### Baseband Signalling
+
+Network uses all available signal frequencies or the entire bandwidth.
+
+One signal can be transmitted at a time.
+
+Light or electrical pulses based transmission.
+
+Related to digital technologies, but can be used for analogue technologies.
+
+Bi-directional communication (Half duplex) is possible, but difficult.
+
+Multiplexing (using Time Division Multiplexing) allows transfer of multiple signals on a single medium.
+
+#### Broadband Signalling
+
+Network uses only one frequency or a part of the entire bandwidth.
+
+Multiple signals can be transmitted at a time.
+
+Electromagnetic or optical waves transmission.
+
+Related to analogue technologies but can be used for digital technologies.
+
+Bi-directional communication is possible and fairly easy.
+
+Multiplexing (using Frequency Division Multiplexing) allows transfers of multiple signals on a single medium.
+
+
+### Multiplexing and Demultiplexing
+
+Putting more than one signal on a wire at once and getting it back again at the other end.
+
+#### Time Division Multiplexing
+
+Gives the illusion of multiplexing.
+
+Each signal is allowed a slot of time to transmit for.
+
+
+
+#### Frequency Division Multiplexing
+
+Actual multiplexing.
+
+Each signal uses a single frequency channel to transmit.
+
+### Fibre Optic
+
+Supports all Ethernet versions above 10BASE5.
+
+Carries high-bandwidth data through beams of light carrying electromagnetic signals. Not so affected by noise. Can carry signals up to approximately 70 miles without amplification.
+
+Light can be pulsed in a single wavelength to represent 45 Gigabits of information.
+
+#### Single-Mode Fibre Optic
+
+Transmits one signal per fibre.
+
+Diameter: 8.3 to 10 microns that has one mode of transmission.
+
+Speed and distance: up to 40Gbps over up to 100km
+
+Used in telephones and cable TV applications.
+
+####Multi-Mode Fibre Optic
+
+Transmits many signals per fibre.
+
+Multi-modes result from the fact that light will only propergate in the fibre core at discrete angles within the cone of acceptance.
+
+Diameter: 50 to 100 microns.
+
+Speed and distance: 10Mbps to 1 Gbps over 275m to 2km.
+
+Used for Computer Networks and LAN Applications.
+
 ## Standards
 
 *The ISO OSI model.*
@@ -530,64 +746,6 @@ Protocol Data Unit (PDU) is a term to define any one of the following:
 * Bits (at Physical Layer)
 
 Each layer, with the exception of the physical layer, adds its own header. This is done because each layer has its own specific function.
-
-### LAN Standards: 802.3, 802.4 and 802.5
-
-* 802.3 - Ethernet
-* 802.4 - Token Bus
-* 802.5 - Token Ring
-
-Standards differ at the physical layer
-
-Differ at MAC sublayer of Data Link Layer.
-
-Compatible at the LLC sublayer of the Data Link Layer.
-
-#### Ethernet
-
-See Ethernet section.
-
-#### Token Bus
-
-Uses a bus physical topology and ring logical topology. The physical order of nodes does not matter.
-
-Coaxial cable served as a common communication bus.
-
-Token was created bus the token bus protocol to manage access to the bus
-
-Any station that holds the token packet has permission to transmit data.
-
-The station releases the token when it is done communication or when a higher priority device needs to transmit.
-
-Two major problems:
-
-1. Bus failure leads to a network failure.
-2. Adding a new node is not simple.
-
-#### Token Ring
-
-Similar to token bus, but in a ring physical ring topology.
-
-Messages are transferred in one direction along the ring at all times.
-
-Token Ring networks sequentially pass a token to each connected device.
-
-When the token arrives at a particular node, the recipient is allowed to transmit data onto the network.
-
-Since only one device may be transmitting at any given time, no data collisions occur.
-
-Access to the network is guaranteed
-
-Time-sensitive applications can be supported.
-
-Still used for some real-time applications.
-
-Based initially for the mainframe infrastructure.
-
-Problems:
-
-1. Costly
-2. Complex.
 
 ## Unicast Network Level Protocols
 
@@ -1083,6 +1241,61 @@ Same as UDP Checksum
 
 #### Connections
 
+How TCP establishes, keeps and tears down connections.
+
+##### States
+
+![](http://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Tcp_state_diagram_fixed.svg/796px-Tcp_state_diagram_fixed.svg.png)
+
+###### Listening
+
+Waiting for a connection
+
+###### SYN Sent
+
+Waiting for acknowledgement of the first send of a `SYN`
+
+###### SYN Received
+
+
+###### Established
+
+###### FIN Wait 1
+
+Wait for an `ACK` of a sent `FIN`
+
+###### FIN Wait 2
+
+Wait for a `FIN` from an acknowledged `FIN`.
+
+###### Close Wait
+
+Acknowledged a `FIN` but still need the connection to send data.
+
+###### Last ACK
+
+Final `FIN` sent, waiting for the last `ACK`.
+
+###### Time Wait
+
+Final `FIN` received and `ACK` sent, wait for a number of seconds before closing.
+
+Done in case the `ACK` is not received by the other party.
+
+###### Closed
+
+Not listening, connection closed.
+
+##### Wait States
+
+`TIME_WAIT` is also called the 2MSL wait state.
+
+* MSL - Maximum segment life.
+* RFC 793 specifies MSL as 2 minutes.
+* 30 seconds, 1 minute, 2 minutes are common implementations.
+
+
+
 ##### Connection Establishment
 
 1. **Server** listens on a given port (no network traffic).
@@ -1098,6 +1311,18 @@ If no `ACK` is received at `SYN Received` state then the `SYN` is resent after a
 
 Known as the *three way handshake*.
 
+##### Half-Open
+
+When you have a connection between two machines, but one crashes. There's no data sent between them so one still believes it is connected.
+
+##### Simultaneous Open
+
+Possible (but unlikely) that two applications will perform active open to one another. Not Client/Server, each opens to a known port.
+
+Results in a single open connection.
+
+Four-way handshake required.
+
 ##### Connection Termination
 
 1. **Client** sends a `FIN`
@@ -1107,6 +1332,119 @@ Known as the *three way handshake*.
 *Three way closedown*.
 
 `ACK` and `FIN` might not be sent together (server might still be transmitting data).
+
+##### Half-Close
+
+When a `FIN` is sent to the server but there is still more data to be sent should not close fully until a `FIN AWK` is sent and the `AWK` returned. Microsoft broke this by sending a `RST` instead of a proper `AWK`
+
+##### Simultaneous Close
+
+Both sides of a connection might perform an active close.
+
+Four segments required, which s not unusual.
+
+#### TCP Options
+
+TCP Header also supports options.
+
+Originally only `MSS`, `NOOP` and `EOS` were specified.
+
+##### End of Option List (0)
+
+##### No Operation (NOOP) (1)
+
+##### Maximum Segment Size (MSS) (2)
+
+Length is 4
+
+2 byte MSS. Usually based on the MTU size.
+
+##### Window Scale Factor (3)
+
+Length is 3
+
+1 byte shift count.
+
+##### Timestamp (4)
+
+Length is 10
+
+4 bytes timestamp value
+4 bytes timestamp echo reply
+
+#### Bulk Data Transfer
+
+Bulk data transfer (e.g. FTP) has different requirements.
+
+Low overhead from headers.
+
+Receiving systems have limited buffers.
+
+Sliding windows used for flow control.
+
+Packet loss is expensive; timeouts are the simplest way, but there are better.
+
+Want to send as many packets as possible without flooding the network.
+
+#### Flow Control In TCP
+
+
+##### Sliding Windows Flow Control
+
+The idea is that in every `ACK` we also advertise a window. The window is a number of bytes, usually a multiple of the `MSS`.
+
+The initial window size will be the size of the buffer TCP has available.
+
+Sender can send up to the limit of the window.
+
+When a segment is acknowledged, the window slides making another slot in the window available.
+
+The window is said to close when the left-hand edge moves to the right.
+
+The window is said to open when the right-hand edge moves to the right.
+
+The window is said to shrink if the right-hand edge moves to the left.
+
+###### Window Scaling
+
+Scale factor is actually a shift.
+
+Largest scaling factor is 14 (maximum window size of 1,073,741,823 bytes).
+
+Remember this increases the size of the packet.
+
+Used for high capacity networks.
+
+RFC 1323, TCP Extensions for High Performance.
+
+###### Calculating Optimal Window Size
+
+Can never reach optimal capacity but can approach it.
+
+###### Bandwidth delay product
+
+`Capacity(bits) = bandwidth (bits/s) * RTT (sec)`
+
+Increase Round Trip Time (RTT) and data travels more slowly, thus higher capacity.
+
+Likewise increased bandwidth involves higher capacity.
+
+Max window size of 65535 bytes, but window scale option can increase this to 1024MB.
+
+Around 10% of the capacity is a good size for the TCP buffer size.
+
+#### Persist Timer
+
+Keeps window size information flowing even if the other end closes its receive window.
+
+Possible situation where an `ACK` is lost and both ends waiting.
+
+* Sender waiting for acknowledgement with window update so that it can send more data.
+* Receiver waiting to receive the data as it indicated a non-zero window in the acknowledgement that go lost.
+
+Sending TCP uses a persist timer to periodically query the receiver to see if the window size has updated.
+
+
 
 ### Port Numbers
 
