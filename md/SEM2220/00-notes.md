@@ -746,6 +746,141 @@ The error message should give you a clue as to what is wrong.
 
 You can put each of the views into the storyboard and define how you segue from screen to screen then write code to pass data between them.
 
+#### Tabbed Screens
+
+#### Tables
+
+`UITableView` is used to display repeating section of data. `UITableViewCell` is a cell in the table.
+
+Unlike classic tables on other platforms, there is only a single column.
+
+Tables contains many sections, which in turn contains many rows.
+
+The entire table can have a header and footer. Sections can also have a header and footer.
+
+Each table must have at least one section to be complete.
+
+##### Table Styles
+
+Table style is set at build time only.
+
+###### Plain
+
+Cells flush to each other
+
+###### Grouped
+
+Not in iOS7.
+
+##### Cells
+
+Each row contains a cell.
+
+When a row's data is to be displayed, the `UITableView` will request the cell.
+
+By default, the `UITableViewCell` is used to degine a cell.
+
+The cell is initialised in the method: `tableView:cellForRowAtndexPath:`
+
+A table can contain different types of cells for different rows.
+
+The cell is reused.
+
+###### Cell Structure
+
+* Content
+  * Layout depends on Style
+    * `UITableViewCellStyleDefault`
+    * `UITableViewCellStyleSubtitle`
+    * `UITableViewCellStyle1` (right detail)
+    * `UITableViewCellStyle2` (left detail)
+* Accessory
+  * Disclosure Indicator
+  * Detail Disclosure Button
+  * Check Mark
+
+###### Custom Cells
+
+Content of a cell can be defined in code, but is tedious.
+
+It is more likely that IB will be used to define the layout for the cell and use a View Controller to control the behaviour.
+
+#### Table View Contoller
+
+`UITableViewContoller` is a subclass of `UIViewControler` that is designed to manage `UITableView`s.
+
+If a new view based controller is created, the XIB will contain the table linked to this controller.
+
+In order to provide custom behaviour, the following methods needed to be implemented:
+
+* `UITableViewDelegate`
+  * Manage selections, 
+  * Configure section headings and footers, 
+  * Help to delete and reorder cells, 
+  * Perform other actions
+  * (All optional)
+* `UITableViewDataSource`
+  * The data source provides the table-view object with the information it needs to construct and modify a table view. Two are required.
+
+#### Linked Views
+
+### Data Storage on iOS
+
+Techniques for storing and retrieving data on the iPhone.
+
+XML and SQLite provide the best portability.
+
+#### NSUserDefaults
+
+User preferences.
+
+Persistent map.
+
+#### Property List Serialisation
+
+Mechanism to store a selected number of data types in a property list (plist).
+
+#### NSCoder
+
+Technique to save more complex objects.
+
+#### XML
+
+XML data files.
+
+#### SQLite
+
+Small memory footprint SQL database.
+
+#### Core Data
+
+More complex system, but offering a powerful way to manage data and relationships. Best integration with iCloud.
+
+### Application Sandbox
+
+iOS applications are run in a protected area on the device. Within this area there is a defined structure of Directories that you can access.
+
+The developer is responsible for managing files that are created within the application area.
+
+
+### SQLite 3
+
+Database and library available in iOS.
+
+C library, which needs to be included in the project.
+
+Create a SQLite database on the command line and include in the project.
+
+Need to marshal data into and out of the database, with some conversions (e.g. Strings).
+
+#### Where to store the database
+
+By default, your database is in the default bundle, inside your application.
+
+If read-only data is needed, it can remain there.
+
+Write access needs to be moved to the Documents directory.
+
 ## Android Native Apps
 
 *Relevant design patterns, platform design considerations, handling data, using sensors and location, handling device variation (5 lectures plus practicals)*
