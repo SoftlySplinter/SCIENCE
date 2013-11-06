@@ -10,6 +10,7 @@ EXT_FILE="aber-level-m.txt"
 BASE="https://gingkoapp.com/"
 URL="${BASE}${EXT_FILE}"
 TEMP=".temp"
+MD="md/${1}/00-notes.md"
 
 wget --quiet --output-document=${FILE} -- ${URL}
 
@@ -26,7 +27,7 @@ then
   else
     LINEEND=`expr $LINEEND + $LINESTART - 1`
   fi
-  sed -n "${LINESTART},${LINEEND}p" $FILE > md/${1}/00-notes.md
+  sed -n "${LINESTART},${LINEEND}p" ${FILE} > ${MD}
 else
   echo "Module ${1} not found."
   exit 254
@@ -34,6 +35,6 @@ fi
 
 rm ${FILE}
 
-git add .
+git add ${MD}
 git commit -m "[auto] Add notes from `date`"
 git push
