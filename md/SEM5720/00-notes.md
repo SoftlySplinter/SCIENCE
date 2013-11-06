@@ -1480,6 +1480,10 @@ Want to send as many packets as possible without flooding the network.
 
 #### Flow Control In TCP
 
+Sliding window flow control is carried out by the receiver.
+
+CWND flow control is carried out by the receiver.
+
 
 ##### Sliding Windows Flow Control
 
@@ -1503,7 +1507,7 @@ Scale factor is actually a shift.
 
 Largest scaling factor is 14 (maximum window size of 1,073,741,823 bytes).
 
-Remember this increases the size of the packet.
+Remember this increases the size of the header.
 
 Used for high capacity networks.
 
@@ -1525,6 +1529,27 @@ Max window size of 65535 bytes, but window scale option can increase this to 102
 
 Around 10% of the capacity is a good size for the TCP buffer size.
 
+#### TCP Slow Start (RFC 2001)
+
+Intermediate routers must queue packets - congestion may occur at routers.
+
+Congestion window (CWND).
+
+1. Initially set to 1 segment (based on announced MSS).
+2. On first ACK, increase CWND by 1 segments of bytes.
+3. Now 2 segments are sent and ACK'd. CWND is increased to 4 segments.
+4. Exponentiall increase until peak flow reached or router discards packets.
+5. Sender can transmit up to the minimu of the sliding window size and CWND.
+
+Has two phases:
+
+1. Exponential increase.
+2. Linear increase.
+
+Based on a threshold (the slow start threshold).
+
+Drops drastically when there is packet loss.
+
 #### Persist Timer
 
 Keeps window size information flowing even if the other end closes its receive window.
@@ -1536,7 +1561,59 @@ Possible situation where an `ACK` is lost and both ends waiting.
 
 Sending TCP uses a persist timer to periodically query the receiver to see if the window size has updated.
 
+#### Timeout and Retransmission
 
+Fundamental to the use of acknowledgements is the need for timeout and re-transmission of packets.
+
+TCP keeps four different timers for a connection and performs exponential backoff when a packet goes unacknowledged.
+
+TCP also has a congestion avoidance algorithms to complement the slow start algorithm to cope with packet loss caused by congestion.
+
+##### Timers
+
+###### Retransmission Timer
+
+Used when expecting an acknowledgement from the other end.
+
+###### Persist Timer
+
+Keeps window size information flowing even if the other end closes its receive window.
+
+###### Keepalive Timer
+
+Detects when the other end of a connection has crashed or re-booted.
+
+###### 2MSL Timer
+
+##### Round Trip Time Measurement
+
+Used to calculate retransmission timeout (RTO).
+
+Mean deviation is used to allow arithmetic to be carried out with integers and without square roots.
+
+![](http://www.texify.com/img/%5Cnormalsize%5C%21Err%20%3D%20M%20-%20A%5C%5CA%20%5Cleftarrow%20A%20%2B%20gErr%20%5C%5C%20D%20%5Cleftarrow%20D%20%2B%20h%20%28%20%7C%20Err%20%7C%20-%20D%20%29%5C%5C%20RTO%20%3D%20A%20%2B%204D.gif)
+
+Where:
+
+* D is the smoothed mean deviation
+* M is the latest measured RTT value
+* Gain (g) for average is set to 1/8
+* Gain (h) for deviation is set to 1/4
+
+##### Karn's Algorithm
+If a packet times out and there is a retransmission, when an ACK is received, whose was it.
+
+Karn's algorithms specifies that RTT estimate cannot be update when a timeout and retransmission occur.
+
+Re-use the RTO after such an exponential back off until an acknowledgement is received.
+
+#### Fast Retransmit and Fast Recovery (TCP Reno)
+
+Problem: TCP timeouts lead to idle periods.
+
+Fast retransmit: use 3 duplicate ACKs to trigger retransmission.
+
+Fast recovery: start CWND at SSTHRESH and do incremental increase after fast retransmit.
 
 ### Port Numbers
 
