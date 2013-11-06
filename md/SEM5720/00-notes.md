@@ -642,6 +642,98 @@ Speed and distance: 10Mbps to 1 Gbps over 275m to 2km.
 
 Used for Computer Networks and LAN Applications.
 
+### Network Adapters
+
+Adapters for connecting to ethernets.
+
+Ethernet cards, etc.
+
+#### 10/100 Ethernet
+
+Connect computer using a PCI, PCIe or ISA moethboard interface slot, CAT5/6
+
+#### Gigabit Ethernet
+
+PCIe slots, CAT5/5e/6/7 and Fibre Optic cables.
+
+#### Fibre Optics
+
+For tier 1 and 2 internet backbones, External device, Fibre Optic cables.
+
+Slightly different, can use not only for network but for the backbone (a sophisticated network).
+
+#### Wireless Network Interface Cards
+
+Internal or external device
+
+#### Wireless Dongles
+
+External device
+
+### Ethernet Devices
+
+Note that most devices are completely tied to a specific function, some repeaters might have some Data Link Layer functions depending on the manufacturer.
+
+#### Repeater
+
+Repeat an electrical signal including noise.
+
+Takes an incoming signal and then generates a new, clean copy of that exact signal.
+
+Overcomes signal attenuation problem.
+
+Allows LANs to extend beyond normal distance limitations.
+
+Physical layer device.
+
+Doesn't read data frames, just repeat the signal unintelligently.
+
+#### Hub
+
+Multiport repeater.
+
+Broadcasts frame to all ports and devices.
+
+Allows users to share Ethernet for transmission of data onto a single network (collision domain).
+
+Physical Layer device.
+
+Doesn't read data frames.
+
+Repeater is usually used for the extension of the length of a network, while the hub is a simple connectivity gadget that is used to broaden a network.
+
+#### Bridge
+
+Connect two LAN segments of similar or dissimilar types such as Ethernet and Token Ring.
+
+Split a networking into separate collision domains.
+
+Map the Ethernet addresses of the nodes residing on each network segment and allow only the necessary traffic to pass through the bridge.
+
+Do not forward bad or misaligned packets.
+
+Works on the Physical and lower Data Link (MAC) Layers
+
+#### Switch
+
+Expansion of the Bridge.
+
+Used in heavily loaded networks to isolate data flow and improve performance (parallelism).
+
+Up to on-half of the computers connected to a switch can send data at the same time.
+
+Data Link and Network Layer device.
+
+##### Cut-through Switches
+
+Are faster because they examined the packet destination address only before forwarding it on to its destination segment.
+
+##### Store-and-forward Switches
+
+Work like bridges in that they accept and analyse the packet before forwarding it to its destination.
+
+Takes more time to examine the whole packet, although it does allow the switch to catch certain packet errors and keep them from propagating through the network.
+
 ## Standards
 
 *The ISO OSI model.*
