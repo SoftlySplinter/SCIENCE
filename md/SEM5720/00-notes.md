@@ -559,7 +559,7 @@ CAT5e is backwards compatible with CAT5.
 
 CAT6 (250MHz) and CAT7 (600MHz).
 
-### Baseband and Broadband Signalling
+### Signalling
 
 Baseband is a single transmission involved (digital signal)
 
@@ -733,6 +733,67 @@ Are faster because they examined the packet destination address only before forw
 Work like bridges in that they accept and analyse the packet before forwarding it to its destination.
 
 Takes more time to examine the whole packet, although it does allow the switch to catch certain packet errors and keep them from propagating through the network.
+
+### Ethernet Encoding
+
+Methods for encoding bits in different Ethernet technologies.
+
+#### Manchester Coding
+
+Used in 10-Base* 
+
+Bipolar scheme, synchronisation via a clock.
+
+### Fast Ethernet 802.3u
+
+CSMA/CD and Full Duplex
+
+Backwards compatible.
+
+Physical layer structure (PHY) has been redesigned.
+
+Complex signal encoding mechanisms than the simple Manchester code.
+
+Uses three sublayers.
+
+#### Convergence Sublayer
+
+Introduces the concept of auto-negotiation; negotiates between two different medium to make the properties similar to for communication
+
+#### Media Independent Interface
+
+Interfaces the physical medium used so that it can be handled generically.
+
+#### Media Dependent Sublayer
+
+Deals with encoding, transmission in a way specific to the medium.
+
+### Gigabit Ethernet 802.3z
+
+Two distinctive approaches for medium access:
+
+1. Half Duplex
+2. Full Duplex
+
+Most follow the full-duplex approach.
+
+Star topology.
+
+Support standard Ethernet frame format.
+
+Uses 802.3x flow control.
+
+Backwards compatible.
+
+Physical layer is more complex
+
+#### Gigabit Media Independent Interface
+
+#### Physical Layer
+
+#### Media Dependent Interface
+
+#### Medium
 
 ## Standards
 
@@ -1478,7 +1539,7 @@ Packet loss is expensive; timeouts are the simplest way, but there are better.
 
 Want to send as many packets as possible without flooding the network.
 
-#### Flow Control In TCP
+#### Flow Control In TCP for Bulk Data Transfer
 
 Sliding window flow control is carried out by the receiver.
 
@@ -1529,7 +1590,7 @@ Max window size of 65535 bytes, but window scale option can increase this to 102
 
 Around 10% of the capacity is a good size for the TCP buffer size.
 
-#### TCP Slow Start (RFC 2001)
+##### TCP Slow Start (RFC 2001)
 
 Intermediate routers must queue packets - congestion may occur at routers.
 
@@ -1549,6 +1610,73 @@ Has two phases:
 Based on a threshold (the slow start threshold).
 
 Drops drastically when there is packet loss.
+
+##### Fast Retransmit and Fast Recovery (TCP Reno)
+
+Problem: TCP timeouts lead to idle periods.
+
+Fast retransmit: use 3 duplicate ACKs to trigger retransmission.
+
+Fast recovery: start CWND at SSTHRESH and do incremental increase after fast retransmit.
+
+###### Problems with Fast Retransmit and Fast Recovery
+
+WiFi and very fast networks.
+
+Can be a problem on high capacity networks.
+
+#### TCP Westwood +
+
+Improved congestion control algorithm for fast, high latency links and lossy links.
+
+Can take many hours to reach optimal throughput with TCP Reno as packet loss has a large affect on throughput.
+
+Westwood carries out end to end bandwidth estimate (BWE) using received ACKs and RTT monitoring.
+
+TCP Reno overreacts to random loss by cutting cwnd in half.
+
+A small fraction of random packet loss does not impact the BWE.
+
+Thus the ssthresh remains unchanged, allowing Westwood to be much more efficient than Reno.
+
+###### On ACK Reception
+
+Increase cwnd according to Reno algorithm.
+
+Estimate available bandwidth.
+
+###### When 3 Duplicate ACKs received
+
+![](http://www.texify.com/img/%5Cnormalsize%5C%21%5Ctext%7BSsthresh%7D%20%3D%20%5Ctext%7Bmax%7D%5Cleft%282%2C%20%5Cfrac%7B%5Ctext%7BBWE%7D%20%5Ctimes%20%5Ctext%7BRTT%7D_%7B%5Ctext%7Bmin%7D%7D%7D%7B%5Ctext%7BSeg%5C_size%7D%5Cright%29.gif)
+
+cwnd is then set to ssthresh.
+
+###### On RTO (coarse timeout)
+![](http://www.texify.com/img/%5Cnormalsize%5C%21%5Ctext%7BSsthresh%7D%20%3D%20%5Ctext%7Bmax%7D%5Cleft%282%2C%20%5Cfrac%7B%5Ctext%7BBWE%7D%20%5Ctimes%20%5Ctext%7BRTT%7D_%7B%5Ctext%7Bmin%7D%7D%7D%7B%5Ctext%7BSeg%5C_size%7D%5Cright%29.gif)
+
+cwnd is then set to 1.
+
+#### Flow Control in TCP for Interactive Data Transfer
+
+Interactive data transfer can result in many small segments which, together with their ACKs, can lead to congestion.
+
+ACKs are, therefore, piggybacked onto data segments - delayed ACKs.
+
+Nagle's algorithm result in some collection of data to produce larger segments.
+
+##### Nagle Algorithm
+
+Many small datagrams results in very large overhead.
+
+Can cause congestion, particularly on a WAN.
+
+* Only one outstanding segement not ACK'd
+* Cannot send any more small segments until ACK received.
+* Whilst waiting for ACK, TCP will collect small segments together to send as a single segment.
+* On a fast network, more segments are sent.
+* On a congested network less segments are sent, but data still get through (with less overhead).
+
+Sometimes desirable to disable Nagle algorithm, e.g., X mouse movements need to be sent without delay.
 
 #### Persist Timer
 
@@ -1607,13 +1735,31 @@ Karn's algorithms specifies that RTT estimate cannot be update when a timeout an
 
 Re-use the RTO after such an exponential back off until an acknowledgement is received.
 
-#### Fast Retransmit and Fast Recovery (TCP Reno)
+### Transactional Transmission Control Protocol (T/TCP) RFC 1644
 
-Problem: TCP timeouts lead to idle periods.
+TCP for transactions.
 
-Fast retransmit: use 3 duplicate ACKs to trigger retransmission.
+Nearly as fast as UDP.
 
-Fast recovery: start CWND at SSTHRESH and do incremental increase after fast retransmit.
+#### TCP Accelerated Open (TAO)
+
+Reduces minimum number of packets required to three in many circumstances.
+
+Data and FIN are piggybacked on the ACK.
+
+Connection Count (CC) used to avoid duplicate SYNs.
+
+Security issues caused due to this.
+
+#### Truncation of TIME_WAIT State
+
+2MSL state is abandonded.
+
+8 times RTO used instead.
+
+Allows retransmission of final ACK.
+
+A new incarnation of the same connection, using TAO, implicitly acknowledges the ACK of FIN.
 
 ### Port Numbers
 
