@@ -795,6 +795,71 @@ Physical layer is more complex
 
 #### Medium
 
+### Encoding
+
+Digital to digital encoding schemes.
+
+#### Unipolar Encoding
+
+Only use one pole (`+` or `-`). One pole is used to represent `1` or `0`, zero is used to represent the other.
+
+![](http://file1.hpage.com/000143/66/bilder/picture3.png)
+
+![](https://lh6.googleusercontent.com/i_wHvlOcxGA9HilYhdmFM5wjbo1dJ3q9q8qc6vKMkl8gbgqkBW2vhGjzoioF9gS8DA=s400)
+
+Two problems:
+
+1. DC Component
+2. Synchronisation
+
+DC cannot be transmitted properly through an AC line without noise.
+
+The receiver cannot synchronise its clock to the sender.
+
+#### Polar Encoding
+
+Uses both poles to represent bits.
+
+##### Non-Return to Zero (NRZ)
+
+###### NRZ-Level
+
+1 as positive voltage, 0 as negative voltage.
+
+![](https://lh6.googleusercontent.com/mP9wm9qDd9b5JoiZKmh5FfRDC6aLo7LUd5Vy3lMwRK_7ZBf5rayz67dOzaonQSEY0g=s400)
+
+###### NRZ-Inverse
+
+Voltage inverts on a 1.
+
+##### Return to Zero (RZ)
+
+* Positive to 0 is 1.
+* Negative to 0 is 0
+
+![](https://lh6.googleusercontent.com/HsrRIApzAFwlGCCoFtthVZmKRsROFZdEpN6cpv8tsQsXOl-PVGbD7wkO6adq2rMqUw=s400)
+
+##### Biphase
+
+###### Manchester
+
+![](https://lh4.googleusercontent.com/MA7WfPVKktOw6LLGbu3pQCVMswe4cqHsZnrQ9oNDPqjR28qPOw7j7IjaakklukHDYA=s400)
+
+###### Differential Manchester
+
+![](https://lh6.googleusercontent.com/GsN5RdpXdhqMLMub0RgampWgREFpBMwcot-BmHSzY2GxGPC18HYRUh06YLzj3Mpuig=s400)
+
+#### Bipolar Encoding
+
+![](https://lh4.googleusercontent.com/dsAffc-caZWoTueproHHYXmv7b46ebT0bHws-HJNeDVE6YO3rmWLCe9RgoSy0ljo2g=s400)
+
+##### Alternating Mark Inversion
+
+##### Bipolar 8 Zero Subsitution
+
+##### High Density Bipolar 3
+
+
 ## Standards
 
 *The ISO OSI model.*
@@ -1800,6 +1865,14 @@ Frame headers are: source address, destination address, protocol and checksum.
 ## Naming and Directory Services
 
 *Including the DNS and LDAP and their use.*
+
+### Domain Name Service (DNS)
+
+A distributed database mapping hostnames to IP addresses and vice versa.
+
+### Dynamic Host Configuration Protocol (DHCP)
+
+### Lightweight Directory Access Protocol (LDAP)
 
 ## Quality of Service
 
