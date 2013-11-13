@@ -1870,6 +1870,50 @@ Frame headers are: source address, destination address, protocol and checksum.
 
 A distributed database mapping hostnames to IP addresses and vice versa.
 
+#### How DNS is used
+
+* Applications access the information in the DNS by way of resolver programs
+  * `gethostbyname()` returns an IP address in response on a hostname
+  * `gethostbyaddr()` returns a hostname in response to an IP address.
+* People access information by way of client programs
+  * `nslookup`
+  * `dig`
+* Common implementation of DNS client and server is BIND (Berkeley Internet Domain Server).
+  * Server is **named**
+* The DNS defines a protocol (see RFCs) that is used for communication between client and server.
+
+#### The DNS namespace
+
+DNS is stored as a tree:
+
+![](http://bio3d.colorado.edu/tor/sadocs/dns/dns-1.png)
+
+13 canonical name servers which server information for the root "unnamed" root.
+
+##### .arpa
+
+A special domain which is used for reverse lookup.
+
+Now `.ipv6`
+
+##### Fully qualified domain names
+
+`www.google.com.` is a fully qualified domain name. Missing the trailing `.` allows the DNS to lookup other entries based on the domain it resides on.
+
+#### DNS Lookup
+
+Is a recursive process and therefore quite slow. Results are cached to improve performance.
+
+To try and reduce the effects of this when changing hostnames the TTL of the cache is reduced prior to performing this.
+
+#### Name Ownership
+
+No one company owns all names
+
+#### Name Server Zones and Boundaries
+
+Can have zones within a name server.
+
 ### Dynamic Host Configuration Protocol (DHCP)
 
 ### Lightweight Directory Access Protocol (LDAP)
