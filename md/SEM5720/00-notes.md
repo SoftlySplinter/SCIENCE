@@ -860,6 +860,58 @@ Voltage inverts on a 1.
 ##### High Density Bipolar 3
 
 
+### Broadband
+
+#### Digital Subscriber Line
+
+Uses local telephone lines.
+
+Allows simultaneous void and data transmission.
+
+##### Asymmetric Digital Subscriber Line (ADSL)
+
+Designed to deliver more bandwidth down than up.
+
+Rates range from 1.5 to 9 Mbps down, 16 to 640kbps up.
+
+Distances of 18,000 feet over a single copper twisted pair.
+
+A splitter is needed.
+
+##### Very high bit-rate Digital Subscriber Line (VDSL)
+
+VDSL is designed to provide higher bandwidths.
+
+Up to 52Mbps down, 16Mbps up.
+
+##### VDSL 2
+
+Support the wide deployment og triple play services.
+
+100 Mbps down, 20 Mbps up
+
+150 to 500m distance.
+
+500 Mbps transmission rates over copper cabling by using crosstalk cancellation or "vectorized" VDSL2 based modems.
+
+##### BT Infinity
+
+Now rolling out ultrafast fibre optic broadband with speeds of up to 100Mb.
+
+Next step up from FTCC is FTTh (Fibre to the Home).
+
+Negative factor is the costs.
+
+###### Infinity-1
+
+Top speeds are up to 40Mbps down and 10Mbps up
+
+###### Infinity-2
+
+Topspeeds are up to 76Mbps down and 19Mbps up.
+
+#### Cable
+
 ## Standards
 
 *The ISO OSI model.*
@@ -1913,6 +1965,60 @@ No one company owns all names
 #### Name Server Zones and Boundaries
 
 Can have zones within a name server.
+
+#### Resource Record
+
+This is where DNS gets its information from.
+
+![](http://www.tcpipguide.com/free/diagrams/dnsrrformat.png)
+
+Examples:
+
+`3www4aber2ac2uk0`
+
+`3www6google3com0`
+
+The `0` occurs because the top-level domain has no name. This is how the end of the string is reached.
+
+##### SOA
+
+Name of primary source of info for zeon
+
+##### A
+
+IP address of host
+
+##### CNAME
+
+Canonical name
+
+##### PTR
+
+Alias for an IP address for reverse lookups
+
+##### MX
+
+Mail exchange information
+
+##### NS
+
+The Name of the nameserver
+
+##### AAAA
+
+IPv6 address of host
+
+##### A6
+
+Experimental IPv6 address.
+
+##### HINFO
+
+Host information (CPU and OS).
+
+##### LOC
+
+Location of host.
 
 ### Dynamic Host Configuration Protocol (DHCP)
 
