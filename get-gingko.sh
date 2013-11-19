@@ -12,7 +12,7 @@ URL="${BASE}${EXT_FILE}"
 TEMP=".temp"
 MD="md/${1}/00-notes.md"
 
-wget --quiet --output-document=${FILE} -- ${URL}
+wget --quiet --no-check-certificate --output-document=${FILE} -- ${URL}
 
 if grep --silent "^# ${1}" $FILE
 then
