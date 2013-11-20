@@ -912,6 +912,267 @@ Topspeeds are up to 76Mbps down and 19Mbps up.
 
 #### Cable
 
+### Wireless LAN (802.11)
+
+
+
+#### Station (STA)
+
+#### Access Point (AP)
+
+Access points act as a central transmitter and receiver of WLAN radio signals.
+
+#### Basic Service Set (BSS)
+
+A set of STAs that communicate with each other.
+
+When two or more stations communicate together they form a BSS.
+
+##### Infrastructure Mode
+
+All wireless clients are connected to an AP.
+
+Generally the default mode for the 802.11b cards.
+
+All mobile STAs communicate with each other via the AP.
+
+Network consumes double bandwidth for one communication.
+
+AP provide buffering of traffic for a mobile broadcast.
+
+##### Ad-hoc Mode
+
+Wireless clients are connected without an AP.
+
+An ad-hoc network is where stations only communicate peer-to-peer (P2P).
+
+There is no base and no one gives permission to talk.
+
+Mostly these networks are set up spontaneously.
+
+#### Distributed System (DS)
+
+Two or more BSSs are interconnected using a distribution system.
+
+APs communicate via the DS.
+
+The DS is the backbone of the WLAN and may be constructed of either wired or wireless networks.
+
+The DS is also a thin layer in each AP.
+
+That determines if communications received from the BSS are to be relayed back to a destination in the BSS, forwarded on to the DS to another AP or sent into the wired network infrastructure to a destination not in the ESS
+
+#### Extended Service Set (ESS)
+
+An ESS is a BSS where APs communicate amongst themselves from one BSS to another..
+
+Entire network looks like an interdependent BSS to the Logical Link Control (LLC).
+
+This means stations can communicate or even move between BSSs transparently to the LLC.
+
+#### Portal
+
+The logical point at which medium access control (MAC) service data units (MSDUs) from a non-IEEE 802.11 local are network (LAN) enter the distribution system (DS) of an extended service set (ESS).
+
+#### WLAN Frame
+
+
+
+#### MSDU and AMSDU
+
+Multiple MSDUs are aggregated at the MAC layer and are pushed into a single MPDU.
+
+They have a single frame header with multiple frames and they are destined for the same client and the same service class.
+
+##### Mac Service Data Unit (MSDU)
+
+It is the MAC service data unit. This is the unit o transmission used at the MAC layer which is received from the upper layer.
+
+##### Aggregated Mac Service Data Unit
+
+Aggregation of the MSDU directly performed at the MAC layer is called AMSDU.
+
+Such AMSDUs are now passed to the lower PHY later where they are dealt with as MPDUs
+
+#### MPDU and AMPDU
+
+##### Mac Protocol Data Unit (MPDU)
+
+These are the frames passed from the MAC layers into the PHY later.
+
+##### Aggregated Mac Protocol Data Unit
+
+These are the aggregated MPDU units which are pushed into a single Physical Protocol Data Unit (PPDU).
+
+#### DS Services
+
+While the implementation for the DS is not specified, 802.11 does specify the services which the DS must support.
+
+##### Station Mobility
+
+###### No Transition
+
+If a station is not moving within its own BSS or it is not moving
+
+###### BSS Transition
+
+If a station moves between BSSs within the same ESS
+
+###### ESS Transition
+
+If the station moves between BSSs of differing ESS.
+
+##### Station Services (SS)
+
+###### Authentication
+
+With a wireless system, the medium is not exactly bounded as with a wired system.
+
+In order to control access to the network, stations must first establish their identity.
+
+The authentication relationship may be between two stations inside an IBSS or to the AP of the BSS.
+
+Authentication outside of the BSS does not take place.
+
+####### Open System Authentication
+
+All get auth.
+
+####### Shared Key Authentication
+
+###### Deauthentication
+
+When either the station or AP wishes to terminate a stations authentication. 
+
+###### Privacy
+
+An encryption algorithm, which is used so that other 802.11 users cannot eavesdrop on your LAN traffic.
+
+##### Distribution Station Services (DSS)
+
+
+###### Association
+
+A station must affiliate itself with the BSS infrastructure if it wants to use the LAN.
+
+This is done by Associating itself with an AP. Associations are dynamic in nature because stations can move, turn on or turn off.
+
+A station can only be associated with one AP.
+
+This ensures that the DS always knowns where the station is.
+
+Association supports no-transition mobility, but is not enough to support BSS transition.
+
+###### Reassociation
+
+The service allows the station to switch its association from one AP to another.
+
+Both association and reassociation are initiated by the station.
+
+###### Disassociation
+
+When the association between the station and the AP is terminated.
+
+Can be initiated by either party.
+
+A disassociated station cannot send or receive data.
+
+ESS transition is not supported.
+
+A station can move to a new ESS but will have to reinitiate connections
+
+###### Distribution
+
+Getting data from the sender to the receiver.
+
+The message is sent to the local AP (input AP) then distributed via the DS to the AP (output AP) that the recipient is associated with.
+
+If the sender and receiver are on the same BSS the input and output APs are the same.
+
+The distribution service is not logically invoked whether the data is going through the DS or not.
+
+###### Integration
+
+Where the output AP is a portal. Thus 802.X LANs are integrated into the 802.11 DS.
+
+#### Physical Layer
+
+##### Spread Spectrum
+
+The three physical layers originally defined in 802.11 included two spread-spectrum radio techniques and a diffuse infrared specification.
+
+Spread spectrum is a communication technique that spreads a narrowband communication signal over a wide range of frequencies for transmission then de-spreads it into the original data bandwidth at the receive.
+
+Spread spectrum increases the bandwidth of the signal compared to narrow band by spreading the signal.
+
+###### Techniques
+
+The Code of Federal Regulations (CFR) Part 15 originally only described two spread spectrum techniques to be used in the licensed free Industrial, Scientific, Medical (ISM)  band, 2.4 GHz,  thus 802.11 and 802.11b.
+
+* Frequency Hopping Spread Spectrum (FHSS) 
+* Direct Sequence spread Spectrum (DSSS) 
+
+Orthogonal Frequency Division Multiplexing (OFDM) was not covered by the CFR and would have required licensing.
+
+802.11a, employing OFDM, was created to work in the 5GHz.
+
+###### Frequency Hopping Spread Spectrum (FHSS)
+
+FHSS spreads the signal  by hopping from one frequency to another across a bandwidth of 83 MHz. 
+
+The data is spread over 83 MHz in the 2.4 GHz ISM band. 
+
+A short burst of data is sent on one frequency (usually less than half a second).
+
+Then the sender changes to another pseudorandom frequency and broadcasts another burst of data before changing to another frequency, and so on.
+
+The carrier then repeats this pattern.
+
+
+###### Direct Sequence Spread Spectrum (DSSS)
+
+DSSS spreads the signal by adding redundant bits to the signal prior to transmission. 
+
+The signal is divided into many different parts and sent on different frequencies simultaneously.
+Spectrum is divided into 13/14 channels.
+ 
+However, the FCC specifies only 11 channels for non-licensed (ISM band) use in the US.
+
+##### Narrowband and Wideband
+
+In communications, band is referred to as the range of frequencies (bandwidth) used in the channel.
+
+Depending on the size of the band (in terms of kHz, MHz or GHz) and some other properties of the communication channel, they can be categorized as narrowband and wideband etc.
+
+Narrowband uses a smaller frequency range (bandwidth)- 300–3400 Hz.
+
+Wideband is a relative term, and the size of the band may be in kHz, MHz or GHz depending on the application.
+
+
+
+##### Narrow Band vs. Spread Spectrum  
+
+
+###### Narrow Band
+
+Uses only enough frequency spectrum to carry the signal
+ 
+* High peak power 
+* Easily jammed
+* Easy to detect
+* Easy to intercept
+
+
+###### Spread Spectrum
+
+The bandwidth is much wider than required to send to the signal
+
+* Low peak power 
+* Difficult to jam
+* Hard to detect
+* Hard to intercept
+
+
 ## Standards
 
 *The ISO OSI model.*
@@ -1392,6 +1653,48 @@ There is a record route option which can find this: `ping -R`
 ## Multicast Routing in the Internet
 
 *Example routing problems. Protocols covered will include PIM-DM, PIM-SM and MSDP. We will also cover the role of the Rendezvous Point, Anycast IP, and issues still under debate in the technical community.*
+
+### Multicase
+
+Refers to the sending of data from one to many or many to many registered recipients.
+
+Contrast to broadcast, which floods the network with data, which all hosts will receive whether they want it or not.
+
+Unicast is the sending of data to a single recipient.
+
+Unlike unicast, multicast is scalable,if ten clients request a connection then unicast must provide those ten connections with their own copy of the data.
+
+Multicast, whether there are 1, 10 or 100 members of a ground, only one copy of the data is transmitted and is only replicated where there are group members on different paths to and from the router.
+
+### Media Access Control (MAC)
+
+All devices have a unique 48-bit MAC address.
+
+Devices on the LAN keep a table that maps unicast IP to MAC.
+
+A special range of MAC addresses is used for multicast as a multicast address does not correspond to a single end host.
+
+### 1:32 IP Multicast to MAC Multicast Mapping
+
+Class D address range: `224.0.0.0 - 239.255.255.255`
+
+High order 4 bits of the first octet of a class D address are always `1110` (`0xE`)
+
+To provide a 1:1 mapping between MAC and multicast IP addresses the remaining 28 bits of the IP address would need a unique representation in MAC addresses.
+
+MAC address range assigned for multicast is only 24 bits. The high order bit is reserved, leaving 23 bits.
+
+Thus, 28 bits of IP addresses need to be mapped to just 23 bits of the MAC address.
+
+This corresponds to a 1:32 mapping MAC multicast addresses to IP multicast addresses.
+
+#### Translation
+
+Six octets in an Ethernet header. Three high order octets are constant `01-00-5E`.
+
+The remaining three octets have a range of `00-00-00` to `7F-FF-FF` (high order bit is always `0` for IP multicast.
+
+An IP address of `224.1.1.1` maps to `01-00-5E-01-01-01`. Byt the MAC address also maps to 31 other IP addresses.
 
 ## Transport Level Protocols
 
