@@ -1034,11 +1034,10 @@ The authentication relationship may be between two stations inside an IBSS or to
 
 Authentication outside of the BSS does not take place.
 
-####### Open System Authentication
+Two types of authentication:
 
-All get auth.
-
-####### Shared Key Authentication
+1. Open System Authentication
+2. Shared Key Authentication
 
 ###### Deauthentication
 
@@ -1172,6 +1171,189 @@ The bandwidth is much wider than required to send to the signal
 * Hard to detect
 * Hard to intercept
 
+
+### Wireless Mobile Communication/Cellular Telephony.
+
+Utilises lower frequency radio spectrum.
+
+#### Mobile RF Spectrum
+
+Typically delivered over a wide range of radio frequency spectrum bands (e.g. 900MHz, 1800MHz, 2.6GHz, etc.).
+
+Most of which can also reach indoors to some degree.
+
+#### Architecture of the GSM Network
+
+##### Base Station Subsystem (BSS)
+
+Composed of one or more BSC.
+
+BSS is the point where all radio transmission related functions are performed.
+
+BTS and BSC connected through the **Abis interface**.
+
+BSS connected to the MSC through the **A interface**.
+
+###### Base Station Controller (BSC)
+
+The management of several BTS is done by the BSC.
+
+It also provides all the control functions and physical links amoung the different BTS and between the mobile switching centre (MSC) and the BTSs.
+
+Being a high-capacity switch, it provides functions....
+
+###### Base Transceiver Station (BTS)
+
+It is a station or site where antennas and radio transmitters and receivers are placed to create a radio coverage area in the mobile network.
+
+Contains one or more transeivers (TRC) and antennas.
+
+The cell site has a 360 degree omni-directional (omni-sector) antenna that is turned to create.... (*A: need to read the slides as I can't type this fast*).
+
+###### Mobile Station (MS)
+
+Mobile phone with ME and SIM.
+
+It consists of the mobile equipment (uniquely identified by International Mobile Equipment Identity (IMEI)
+
+The SIM card contains the International Mobile Subscriber Identity (IMSI) used to identify the subscriber to the system, a secret key for authentication and other information.
+
+The IMEI and the IMSI are independent, thereby allowing personal mobility.
+
+The SIM card may be protected against unauthorised by a password or PIN.
+
+##### Network Switching Subsystem
+
+Contains the network elements MSC, LR, VLR, EIR, AuC and GMSC.
+
+###### Mobile Switching Centre (MSC)
+
+Primary service delivery node for GSM and central components of NSS.
+
+It provides all the functionality needed to handle a mobile subscriber, such as:
+
+* Registraion
+* Authentication
+* Sets up and releases the end-to-end connection
+* Location...
+
+HLR and VLR, together with the 
+
+###### Home Location Register (HLR)
+
+The database that contains a subscription record for each subscriber of the GSM network.
+
+...
+
+###### Visitor Location Register (VLR)
+
+The database that contains subscriber data for subscribers registered in a MSC.
+
+Temporary details local to the MSC.
+
+...
+
+###### Equipment Identity Register (EIR)
+
+A database of all valid mobile equipment on the network.
+
+###### Authentication Centre (AuC)
+
+A protected database that stores a copy of the secret key stored in each subscriber's SIM card which is used for authentication and encryption.
+
+######Gateway MSC (GMSC)
+
+Switching entity that controls mobile terminating calls.
+
+When a call is estabished towards a GSM subscriber, a GMSC contacts the HLR of that subscriber, to obtain the address of the MSC where that subscriber is currently registered.
+
+##### GSM Interfaces
+
+###### A Interface
+
+###### Abis Interface
+
+...
+
+#### Cell
+
+Cellular telephony derives its name from the partition of geographical area into small cells.
+
+A cell is roughly circular (exactly hexagonal) area with a central transmitter and receiver base station.
+
+The size and shape of each cell is determined by the features of the surrounding area, such as buildings, trees and hills, which can block signals.
+
+In a city, there are many small cells, while rural areas may have very large cells.
+
+#### Sector
+
+Site coverage (cell) is partitioned into different directions called sectors.
+
+Each cell is usually split into tree sectors. Which overlap with other sectors of neighbouring cells so network is uninterrupted.
+
+#### Switched Communications Networks
+
+Long distance transmission between stations (called end devices) is typically done over a network of switching nodes.
+
+Switching nodes do not concern with content of data.
+
+Their purpose is to provide a switching facility that will move the data from node to node until they reach their destination.
+
+A collection of nodes and connections forms a communications network.
+
+In a switched communications network, data entering the network from a station is routed to the destination by being switched from node to node.
+
+##### Circuit Switching Network
+
+A dedicated radio channel is allocated to a single transmission
+
+As long as data transmissions are long and continuous (file transfers) a circuit is used efficiently.
+
+However, most data transmissions are bursty, and dedicating ..........
+
+##### Packet Switching Network
+
+An entire network may be designed just for packet data.
+
+Packets do not have a dedicated path, it is decided by the routers.
+
+Most old wireless data systems offered minimal data rates, usually in the 10Kbps range. However new wireless protocols bond multiple channels to increase data rates.
+
+#### Multiple Access (Multiplexing) Protocol
+
+Mobile development is facing the major problem to find protocols that could be used to maximise bandwidth efficiently.
+
+Multiple access enables ...
+
+##### Frequency Division Multiple Access (FDMA)
+
+##### Time Division Multiple Access (TDMA)
+
+##### Code Division Multiple Access (CDMA)
+
+Each user is assigned a different psuedorandom binary sequence that modulates the carrier, spreading the spectrum of the waveform, ....
+
+#### Cellular Generations
+
+...
+
+##### 1G
+
+##### 2G
+
+
+
+##### 2.5G
+
+##### 2.75G
+
+##### 3G
+
+##### 3.5G
+
+##### 3.75G/Pre-4G
+
+##### 4G
 
 ## Standards
 
@@ -1695,6 +1877,120 @@ Six octets in an Ethernet header. Three high order octets are constant `01-00-5E
 The remaining three octets have a range of `00-00-00` to `7F-FF-FF` (high order bit is always `0` for IP multicast.
 
 An IP address of `224.1.1.1` maps to `01-00-5E-01-01-01`. Byt the MAC address also maps to 31 other IP addresses.
+
+#### Host Behaviour Reception
+
+Discarding of unwanted packets has to be handled by the IP stack.
+
+Hosts interesting in 224.1.1.1 will also receive (if on LAN) the other 31 possibilities.
+
+After de-capsulation the Ethernet fram and discovering the IP address of an unwanted packet, the host discards the packet.
+
+The probability of this are quite slim at the moment
+
+### Special Multicase Addresses
+
+
+
+#### Local Network Control Block
+
+`224.0.0.0 - 244.0.0.255 (224.0.0.0/24)`
+
+Should never leave the local network.
+
+#### Internetwork Control Block
+
+`224.0.1.0 - 244.0.1.255 (244.0.0.1/24)`
+
+#### Session Description Protocol (SDP)/Session Announcement Protocol (SAP) Block
+
+`224.2.0.0 - 224.2.255.255 (224.2/16)`
+
+#### Source Specific Multicast
+
+`232.000.000.000 - 232.255.255.255`
+
+Specifically permit or block source addresses.
+
+#### GLOP Block
+
+`233.000.000.000 - 233.255.255.255`
+
+Ensure that addresses are specific to an administrative domain. Low number of specific addresses (255).
+
+#### Administratively Scoped
+
+`239.000.000.000 - 239.255.255.255`
+
+Private multicast addresses.
+
+### IP Group Management
+
+Protocol used is Internet Group Management Protocol (IGMP)
+
+* IGMPv1 - RFC1112
+* IGMPv2 - RFC2236
+* IGMPv3 - RFC3376
+
+#### IGMPv1
+
+No explicit leave message.
+
+IGMP Report Suppression
+
+##### Membership Queries
+
+Sent by routers to ask for existence of hosts interested in receiving multicast groups.
+
+##### Membership Reports
+
+Sent by hosts in response to Queries,
+
+Also sent by the host if they wish to join a new group.
+
+##### Message Format
+
+![](http://routemyworld.com/wp-content/uploads/2009/01/igmpv1header.png)
+
+#### IGMPv2
+
+Major change, introduces an explicit Leave Message
+
+##### Membership Queries
+
+General Query as before.
+
+Group-Specific Query. Used to query if there are any members of a group left after a leave message.
+
+#### IGMPv1 and IGMPv2 Interoperability
+
+IGMPv2 Hosts **must** send IGMPv1 if they spot an IGMPv1 router is the querier.
+
+IGMPv2 Hosts **may** suppress Leave Messages if they spot an IGMPv1 router is the querier.
+
+IGMPv2 Hosts **must** suppress reports if they see others using IGMPv1 or IGMPv2 reports for a given group.
+
+IGMPv2 routers **must** ignore Leave messages if IGMPv1 hosts are present.
+
+If any IGMPv1 routers are present must use IGMPv1
+
+#### IGMPv3
+
+Major change: supports the specification of sources in messages.
+
+Host now do **not** suppress Reports.
+
+Thus, supports the concept of Source Specific Multicast.
+
+Protocol messages are now more complex.
+
+##### Membership Queries
+
+Now contain source address information.
+
+##### Membership Reports
+
+Now contain information relating to multiple groups and each group report can contain source address information.
 
 ## Transport Level Protocols
 
