@@ -61,6 +61,39 @@ Text book study and revision.
 
 Using the computer connected digital oscilloscopes or *picoscopes*.
 
+### More DNS
+
+`nslookup minted.dcs.aber.ac.uk` whilst capturing packets on port 53 captured **8** packets.
+
+The type of the message was of type **A** and of class **IN** and was a **recursive** lookup. There was no response because the message was a query.
+
+The server this was sent to was `193.60.11.253`. In `/etc/resolv.conf/` the nameserver: `127.0.1.1 c57net.aber.ac.uk`.
+
+**1** question and **3** answers were held in the first answering packet. **4** authoritative records were received specifying the 2 authoritative nameservers from `dcs.aber.ac.uk` and 2 from `yale.ac.uk`.
+
+The additional records provided all possible IP addresses of all nameservers contacted during the lookup to cache the information.
+
+`nslookup set type=MX aber.ac.uk` was then captured. The answer record contained: `Mail exchange: aber-ac-uk.mail.protection.outlook.com`.
+
+The authorative record contained nameservers for: `aber.ac.uk` (3) and `yale.ac.uk` (1).
+
+`nslookup set type=SOA dcs.aber.ac.uk` was then captured.
+
+The email of the person responsible for this domain is: `cs-root.aber.ac.uk`.
+
+There are 4 authoritative nameservers for this domain: `dcs.aber.ac.uk` (2), `aber.ac.uk` (1) and `yale.ac.uk` (1).
+
+`nslookup aber-ac-uk.mail.protection.outlook.com.` The response from this was from microsoft. 2 IP addresses which can switch (load balanced?).
+
+`nslookup 193.60.11.36` had a type of `PTR` for the name `36.11.60.193.in-addr.arpa`. Still used the standard nameservers.
+
+`nslookup sillyname` gave an authoritative and non-authoritative response (one authoritative for `sillyname.c57net.dcs.aber.ac.uk` and non-authoritative for `sillyname`). Uses two different sets of nameservers, the Aberystwyth local ones and the root nameserver.
+
+`dig @dns0.aber.ac.uk 98.34.124.144.in-addr.arpa PTR` shows lots of packets, initially gathering DNS information, then on `144.124.34.98`.
+
+`dig www.yahoo.com A` shows that yahoo uses `CNAME` instead, with an IP address of `87.248.122.122`.
+
+
 ## Basic Issues in Data Communication
 
 *A revision of the basic issues in data communication.*
