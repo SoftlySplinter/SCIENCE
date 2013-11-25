@@ -967,6 +967,84 @@ If necessary a whole application and its process will be removed.
 
 Need to be able to reincarnate apps.
 
+### List Views
+
+Used to display scrollable lists of data.
+
+#### List Activity
+
+Extended by classes to handle clicks, etc.
+
+Acts as a controller in an MVC sense.
+
+#### List View
+
+Used by the List Activity
+
+Acts as a view in an MVC sense. Does the hard work of sizing rows, etc.
+
+#### List Adapter
+
+Created by the controller and acts as the data source for the list view.
+
+Acts as a model in the MVC pattern.
+
+##### Array Adapter &lt;T&gt;
+
+Simple array of type T.
+
+Generally a hard-coded list of static data.
+
+##### Simple Adapter
+
+A list of maps, where the map keys relate to UI element IDs.
+
+##### Simple Cursor Adapter
+
+A dynamic adapter which is based on a cursor of an iteratable object.
+
+### Filesystem
+
+Given a private filestore under: `/data/data/package-path`
+
+#### Public
+
+On SD Card
+
+#### Private
+
+Stored under private filestore.
+
+`/data/data/package-path/files`
+
+##### Access
+
+Apps access their private files folder with: `Context.getFilesDir();`
+
+###### Read/Write
+
+`Context.openFileOutput(String name, int mode);`
+
+`Context.openFileInput(String name)`
+
+#### Media
+
+On SD Card under the standard location for media files.
+
+#### Temporary
+
+`/data/data/package-path/cache`
+
+#### Shared Preferences
+
+`/data/data/package-path/shared-prefs`
+
+XML only
+
+#### Databases
+
+`/data/data/package-path/databases`
+
 ## Bringing it all together
 
 *Legal, social, ethical and professional issues. Selecting platforms and delivery methods, getting the interface right. (3 lectures)*
