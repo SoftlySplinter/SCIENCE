@@ -28,7 +28,38 @@ This module builds on SE31520 examining further the development processes, techn
 
 ## Construction Technologies
 
-*Examination of technical solutions for building enterprise applications as provided by enterprise Java and .NET for building distributed applications. These include support for server-side MVC, e.g. JavaServer Faces and ASP.NET MVC; business objects, e.g. Enterprise JavaBeans; object to relational mapping, e.g. MS LINQ, Java Persistence API; messaging systems, e.g. Java Messaging Service; interoperability, e.g. SOAP-based web services.*
+*Examination of technical solutions for building enterprise applications as provided by enterprise Java and .NET for building distributed applications.*
+
+These include:
+* support for server-side MVC, e.g. JavaServer Faces and ASP.NET MVC; 
+* business objects, e.g. Enterprise JavaBeans; 
+* object to relational mapping, e.g. MS LINQ, Java Persistence API; 
+* messaging systems, e.g. Java Messaging Service;
+* interoperability, e.g. SOAP-based web services.
+
+### Server-Side MVC
+
+#### Java Server Faces
+
+#### ASP.NET
+
+### Business Objects
+
+#### Enterprise Java Beans
+
+### Object Relational Mapping (ORM)
+
+#### MS LINQ
+
+#### Java Persistence API
+
+### Messaging Systems
+
+#### Java Messaging Service
+
+### Interoperability
+
+#### SOAP-based Web Services
 
 ## Design Issues
 
