@@ -22,7 +22,7 @@ This module introduces the key ideas in Artificial Intelligence and ensures all 
 ### Assessment
 
 - Presentation **20%** *01/10/2013-18/10/2013*
-- Report **20%** *01/10/2013-25/10/2013
+- Report **20%** *01/10/2013-25/10/2013*
 - Essay **60%** (coding + report) *10/10/2013-01/11/2013*
 
 *Tips: if you disagree with a paper, you should comment on why, this will be a good thing :)*
@@ -904,3 +904,4 @@ Fewer variables, if they produce a model just as good in testing, should be pref
 Not clear cut for a definite value. (i.e. not boolean logic).
 
 ![](http://upload.wikimedia.org/wikipedia/commons/6/61/Fuzzy_logic_temperature_en.svg)
+
