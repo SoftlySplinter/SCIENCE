@@ -2737,7 +2737,39 @@ Location of host.
 
 ### Dynamic Host Configuration Protocol (DHCP)
 
+### DHCP Timeline
+
+![](http://www.tarunz.org/~vassilii/TAU/protocols/dhcp/alloc.gif)
+
+Request are broadcast address `255.255.255.255`.
+
+Often used during host configuration.
+
+Never forwarded by a route, by a DHCP/BOOTP relay agent can be used to forward this onto the DHCP server.
+
+Replies are routed normally.
+
 ### Lightweight Directory Access Protocol (LDAP)
+
+### The Directory Information Tree
+
+Similar to the DNS tree, but the whole world doesn't typically use the same tree.
+
+### The Information Model
+
+Service model based on **entries**.
+
+An **entry** is a collection of **attributes**, that has a **distinguished name (DN)**.
+
+#### Attributes
+
+Type/value pairs, e.g.:
+
+`C = GB`
+
+`o = University of Wales`
+
+Attributes described by a schema.
 
 ## Quality of Service
 
