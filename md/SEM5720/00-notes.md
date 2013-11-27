@@ -1865,11 +1865,94 @@ There is a record route option which can find this: `ping -R`
 
 *Example routing problems. Interior and exterior routing protocols. Protocols covered will include RIP, OSPF and BGP.*
 
+### IP Routing
+
+Split into two parts:
+
+1. Packet Forwarding or Packet Switching
+2. Routing
+
+#### Packet Forwarding
+
+Needs to be fast and efficient, every packet involves a forwarding option.
+
+Based on prior knowledge the packet is moved towards the destination.
+
+#### Routing
+
+Filling routing tables. This requires knowledge of the connectivity in some sense.
+
+This needs to be stable and should converge relatively quickly.
+
+This task should not be performed frequently
+
+### Classifying Routes
+
+Routes can be classified into three different categories:
+
+1. Default Routes
+2. Static Routes
+3. Dynamic Routes
+
+Could also classify by interior and exterior routing.
+
+#### Default Routes
+
+A default route which is used as a fallback if all other routing fails.
+
+#### Static Routes
+
+Manually configured information.
+
+Not very scalable.
+
+#### Dynamic Routes
+
+Automatically use information from other participating routers.
+
+### Routing Algorithms/Protocols
+
+Different methods for finding out routes.
+
+#### Distance View Routing
+
+Uses the Bellman-Ford algorithm.
+
+Regularly broadcast the entire routing table, containing known networks and the "distance" to each (usually a number of hops).
+
+Has the problem of routing loops and convergence after change.
+
+#### Routing Internet Protocol (RIP)
+
+##### RIPv1 (RFC 1058)
+
+Classful routing with no ability to pass netmasks.
+
+Typically broadcasts every 30 seconds.
+
+Metrics range from 1 to 16 (infinity).
+
+"Split Horizon" often used as it is simple and poison reverse.
+
+"Triggered Updates".
+
+##### RIPv2 (RFC 1723)
+
+Refinement of RIPv1.
+
+Includes netmasks and some support for authentication and multicast.
+
+#### Link State Routing
+
+#### IP Address Class Based Only
+
+#### Classless Inter-domain Routing
+
 ## Multicast Routing in the Internet
 
 *Example routing problems. Protocols covered will include PIM-DM, PIM-SM and MSDP. We will also cover the role of the Rendezvous Point, Anycast IP, and issues still under debate in the technical community.*
 
-### Multicase
+### Multicast
 
 Refers to the sending of data from one to many or many to many registered recipients.
 
