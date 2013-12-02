@@ -1049,3 +1049,35 @@ XML only
 
 *Legal, social, ethical and professional issues. Selecting platforms and delivery methods, getting the interface right. (3 lectures)*
 
+### Motivations
+
+The BCS, under its Royal Chater, is required to establish and maintain standards of competence, conduct and ethical practice for information systems professionals.
+
+The ability to recognised the **legal**, **social**, **ethical** and **professional** issues involved in the exploitation of computer technology and be guided by the adoption of appropriate professional, ethical and legal practises.
+
+### Legal Issues
+
+Which laws relate to the use of computers?
+
+#### Data Protection Act
+
+#### The Equality Act
+
+#### Copyright, Design and Patents Act
+
+#### Contract Law and Licenses
+
+#### Computer Misuse Act
+
+### Social Issues
+
+What is the impact of computers on society?
+
+### Ethical Issues
+
+How should we act?
+
+### Professional Issues
+
+What are our professional responsibilities?
+
