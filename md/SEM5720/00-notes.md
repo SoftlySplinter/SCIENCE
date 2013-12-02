@@ -1924,6 +1924,8 @@ Has the problem of routing loops and convergence after change.
 
 #### Routing Internet Protocol (RIP)
 
+Uses Distance View Routing
+
 ##### RIPv1 (RFC 1058)
 
 Classful routing with no ability to pass netmasks.
@@ -1932,9 +1934,19 @@ Typically broadcasts every 30 seconds.
 
 Metrics range from 1 to 16 (infinity).
 
-"Split Horizon" often used as it is simple and poison reverse.
+"Split Horizon" often used.
 
-"Triggered Updates".
+"Triggered Updates" send an update when something (close) changes to improve convergence.
+
+Sent via UDP to the IP broadcast address (usually) to port 520.
+
+###### Single Splint Horizon
+
+Don't repeat information to the originator.
+
+###### Poison Reverse Horizon
+
+Repeat back information, but metric is set to infinity
 
 ##### RIPv2 (RFC 1723)
 
@@ -1943,6 +1955,16 @@ Refinement of RIPv1.
 Includes netmasks and some support for authentication and multicast.
 
 #### Link State Routing
+
+Each router sends the state of all its links to all adjacent routers.
+
+* Link State Advertisements (LSA)
+
+<!-- .. -->
+
+Each router independently calculates its routing table based on the link state database it has constructed.
+
+Normally uses Dijkstra Shortest Path (Shortest Path First).
 
 #### IP Address Class Based Only
 
@@ -2778,6 +2800,91 @@ Attributes described by a schema.
 ## Security Issues
 
 *The inherent risks within networks such as the Internet, cracking, viruses, trojans, worms and denial of service attacks. The role of the Firewall and the problems it can bring.*
+
+### Data Encryption
+
+Four aspects of security to consider:
+
+1. Privacy
+2. Authentication
+3. Integrity
+4. Nonrepudiation
+
+#### Aspects of Security
+
+#### Privacy
+
+Snoopers should not be able to read confidential data
+
+#### Authentication
+
+Verifies that the apparent sender really sent a message, and not an imposter.
+
+#### Integrity
+
+Verifies that data has not been corrupted or altered in transmission
+
+#### Nonrepudiation
+
+Ensures that the sender or receiver cannot deny sending or receiving a piece of information.
+
+#### Encryption Techniques
+
+Classical encryption techniques:
+
+* Permutation: The order of the plaintext characters is changed
+* Substitution: a plaintext alphabet is mapped to a different one.
+
+A cipher used to perform the encryption.
+
+* Stream ciphers encrypt data bit by bit or byte by byte.
+* Block ciphers first pack data bits into a fixed length block, then encrypt the whole block into a ciphertext block.
+
+#### Symmetric Key Encryption
+
+Use a shared secret key to encrypt and decrypt.
+
+For ![](http://smarturl.it/math?n\) users, ![](http://smarturl.it/math?\sum{n}\) keys required.
+
+Can be done in hardware.
+
+#### Public Key Encryption
+
+The key is split into two: a public key and a private key.
+
+Anything encrypted by the public key can only be decrypted by the private key.
+
+The private key must be kept private, but the public key can be shared without worry.
+
+Cannot be done in hardware.
+
+#### Combining Both
+
+Create a shared secret based from public key encryption.
+
+### Transport Layer Security (TLS)
+
+Client sends a "hello" message with TLS version number and prefernces.
+
+Server sends a certificate including a public key.
+
+* Public key encrypted by some CAs.
+* Client has a list of CAs and their keys and uses a corresponding key to decrypt the server key.
+  * This authenticates the server, unless it is self-signed.
+
+Client sends a secret key encrypted with the server's public key.
+
+Server decrypts message and then encrypts a response with secret key which the client decrypts.
+
+### Hashing and Message Authentication
+
+Hashing is the operation that maps the message of variable length into a hash value with fixed length.
+
+Hashing is not reversible.
+
+Hashing can be used to generate a digest of the message, called the Message Authentication Code.
+
+The receiver can use the digest to verify if the message is authentic.
 
 ## Current and Future Issues
 
