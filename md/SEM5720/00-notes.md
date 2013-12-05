@@ -1966,6 +1966,26 @@ Each router independently calculates its routing table based on the link state d
 
 Normally uses Dijkstra Shortest Path (Shortest Path First).
 
+#### Open Shortest Path First (OSPF)
+
+Uses IP directly.
+
+Early versions could calculate a different set of routes for each value of the IP Type-Of-Service (ToS) field, but this was abandoned in the latest RFC.
+
+Interfaces have a dimension-less costs (these were potentially different for each value of ToS).
+
+Supports equal cost load balancing.
+
+Supports subnet mask and thus CIDR.
+
+Point-to-point links can be used without IP addresses.
+
+Supports authentication
+
+Uses multicasting to reduce load.
+
+On a multi-access network (e.g. ethernet), two routers are elected as Designated Router and Backup Designated Router.
+
 #### IP Address Class Based Only
 
 #### Classless Inter-domain Routing
@@ -2026,7 +2046,7 @@ After de-capsulation the Ethernet fram and discovering the IP address of an unwa
 
 The probability of this are quite slim at the moment
 
-### Special Multicase Addresses
+### Special Multicast Addresses
 
 
 
@@ -2129,6 +2149,115 @@ Now contain source address information.
 ##### Membership Reports
 
 Now contain information relating to multiple groups and each group report can contain source address information.
+
+### Multicast Distribution Trees
+
+The set of links and connections that traffic will follow to get to a destination.
+
+#### Source Trees
+
+Sometimes called Shortest Path Trees (SPT)
+
+A tree where the root is the source of the data.
+
+A different forwarding tree for every combination of source (S) and group (G). N groups and M sources implies ![](http://smarturl.it/math?M\times~N\) trees.
+
+This makes it difficult to calculate the best tree.
+
+Routers need to maintain separate states for all trees.
+
+(S,G) notation.
+
+#### Shared Trees
+
+Rendezvous Point Trees or Core Based Trees.
+
+Traffic follows some form of common path, unlike source trees in which two different trees can send data through different paths, at least most of the route will follow a common tree.
+
+Each group in the system uses the same tree. N trees implies N groups, no matter how many sources.
+
+Normally, each group has a nominated router as the Rendezvous Point, which is the root of the tree.
+
+All sources send towards the Rendezvous Point.
+
+Can potentially lead to a single point of failure if no backup is specified.
+
+(*, G) Notation
+
+### Multicast Forwarding
+
+Routers must no just forward all multicast traffic. Potentially there could be customers anywhere, unlike with unicast. However, forwarding all multicast would be broadcast instead and would lead to chaos.
+
+Techniques include:
+
+* Reverse Path Forwarding
+* Multicast Forwarding Caches
+* TTL Thresholds
+* Administratively Scoped Boundaries
+
+#### Reverse Path Forwarding
+
+Note the source address of the arriving packet and interface of arrival. The IP tables are checked for the correct interface towards the source.
+
+If the packet has arrived into the expected interface, it can be forwarded onwards. If not it can be discarded.
+
+#### Multicast Forwarding Caches
+
+Used to help avoid some RPF calculations
+
+Sometimes called multicast routing tables.
+
+Used to help make decisions for routing tables.
+
+#### TTL Thresholds
+
+TTL normally used by IP and decremented as each router passed. When this TTL reaches zero, the packet is dropped.
+
+Multicast routers often set TTL Thresholds on interfaces, if the TTL of the packet is less than this threshold then the packet isn't forwarding.
+
+If traffic was only designed to reach internal locations, the TTL would be set such that it could reach all internal routers, but external routers would have high enough threshold to stop this traffic, but not those expected to reach external locations.
+
+#### Administratively Scoped Boundaries
+
+These boundaries don't pass certain multicast addresses.
+
+### Multicast Routing Protocols
+
+#### Dense Mode Protocol
+
+Send all valid packets out of all interfaces, flooding the network.
+
+When a router receives unwanted packets it sends a prune message upstream.
+
+When a prune message is received, the router removes the interface it was received on from the forwarding table for the specified group.
+
+Prune times out in typically 2 to 3 minutes.
+
+##### DVMRP
+
+##### Protocol Independant Multicast - Dense Mode (PIM-DM)
+
+
+
+#### Sparse Mode Protocol
+
+Routers send no traffic onwards unless asked.
+
+Shared tree branch constructed from rendezvous point (root) to any interested receiver.
+
+Join messages are sent from the receiver to the root  via other routes, creating a shared tree where it goes.
+
+Prune sent when the traffic is no longer wanted.
+
+##### Protocol Independant Multicast - Sparse Mode (PIM-SM)
+
+Has a rendezvous point using a shared tree, but uses source trees to get data from sources to the rendezvous point. Also allows the final router feeding receivers to switchover to a source tree from the source if the traffic level exceeds some threshold (in Cisco routers the default value for the threshold is zero).
+
+##### CBT
+
+#### Link State Protocol
+
+##### MOSPF
 
 ## Transport Level Protocols
 
@@ -2317,6 +2446,8 @@ Not listening, connection closed.
 If no `ACK` is received at `SYN Received` state then the `SYN` is resent after a timeout.
 
 Known as the *three way handshake*.
+
+**Note:** Initial sequence numbers are important! Both client and server choose different ISNs.
 
 ##### Half-Open
 
@@ -2929,4 +3060,34 @@ Postfix is usually the last 24 bits of MAC address. middle byte is `fffe` due to
 ### Site-Local Addresses
 
 Format Prefix `1111 1110 11` or `FEC0`
+
+### Neighbour Discovery
+
+### Router Advertisements
+
+### DHCPv6
+
+Where autoconfiguration is undesirable for operational reasons.
+
+Similar in concept to DHCP for IPv4
+
+Compatible with autoconfiguration
+
+Nodes may request multiple addresses.
+
+Authentication of nodes.
+
+Makes use of address deprecation and reconfiguration-init message...
+
+### Co-existence and Tunnelling
+
+
+
+## Exam Preparation
+
+*Some chances to get a feel for what is expected in the exam.*
+
+### Steve Kingston
+
+`s/(Use a diagram) is necessary/\1/g`
 
