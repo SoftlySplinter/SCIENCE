@@ -2935,6 +2935,24 @@ Attributes described by a schema.
 * QoS *policy* distribution, maintenance and monitoring will increase in importance.
 * Better to implement QoS earlier - provides scalability, experience. Pro-active not reactive.
 
+### Queueing Disciplines
+
+Ways in which resources can be allocated to priority traffic best.
+
+#### Priority Queue
+
+Other queues only get any resources at all when the priority queue is empty.
+
+Simple and effective.
+
+Traffic must be policed to stay within low limit as other traffic can get starved or the priority queue reverts to Best Effort
+
+#### Weighted Round Robin
+
+Multiple queues, each queue gets a guaranteed minimum of resource even under congestion conditions.
+
+Can be combined with Priority Queues.
+
 ## Security Issues
 
 *The inherent risks within networks such as the Internet, cracking, viruses, trojans, worms and denial of service attacks. The role of the Firewall and the problems it can bring.*
