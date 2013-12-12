@@ -2928,6 +2928,13 @@ Attributes described by a schema.
 
 *The need for and the provision of Quality of Service (QoS) within packet based networks such as the Internet which are inherently best efforts at heart.*
 
+### Challenges
+
+* QoS needs to be end-to-end, involving numerous management domains.
+* QoS service should address all requirements - not just 'top quality'
+* QoS *policy* distribution, maintenance and monitoring will increase in importance.
+* Better to implement QoS earlier - provides scalability, experience. Pro-active not reactive.
+
 ## Security Issues
 
 *The inherent risks within networks such as the Internet, cracking, viruses, trojans, worms and denial of service attacks. The role of the Firewall and the problems it can bring.*
