@@ -1233,15 +1233,23 @@ The management of several BTS is done by the BSC.
 
 It also provides all the control functions and physical links amoung the different BTS and between the mobile switching centre (MSC) and the BTSs.
 
-Being a high-capacity switch, it provides functions....
+Being a high-capacity switch, it provides functions such as cell configuration data, control of radio frequency power levels in BTS, frequency hopping, and handovers.
+
+One MSC serves a number of BSCs.
 
 ###### Base Transceiver Station (BTS)
 
 It is a station or site where antennas and radio transmitters and receivers are placed to create a radio coverage area in the mobile network.
 
-Contains one or more transeivers (TRC) and antennas.
+Contains one or more transceivers (TRC) and antennas.
 
-The cell site has a 360 degree omni-directional (omni-sector) antenna that is turned to create.... (*A: need to read the slides as I can't type this fast*).
+The cell site has a 360 degree omni-directional (omni-sector) antenna that is turned to create a cellular area of a specific size.
+
+Omni-sector means the same frequencies are used in all directions.
+
+Communication from the mobile terminal to the cell site is referred to as uplink.
+
+Cell site to mobile terminal is downlink
 
 ###### Mobile Station (MS)
 
@@ -1268,27 +1276,53 @@ It provides all the functionality needed to handle a mobile subscriber, such as:
 * Registraion
 * Authentication
 * Sets up and releases the end-to-end connection
-* Location...
+* Location Updating
+* Handovers
+* Cell routing and roaming subscribers
 
-HLR and VLR, together with the 
+HLR and VLR, together with the MSC, provide the call-routing and roaming capabilities of GSM.
+
+It takes care of charging and real time pre-paid account monitoring.
+
+These services are provided in conjunction with several functional entities, which together form the Network Switching Subsystem (NSS). 
+
+The MSC provides the connection to the fixed networks (such as the PSTN or ISDN). 
 
 ###### Home Location Register (HLR)
 
 The database that contains a subscription record for each subscriber of the GSM network.
 
-...
+All the administrative information related to each subscriber registered in the respective communication network, including the current location of the subscriber, is contained in the HLR.
+
+The HLR is responsible for the sending of subscription data to the VLR (during registration)
+or GMSC (during mobile terminating call handling).
+
+The location of the mobile is typically in the form of the signalling address of the VLR associated with the mobile station. 
+
+A GSM subscriber is normally associated with one particular HLR. 
+
+There is logically one HLR per GSM network, although it may be implemented as a distributed database.
+
 
 ###### Visitor Location Register (VLR)
 
 The database that contains subscriber data for subscribers registered in a MSC.
 
-Temporary details local to the MSC.
+It contains all the temporary information about the subscribers. 
 
-...
+This information is needed by the MSC to service the visiting subscribers.
+
+Every MSC contains a VLR. Although MSC and VLR are individually addressable.
+
+They are always contained in one integrated node.
 
 ###### Equipment Identity Register (EIR)
 
 A database of all valid mobile equipment on the network.
+
+Where each mobile station is identified by its International Mobile Equipment Identity (IMEI). 
+
+An IMEI is marked as invalid if it has been reported stolen or is not type approved.
 
 ###### Authentication Centre (AuC)
 
@@ -1300,13 +1334,25 @@ Switching entity that controls mobile terminating calls.
 
 When a call is estabished towards a GSM subscriber, a GMSC contacts the HLR of that subscriber, to obtain the address of the MSC where that subscriber is currently registered.
 
+That MSC address is used to route the call to that subsciber
+
 ##### GSM Interfaces
 
 ###### A Interface
 
+The connection between MSC and BSC.
+
 ###### Abis Interface
 
-...
+The connection between BSC and BTS.
+
+######D interface
+
+The connection between MSC and HLR.
+
+###### Um interface
+
+The radio connection between MS and BTS.
 
 #### Cell
 
@@ -1342,7 +1388,9 @@ A dedicated radio channel is allocated to a single transmission
 
 As long as data transmissions are long and continuous (file transfers) a circuit is used efficiently.
 
-However, most data transmissions are bursty, and dedicating ..........
+However, most data transmissions are bursty, and dedicating an entire circuit to them is usually a waste of valuable wireless bandwidth. 
+
+During idle periods when no data is being sent, bandwidth is still dedicated to the user and not available for others to use.
 
 ##### Packet Switching Network
 
@@ -1364,7 +1412,7 @@ Multiple access enables ...
 
 ##### Code Division Multiple Access (CDMA)
 
-Each user is assigned a different psuedorandom binary sequence that modulates the carrier, spreading the spectrum of the waveform, ....
+Each user is assigned a different psuedorandom binary sequence that modulates the carrier, spreading the spectrum of the waveform, giving each user a unique code pattern.
 
 #### Cellular Generations
 
@@ -3115,4 +3163,65 @@ Makes use of address deprecation and reconfiguration-init message...
 ### Steve Kingston
 
 `s/(Use a diagram) is necessary/\1/g`
+
+## Past Paper 2012-113
+
+### 1. This is a question about the Transport Layer Protocols
+
+#### a) With reference to the User Datagram Protocol (UDP) and the Transmission Control Protocol (TCP), describe features that are provided by transport layer protocols. In your answer distinguish between features provided just by TCP and those provided by both UDP and TCP.
+
+* Both use port numbers. Server listens of a specific port and client sends data to that port.
+* UDP Connectionless
+  * No acknowledgement that data is recieved
+  * Up to the application to manage successful transmission of data
+* TCP sets up a connection between two machines
+  * Connection must first be established
+  * All sent packets (except ACK's) must be acknowledged by the other party
+  * Support for flow control using sliding window protocol
+  * Must also terminate the connection
+  * Protocol ensures sucessful delivery of data (or failure).
+
+b) Describe with the aid of diagrams the TCP/IP connection establishment processes, and explain how the initial sequence number (ISN) is exchanged between two nodes during connection establishment. Label the diagrams with the TCP connection states at each stage.
+
+* Server listens on a specified port
+* Client sends a SYN packet to that with a random ISN and a receiving port number (usually fairly high).
+* Server responds to the client with an ACK with a sequence one higher than the SYN's ISN (the SYN is seen to have taken up one byte of data).
+* Server also responds with a SYN to the client, the ISN here is generated by the server and is different to the clients.
+* Client responds to the server's SYN with an ACK, again here the sequence number of this packet will be the ISN of the Servers SYN packet + 1.
+* At this point the connection is established.
+
+The ISNs must be different as they are used to acknowledge how much data was actually received later in the connection.
+
+Sequence numbers returned in the ACK are the sequence number of the acknowledge packets plus the size of that packet (which can then be used for flow control).
+
+#### c) What is meant by a flow control mechanism? In your answer describe the likely effect of not employing flow control on TCP connections.
+
+* Flow control used to send multiple packets of data and acknowledging them all in a single packet.
+* Flow control is also used to stop flooding the network with packets that would just be dropped by the receiver because it's buffers are full.
+
+Not using flow control would either:
+
+1. Require the sender to wait for the receiver to acknowledge a single packet before sending the next one, meaning the whole transmission would be very slow.
+2. Allow the sender to flood the network with packets which would eventually be dropped by the receiver as its buffers fill up to maximum (or by intermediary devices to the same effect). The sender would receive acknowledgements for some of the packets and would have to constantly resend dropped packets after a timeout period, leading to a lot of traffic on the network, especially when the receiver does not process the information quickly.
+
+
+#### d) Describe, with the aid of diagrams, the problem with transferring very large files using the slow start /congestion avoidance flow control mechanism on fast (e.g. gigabit) but high latency networks. Explain in your answer how the TCP Westwood+ algorithm modifies the mechanism to provide better throughput whilst retaining a concept of fair access.
+
+
+
+* Slow start sets the window to 1 to begin with and grows it exponentially after each ACK received. Once it reaches the slow start threshold (ssthres), this growth is linear (by 1 from each ACK) - this is congestion avoidance.
+* Eventually the congestion will be encountered, and a packet will not be ACK'd before a timeout. The size of sstresh is set to one half of the current window size and then the size of the window is reset to 1. The process then repeats endlessly.
+* This tends to lead to "sawtooth" graphs.
+* Problem of slow start is that it has to wait for a timeout to occur before it knows congestion has occurred.
+
+* To change this, TCP Reno was implemented; if the receiver does not receive the next expected packet (i.e. it receives one with a higher sequence number than expected) it will send a duplicate ACK of the last ACK it sent.
+* If this ACK is received by the sender 3 times it triggers retransmission and will retransmit the next packet from that sequence number.
+* The receiver may then acknowledge further packets in the sequence in the next ACK.
+* Instead of reseting the window size to 1, it is started at sstresh instead and grown incramentally.
+
+* TCP Reno still leads to sawtooth graphs, but is less affected by congestion.
+* TCP Westwood+ implemented to further improve TCP connections.
+* Westwood+ estimates the bandwidth available using received ACKs and Round Trip Time monitoring.
+* In both cases of 3 duplicate ACKs or coarse timeout, the ssthresh is set to `max(2, (BWE * RTTmin) / Seg_size)`. The congestion window is set to ssthresh in the case of 3 dup ACKs or 1 in the case of coarse timeout.
+* A small fraction of randomly lost packets doesn't affect the BWE and therefore the ssthresh, unlike with Reno.
 
