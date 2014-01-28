@@ -260,6 +260,39 @@ Provides access to:
 * Headers
 * A writer (for the body)
 
+###### Forwarding
+
+Can forward requests to other servlets, passing on the request and response objects. Used for branching on context, for example.
+
+
+```java
+RequestDispatcher d = req.getRequestDispatcher('name');
+d.forward(req, resp)
+```
+
+###### Instance Variables and Servlets
+
+A servlet could have instance variables, however these variables are not specific to a connection, rather the whole servlet.
+
+There may also be multiple servlets so there is no guarantee that these will be the same.
+
+Need features for session data.
+
+Reminder that HTTP is stateless.
+
+###### Sessions
+
+The request must carry some identification of the session, server usually generates this information.
+
+* Parameters
+* Cookies
+
+Remember EU Cookie Law
+
+###### Error Redirects
+
+Specified in the `web.xml` descriptor.
+
 ## Construction Technologies
 
 *Examination of technical solutions for building enterprise applications as provided by enterprise Java and .NET for building distributed applications.*
