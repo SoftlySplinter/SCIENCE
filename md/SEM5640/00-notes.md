@@ -125,6 +125,17 @@ SOAP XML, WSDL and REST are the big players.
 
 Alternatives to REST?
 
+## Construction Technologies
+
+*Examination of technical solutions for building enterprise applications as provided by enterprise Java and .NET for building distributed applications.*
+
+These include:
+* support for server-side MVC, e.g. JavaServer Faces and ASP.NET MVC; 
+* business objects, e.g. Enterprise JavaBeans; 
+* object to relational mapping, e.g. MS LINQ, Java Persistence API; 
+* messaging systems, e.g. Java Messaging Service;
+* interoperability, e.g. SOAP-based web services.
+
 ### Java Enterprise Edition (Java EE)
 
 Java is a language (JDK) and a platform (JRE).
@@ -293,20 +304,189 @@ Remember EU Cookie Law
 
 Specified in the `web.xml` descriptor.
 
-## Construction Technologies
+#### Useful Features
 
-*Examination of technical solutions for building enterprise applications as provided by enterprise Java and .NET for building distributed applications.*
+* Templating
+* Validation & Schemas
+* i18n
+* Security
+* Database access
+* Support for good design patterns
+* Tight Integration
+* Testing Frameworks
+* Web Service support
 
-These include:
-* support for server-side MVC, e.g. JavaServer Faces and ASP.NET MVC; 
-* business objects, e.g. Enterprise JavaBeans; 
-* object to relational mapping, e.g. MS LINQ, Java Persistence API; 
-* messaging systems, e.g. Java Messaging Service;
-* interoperability, e.g. SOAP-based web services.
+Generally: higher level libraries and code reuse.
+
+##### i18n and L10n
+
+Internationalisation and localisation are both important. Don't hardcode for the locale, instead store translations in DB or files and load them dynamically.
 
 ### Server-Side MVC
 
-#### Java Server Faces
+#### JavaServer Faces (JSF)
+
+Provides:
+
+* Templating
+  * Facelets
+  * JavaServer Pages (JSP)
+* Validators
+* MVC Pull
+* Navigation
+  * Fixed
+  * Dynamic
+* AJAX
+* i18n/L10n
+* Session Management
+* DB Access
+  * JDBC
+  * ORM frameworks
+* Testing Frameworks
+* Code reuse
+* Web Services and resources
+
+##### Basic Technology
+
+Basic Api for represention components and managing their state; handling events, server-side validation and data conversion; defining page navigation; supporting i18n and accessibility; and providing extensibility.
+
+A tag library for adding components to web pages and connecting components to server-side objects.
+
+##### Expression Language
+
+Like most scripting languages `$` and `#` are used.
+
+`${expr}` are *rvalues* (read-only) and are processed immediately.
+
+`#{expr}` are *lvalues (read-write) and have deferred evaluation. Also used for method expressions.
+
+`${object.variable}` calls `object.getVariable()` under the covers.
+
+`#{object.method}` calls `object.method()`.
+
+##### Faces
+
+A replacement for JavaServer Pages (which are now deprecated).
+
+Write (X)HTML with special tags which have an XML appearance which will be rendered as HTML with functionality behind it.
+
+`<h:body>` is the top level tag.
+
+All pages will tend to act like a form, so `<h:form>` is very commonly used, even in cases where there would not normally be a form.
+
+##### Common Attributes
+
+* `id`
+* `style` to associate CSS
+* `rendered` is a condition to check is the element should be rendered on the page. The condition can be an expression from the Expression Language.
+* `value` the value of the component, again this can be from the Expression Language, which links the view to the model.
+
+##### Composite Components
+
+Built from standard components.
+
+These can be parametrised and stored in `resources`; they have a namespace (default: `http://xmlns.jcp.org/jsf/composite/ezcomp`)
+
+```xml
+<!DOCTYUPE html PUBLIC ...>
+<html xmlns="..."
+      xmlns:cc = "..."
+      xmlns:h = "...">
+
+<!-- INTERFACE -->
+<cc:interface>
+  <cc:attribute name="x" required="true" />
+</cc:interface>
+
+<!-- IMPLEMENTATION -->
+<cc:implementation>
+  <p>
+    <h:outputLabel for="i" value="Repeats" />
+    <h:inputText id="i" value="{cc.attrs.x}" />
+    <h:message for="repeat" />
+  </p>
+</cc:implementation>
+```
+
+##### Templating
+
+Can create template pages which has values to fill in. The inheriting page has to fill in these values.
+
+##### Navigation
+
+Write navigation rules in XML, each rule is a page (view). For each page there is a set of outcomes (in string form). For each outcome a next page is specified.
+
+Typically stored in `faces-config.xml`
+
+Outcomes are generated from the `action` attributes from components.
+
+There are implicit navigation rules which falls back to a matching page if it can be found.
+
+##### Converters
+
+Implement `javax.faces.convert.Converter`
+
+Have associated error string displayed if conversion fails (`<h:messages>`).
+
+Number of default converters for most Java Objects and primitives.
+
+Converters are used in four ways:
+
+1. Bind the component to a managed bean property of the right type (default).
+2. Put the converter class in the component's `converter` attribute.
+3. For numbers and dates, nest the `f:convertDateTime` or `f:convertNumber` tag inside the component.
+4. Put the `f:converter` tag inside the component and refer to the converter (general purpose tag).
+
+##### Events & Listeners
+
+Part of the component model, application events are generated by components (ultimately from the rendered page).
+
+The JSF application can map HTTP requests to the specific handling code.
+
+Two types of event:
+
+1. Application event; when the user activates a component that implements `ActionSource` (buttons, links, etc.).
+2. Value-change event; when the users changes the value of a component represented by `UIInput`.
+
+Listeners cause the application to respond to events:
+
+1. Implement an event listener class to handle the event and register it to a component.
+2. Implement a method of a managed bean and refer to it in the EL attribute in the component tag.
+
+##### Validators
+
+Similar to converters, but only provide validation.
+
+Implement `javax.faces.validator.Validator`
+
+Again, default validators are provided.
+
+Registered by:
+
+1. nesting the validator's tag inside the component
+2. Nesting the `f:validator` tag inside the component.
+
+`BeanValidator` uses validation methods in the bean instead of having to write a separate class. Also allows the validation to be model-state specific.
+
+###### Bean Validation
+
+```java
+public void validateVar(FacesContext context, UIComponent toValidate, Object value) {
+    int input = (Integer) value; // cast the given value
+    if(!condition) {
+      ((UIInput) toValidate).setValid(false);
+      FacesMessage message = newFacesMessage(
+        "error message");
+      context.addMessage(
+        toValidate.getClientId(context), 
+        message);
+    }
+}
+```
+
+##### Lifecycle
+
+Starts when the client request a URL and ends with the server response.
 
 #### ASP.NET
 
@@ -319,6 +499,12 @@ These include:
 #### MS LINQ
 
 #### Java Persistence API
+
+Access to database at SQL level or through an ORM Framework
+
+##### JDBC
+
+Provides direct access to a database.
 
 ### Messaging Systems
 
