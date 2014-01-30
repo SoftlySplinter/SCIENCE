@@ -506,6 +506,33 @@ Access to database at SQL level or through an ORM Framework
 
 Provides direct access to a database.
 
+Only provides relational records, not Objects.
+
+##### Java Naming and Directory Interface (JNDI)
+
+Access to naming and directory services, part of the Java SE API. Looks up objects by name, returning values or references.
+
+API for the clients.
+
+Service provider interface (SPI) wadds new directory and naming services.
+
+##### Java Persistence API (JPA)
+
+Provides an ORM mapping of Java Object using Java annotations. Provides:
+
+* Create
+* Retrieve
+* Modify
+* Write
+
+*(So CUR<s>D</s> then? -A)*
+
+Entities are JavaBeans, annotated with `@Entity`. Automatically mapped, but can label instance variables with extra details; `@Column` can map Java types to SQL types.
+
+`@Id` is required.
+
+*(JPA can be a real pain though, he glossed over this just a little bit -A).*
+
 ### Messaging Systems
 
 #### Java Messaging Service
