@@ -533,6 +533,276 @@ Entities are JavaBeans, annotated with `@Entity`. Automatically mapped, but can 
 
 *(JPA can be a real pain though, he glossed over this just a little bit -A).*
 
+#### Enterprise Java Beans (EJB)
+
+EJBs act as an ORM framework, where the Java Objects are annotated with the DB schema details.
+
+Three types of EJB Session:
+
+1. Stateful
+2. Stateless
+3. Singleton
+
+Can also have message-driven beans.
+
+Access can be done through:
+
+* No-interface view (all the public methods are available)
+* Through a business interface
+* Injection
+* JNDI
+
+#### Transactions
+
+A transaction is a unit of work which supports "ACID".
+
+
+##### Atomic
+
+Every task within a unit of work must complete successfully otherwise the transaction is aborted
+
+##### Consistent
+
+Atomicity, isolation, durability lead to consistent data. Developer must also define database consistency checks.
+
+##### Isolated
+
+Preventing interference from other transactions.
+
+##### Durable
+
+Data written to disc before a transaction can fully complete.
+
+#### EJB Transactions
+In EJB Transactions have a scope. A transaction manager manages this process.
+
+EJBs support two types of transactions:
+
+* Container managed
+* Bean Managed
+
+##### Container Managed Transactions
+
+Transactional attributed specified using annotations or in the deployment descriptor.
+
+Outside of the EJB code.
+
+Reccommended
+
+##### Bean Managed Tranasctions
+
+Annotate EJB class with:
+
+```java
+@TransactionManagement(TransactionManagerType.BEAN)
+```
+
+Offers fine grained control.
+
+#### EJB Transactions Attributes
+
+Six types of transaction attributes, specified by annotations or descriptor.
+
+The default is `Required`.
+
+Can annotate the class to set the default for the class.
+
+##### NotSupported
+
+Transactions are not supported by the method, any current transaction will be suspended during this method call and resumed once it terminates.
+
+##### Supports
+
+Follows the caller; if it was in a transaction, it will remain so, if it was not, this will **not** create a new one.
+
+##### Required
+
+The method **must** be part of a transaction.
+
+If the caller was not in a transaction, this will start one.
+
+##### RequiresNew
+
+This method will always crate a new transaction. An existing one will be suspended and will resume after this is complete.
+
+The outer transaction will not roll-back if this one does.
+
+Useful to nest transactions
+
+##### Mandatory
+
+Must already be in a transaction, otherwise a `TransactionRequiredException` will be thrown.
+
+##### Never
+
+Must never be in a transaction, otherwise a `RemoteException` will be thrown.
+
+#### EJB Isolation
+
+Problems:
+
+* Dirty Reads
+* Non-repeatable Reads
+* Phantom Reads
+
+Provide four (fairly standard) levels of transactions:
+
+* `TRANSACTION_READ_UNCOMMITTED`
+* `TRANSACTION_READ_COMMITTED`
+* `TRANSACTION_REPEATABLE_READ`
+* `TRANSACTION_SERIALIZABLE`
+
+In bean-managed transaction, can specify isolation using the JDBC API: 
+
+```java
+connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE) ;```
+
+Using serializable guarantees data consistency, but may affect performance.
+
+##### Read Uncommitted
+
+Uncommitted changes are visible to other transactions, other transactions can change rows that another transaction has read.
+
+May result in inconsistencies as a rollback by T1 may mean that T2s data is out of date.
+
+##### Read Committed
+
+Rows updated in a transaction cannot be read by another transaction, but rows read by one transaction can be changed by another.
+
+Rows updated by T1 cannot be read by T2.
+
+Rows read by T1 can be updated by T1 or T2.
+
+##### Repeatable Read
+
+Rows read by one transaction cannot be updated by any transactions.
+
+Rows read by T1 cannot be updated by T1 or T2.
+
+##### Serializable
+
+Transaction (appears) to have a lock on the data.
+
+#### EJB Transactions with Exceptions
+
+Checked exceptions (including application exceptions) do not cause an automatic rollback, but can be set using `@ApplicationException(rollback=true)`
+
+Unchecked exceptions and `RemoteException`s automatically cause a rollback and the EJB instance is discarded.
+
+#### Injections
+
+Getting a reference to object instances without instantiation or passing in as parameters, providing good decoupling.
+
+There are two mechanisms for this:
+
+1. Resource Injection
+2. Dependency Injection
+
+Annotations to fields or methods specify the injection points.
+
+Provides a  runtime binding which provides inversion of control.
+
+Compatible abstractions are required to avoid typing errors; the code using an object is not responsible for choosing an implementation or creating the instance.
+
+Injection is often the implementation for this, but can use:
+
+* Factories
+* Service Locators
+* Contextualised lookup
+
+#### Resource Injection
+
+Inject references to objects in the JNDI namespace into any container-managed object.
+
+Gets a reference to a resource using: 
+
+* Annotations
+* Deployment Descriptor
+* `InitialContext` lookup
+
+Inject as an interface type, code independent of specific implementation.
+
+Not type safe!
+
+##### Variable Resource Injection
+
+```java
+public class MyServlet extends HttpServlet
+  @Resource(name="java:comp/DfeaultDataSource")
+  private javax.sql.DataSource dsc;
+}
+```
+
+##### Method Resource Injection
+
+```java
+public class MyServlet extends HttpServlet {
+  private javax.sql.DataSource dsc;
+
+  @Resource(name="java:comp/DefaultDataSource")
+  public void setDsc(javax.sql.DataSource dsc) {
+    this.dsc = dsc
+  }
+}
+```
+
+Method name must being with `set`, with a `void` return type and only one parameter.
+
+#### Contexts and Dependency Injection (CDI)
+
+Any Java object can be made managed by its container. The CDI defines scpoes and a managed object has a declared (or default) scope.
+
+This can then be injected into any other managed object.
+
+##### Application Scoped
+
+`@ApplicationScoped`
+
+##### Session Scoped
+
+`@SessionScoped`
+
+##### Request Scoped
+
+`@RequestScoped`
+
+##### Conversation Scoped
+
+`@ConversationScoped`
+
+Covers the AJAX exchanged (can be extended using an ID)
+
+##### Dependent
+
+`@Dependent`
+
+Inherits the scope from the object it is inserted into.
+
+This is the default scope.
+
+##### Injection
+
+```java
+import javax.inject.Inject
+
+public class Printer {
+  @Inject
+  Greeting greeting;
+}
+```
+
+##### Qualified Injection
+
+```java
+public class Printer {
+  @Inject
+  @Informal
+  Greeting greeting;
+}
+```
+
+Can create a subtype of Greeting which is annotated using `@Informal` to allow variants of a type.
+
 ### Messaging Systems
 
 #### Java Messaging Service
