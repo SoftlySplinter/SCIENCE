@@ -271,7 +271,7 @@ Provides access to:
 * Headers
 * A writer (for the body)
 
-###### Forwarding
+##### Forwarding
 
 Can forward requests to other servlets, passing on the request and response objects. Used for branching on context, for example.
 
@@ -281,7 +281,7 @@ RequestDispatcher d = req.getRequestDispatcher('name');
 d.forward(req, resp)
 ```
 
-###### Instance Variables and Servlets
+##### Instance Variables and Servlets
 
 A servlet could have instance variables, however these variables are not specific to a connection, rather the whole servlet.
 
@@ -291,7 +291,7 @@ Need features for session data.
 
 Reminder that HTTP is stateless.
 
-###### Sessions
+##### Sessions
 
 The request must carry some identification of the session, server usually generates this information.
 
@@ -300,7 +300,7 @@ The request must carry some identification of the session, server usually genera
 
 Remember EU Cookie Law
 
-###### Error Redirects
+##### Error Redirects
 
 Specified in the `web.xml` descriptor.
 
@@ -318,9 +318,61 @@ Specified in the `web.xml` descriptor.
 
 Generally: higher level libraries and code reuse.
 
-##### i18n and L10n
+#### i18n and L10n
 
 Internationalisation and localisation are both important. Don't hardcode for the locale, instead store translations in DB or files and load them dynamically.
+
+#### Authentication
+
+#### Authorization
+
+### .NET
+
+Microsoft framework for developing and deploying applications with:
+
+* Cloud (Azure)
+* Web Server
+* Desktop
+* Restricted Resource Devices and Mobile Phones
+
+Similarities with Java (JRE).
+
+Focused on Windows, but can run on other platforms through mono.
+
+#### Overview
+
+![](http://misc.alexanderdbrown.com/dotNET.png)
+
+##### Common Language Runtime (CLR)
+
+The .NET JRE effectively.
+
+Loads and executes .NET "managed code".
+
+CLR loads code into application domains to provide a level of isolation and the ability to stop and remove a domain.
+
+Provides Just In Time (JIT) compilation, memory management and GC.
+
+Security based one roles and defined by policies.
+
+##### Building and Deploying Code
+
+1. Compile source code files.
+2. Combine IL (MSIL), metadata, config files and other resources into assembly files.
+  * DLL or EXE extensions
+    * DLL is a library module
+    * EXE is only type that will activate the CLR
+3. Deploy Applications to CLR
+
+
+#### ASP.NET
+
+.NET Applications for the web, which uses:
+
+* Web Forms - Event based
+* Web Services - Application to Application
+* MVC
+* ASP.NET AJAX
 
 ### Server-Side MVC
 
