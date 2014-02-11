@@ -944,6 +944,134 @@ Some protocols and some implementation already on offer.
 
 #### SOAP-based Web Services
 
+## Software Development Process
+
+There is no such thing as a silver bullet for software development processes.
+
+### Testing
+
+Methods for testing a system.
+
+#### White/Black Box Testing
+
+A basis for which testing is built on
+
+#### Unit Testing
+
+Testing the smallest possible unit.
+
+#### Functional Testing
+
+Test that a part provides an expected function.
+
+#### Non-functional Testing
+
+Tests that a part will not fail to function under certain circumstances.
+
+#### Integration/Subsystem Testing
+
+Testing larger units of work combine together.
+
+#### Verification Testing
+
+Have we built the right thing?
+
+Does it conform to standards.
+
+#### System Testing
+
+Our testing of the entire system.
+
+#### Acceptance Testing
+
+Testing the system is acceptable for the client.
+
+### Formal Methods
+
+Write a formal specification and then program to that specification so that something can be proved to have worked.
+
+#### VDM
+
+#### Z Notation
+
+### Traditional Methods
+
+Focus on up front design before development
+
+#### Waterfall Model
+
+1. Requirements
+2. Planning
+3. Design
+4. Development
+5. Testing
+6. Deployment
+7. Maintainace
+
+#### Spiral Model
+
+#### Iterative Development
+
+### Agile Methods
+
+Focus on providing features without large amounts of up-front development and client involvement.
+
+#### Extreme Programming
+
+Promotes no-one authorship of code with refractoring.
+
+Planning game to put features.
+
+Can use a metaphor to describe the system.
+
+#### Test Driven Development
+
+Write tests first then produce code to pass those tests (but no more).
+
+#### Feature Driven Development
+
+Break the system down into user stories, make these stories into features which can then be developed independently.
+
+Need some overall architecture.
+
+#### Rapid Application Development
+
+Hack it until it works.
+
+#### Scrum
+
+Self organising teams with a focus on co-location of all team members and communication.
+
+#### Model-Driven Engineering
+
+1. Build a model
+2. Test the model
+3. Translate the model into executables
+
+Platform Independent Model -> Platform Dependent Model.
+
+Can use tools like executable UML.
+
+### Open Source
+
+Methods for developing software in a more unmanaged and dynamic way.
+
+#### Cathedral
+
+A big in-house style of development where every developer understands the big picture.
+
+#### Bazaar
+
+A very dynamic way of developing, which not every developer has the big picture, but understands their small parts, usually needs some figureheads.
+
+#### Crowd Sourcing
+
+Getting a large amount of people to come up with potential solutions and selecting the best ones.
+
+#### Hacking
+
+Playing with a system and getting it to do tasks it was not necessarily designed to do.
+
 ## Design Issues
 
 *A number of enterprise application design patterns will be reviewed within the context of technologies discussed in 2. Building multi-tier applications requires developers to know more than just technologies, they must also know and use design techniques suited to their development. Students will learn about reusable enterprise design patterns, and in particular those used for the development of distributed, multi-tier applications.*
