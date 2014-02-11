@@ -4,7 +4,7 @@ This module focuses on current issues in the field of Software Engineering. The 
 
 ## Introduction
 
-
+It is okay to produce a paper based on my own paper :-)
 
 ### Staff
 
@@ -25,4 +25,23 @@ This module focuses on current issues in the field of Software Engineering. The 
 * Participation and Contribution **15%**
 * Survey Paper (9000 words) **60%**
 * Poster **25%**
+
+## How to Read a Scientific Paper
+
+Papers provides a good view of what is happening now. Journal papers give a more out of date view than conference papers. Blogs typically give the most up-to-date view but are least verifiable.
+
+Papers should give enough information that there is enough information to replicate the experiment.
+
+It will show some actual data.
+
+### Steps
+
+1. Read the abstract, check the information will be relevant
+2. Read the conclusion and discussion, check the results agree with the abstract and if they are still relevant.
+3. Read the introduction, check you understand the background information and see if you need to look up more items to understand this paper.
+4. Read the results. Usually tables and figures are provided to show the data.
+
+Now the methods become important, it gives details on how the experiment was set up and carried out. Try to pick out the basic methods and work upwards.
+
+References provide a way of tracking back through the sources.
 
