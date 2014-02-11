@@ -326,6 +326,35 @@ Internationalisation and localisation are both important. Don't hardcode for the
 
 #### Authorization
 
+#### Testing
+
+Use JUnit where possible (with mocks, stubs, etc.)
+
+Can test Java Beans using an embedded EJB Container.
+
+Service testing is slightly more difficult
+
+##### Service Testing
+
+Testing the resources in an automated way to avoid manual input.
+
+Provides rapid and reliable regression testing.
+
+Handles:
+
+* HTTP(S)
+* FTP
+* LDAP
+* JMS
+* Mail
+* SOAP
+
+Specify calls, with parameters or sequences.
+
+Selenium or JMeter are options (JMeter also does load testing).
+
+JMeter also has a NetBeans plugin.
+
 ### .NET
 
 Microsoft framework for developing and deploying applications with:
@@ -857,7 +886,59 @@ Can create a subtype of Greeting which is annotated using `@Informal` to allow v
 
 ### Messaging Systems
 
+Acts as a middleware which decouples:
+
+* time
+* platform
+* language
+
+Which is usually machine-to-machine.
+
+There are **a lot** of standards.
+
+#### Models for Messaging Systems.
+
+* Point-to-Point (queue)
+* Publish/Subscribe
+* Fanout
+* Request/Response
+
 #### Java Messaging Service
+
+A Java API which "allows applications to create, send, receive and read messages using reliable, asynchronous, loosely coupled communication."
+
+Requires an implementation.
+
+Access Connection Factories or Queues using injection.
+
+#### Message Brokers
+
+Most patterns require middleware (all can use it).
+
+Possible roles include:
+
+* Routing
+* Receiving
+* Storing
+  * Persistent
+* Transmit
+* Broadcast
+* Translate
+* Monitor
+
+##### Brokers
+
+JavaEE applcation servers must have one. Glassfish has Open MQ.
+
+.NET has one part of the service bus.
+
+Apache Active MQ is a good offering.
+
+##### Security
+
+Authentication & Authorisation, encryption of messages, integrity of messages, transactional, etc.
+
+Some protocols and some implementation already on offer.
 
 ### Interoperability
 
