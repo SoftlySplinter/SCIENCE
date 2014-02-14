@@ -45,3 +45,15 @@ Now the methods become important, it gives details on how the experiment was set
 
 References provide a way of tracking back through the sources.
 
+## Paper Presentations
+
+Set down for presenting Abstract State Machines (Feb 28) and Swarm Robotics (Mar 28) and asking questions on Biological Data Sharing (Mar 14) and Swarm Robotics (Apr 4).
+
+## Literature Review/Survey Paper
+
+9000 words of pure gold.
+
+May address *any* aspect of software engineering.
+
+MSc should probably review the literature of their project.
+
