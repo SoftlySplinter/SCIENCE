@@ -394,14 +394,9 @@ Security based one roles and defined by policies.
 3. Deploy Applications to CLR
 
 
-#### ASP.NET
+#### Internet Information Services (IIS)
 
-.NET Applications for the web, which uses:
-
-* Web Forms - Event based
-* Web Services - Application to Application
-* MVC
-* ASP.NET AJAX
+The application server which runs ASP.NET applications.
 
 ### Server-Side MVC
 
@@ -571,6 +566,77 @@ Starts when the client request a URL and ends with the server response.
 
 #### ASP.NET
 
+.NET Applications for the web, which uses:
+
+* Web Forms - Event based
+* Web Services - Application to Application
+* MVC
+* ASP.NET AJAX
+
+##### View State
+
+Stores the entire state in a hidden item in the form. Simplistic, but does affect performance and security.
+
+Sent in base64.
+
+Can disable for the entire page, or for specific elements.
+
+Also have the ability to encrypt, `EnableViewStateMac` or store server-side.
+
+##### Session State
+
+There are different techniques which can be used to store session state:
+
+* Cookies (bad)
+* REST Requests (not stateful)
+* Server Side session tokens (persistence/scalability questions)
+
+ASP.NET uses server side session tokens:
+
+```C#
+String myVallue = "A. Name";
+Session["name"] = myValue;
+myVale = (String) Session["name"];
+```
+
+Can configure where the data is held. Can also turn off the requirement for cookies.
+
+###### In Process (InProc)
+
+Same as ASP.
+
+###### SQL Server (SQLServer)
+
+Store state in Microsoft's SQL Server, which can be on another machine.
+
+###### StateServer
+
+Store in a separate process, which can be on another machine.
+
+###### Custom
+
+Write your own mechanism.
+
+###### Off
+
+
+##### System.Web.UI.Page
+
+Default base class for code-bheind filels.
+
+Implements `System.Web.IHttpHandler`:
+
+* `IsReusable()` - true if the handler can be pooled
+* `ProcessRequest(` - Processes the actual HTTP request.
+
+##### HTTP Pipeline
+
+![HTTP Pipeline](http://misc.alexanderdbrown.com/asp.net/http_pipeline.png)
+
+#### GridView and SQL DataSource
+
+Ways of display DB data.
+
 ### Business Objects
 
 #### Enterprise Java Beans
@@ -736,7 +802,8 @@ Provide four (fairly standard) levels of transactions:
 In bean-managed transaction, can specify isolation using the JDBC API: 
 
 ```java
-connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE) ;```
+connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE) ;
+```
 
 Using serializable guarantees data consistency, but may affect performance.
 
