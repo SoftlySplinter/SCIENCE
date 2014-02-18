@@ -77,9 +77,9 @@ then
   IFS_BAK=$IFS
   IFS="
 "
-  for i in `grep "^# " $FILE`
+  for i in $(grep "^# " $FILE)
   do
-    module=`echo $i | awk --field-separator=' ' '{print $2}'`
+    module=$(echo $i | awk --field-separator=' ' '{print $2}')
     getmodule $module
   done
   IFS=$IFS_BAK
