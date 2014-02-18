@@ -16,7 +16,7 @@ This allows some of the maths formats provided in the earlier modules.
 
 ## [Gingko](https://gingkoapp.com) Compatability
 
-The [Gingko Script](gingko.sh) provides a way of downloading notes from the Gingko editor. To use this for your own Gingko tree edit the `EXT_FILE` variable to point at your tree name; this tree will need to be public.
+The [Gingko Script](gingko.sh) provides a way of downloading notes from the Gingko editor.
 
 There is no way of updating a Gingko tree from this repository at the moment.
 
