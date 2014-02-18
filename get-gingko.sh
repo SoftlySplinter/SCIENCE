@@ -10,7 +10,8 @@ EXT_FILE="aber-level-m.txt"
 BASE="https://gingkoapp.com/"
 URL="${BASE}${EXT_FILE}"
 TEMP=".temp"
-MD="md/${1}/00-notes.md"
+DIR="modules"
+MD="${DIR}/${1}.md"
 
 wget --quiet --no-check-certificate --output-document=${FILE} -- ${URL}
 
