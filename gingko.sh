@@ -17,10 +17,8 @@ getmodule() {
   out=${DIR}/${module}.md
   if [ $module = "Seminars" ]
   then
-    echo "Seminars can't be processed yet."
     return 2
   fi
-  echo "Getting module: ${module}"
   start=$(grep --line-number "^# ${module}" $FILE | awk --field-separator=: '{print $1}')
   linestart=$(expr ${start} + 1)
   sed -n "${linestart},\$p" $FILE > $TEMP
@@ -71,7 +69,7 @@ fi
 
 url="${URL}/${tree:-${DEFAULT_TREE}}.txt"
 
-trap 'echo "Removing temp files"; rm -f ${FILE} ${TEMP}' INT TERM EXIT
+trap 'rm -f ${FILE} ${TEMP}' INT TERM EXIT
 wget --quiet --no-check-certificate --output-document=${FILE} -- ${url}
 
 if [ ! -z $all ]
@@ -94,8 +92,7 @@ fi
 
 if [ ! -z $git ]
 then
-  echo "Pushing to git"
-  git add ${f}
+  git add ${added}
   git commit -m "[auto] Add notes from $(date)"
   git push
 fi
