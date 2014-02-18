@@ -84,7 +84,7 @@ then
     module=`echo $i | awk --field-separator=' ' '{print $2}'`
     getmodule $module
   done
-  IFS=$IFS_BACK
+  IFS=$IFS_BAK
 fi
 
 if [ ! -z $module ]
@@ -94,11 +94,8 @@ fi
 
 if [ ! -z $git ]
 then
-  for f in ${added}
-  do
-    echo "Pushing to git"
-    git add ${f}
-    git commit -m "[auto] Add notes from $(date)"
-    git push
-  done
+  echo "Pushing to git"
+  git add ${f}
+  git commit -m "[auto] Add notes from $(date)"
+  git push
 fi
