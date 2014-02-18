@@ -1,8 +1,14 @@
 #! /bin/sh
 if test $# -eq 0
 then
-  echo "You bastard"
+  echo "No module supplied."
   exit 255
+fi
+
+if [ ${1} = "Seminars" ] 
+then
+  echo "Need to sort out Seminars."
+  exit 254
 fi
 
 FILE=".notes"
