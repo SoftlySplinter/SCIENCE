@@ -1,54 +1,98 @@
 #! /bin/sh
 
-# Script to pull the markdown notes from Gingko (https://gingkoapp.com) based on
-# a module name.
-# Usage: gingko.sh <module>
-
-USAGE="${0} <module>"
+URL="https://gingkoapp.com"
+DEFAULT_TREE="aber-level-m"
 FILE=".notes"
-EXT_FILE="aber-level-m.txt"
-BASE="https://gingkoapp.com/"
-URL="${BASE}${EXT_FILE}"
 TEMP=".temp"
 DIR="modules"
-MD="${DIR}/${1}.md"
+added=""
 
-if test $# -eq 0
-then
-  echo "No module supplied."
-  echo ${USAGE}
-  exit 255
-fi
+usage() {
+  echo "Usage: ${0} -m <module>|-a [-t <tree name>] -p" 1>&2
+  exit 1
+}
 
-if [ ${1} = "Seminars" ] 
-then
-  echo "Seminars are not currently supported."
-  exit 254
-fi
-
-wget --quiet --no-check-certificate --output-document=${FILE} -- ${URL}
-
-if grep --silent "^# ${1}" $FILE
-then
-  LINESTART=`grep --line-number "^# ${1}" $FILE | awk --field-separator=: '{print $1}'`
-  START=`expr $LINESTART + 1`
-  sed -n "${START},\$p" $FILE > $TEMP
-  LINEEND=`grep --max-count 1 --line-number "^# .*" $TEMP | awk --field-separator=: '{print $1}'`
-  rm ${TEMP}
-  if [ -z "$LINEEND" ]
+getmodule() {
+  module=$1
+  out=${DIR}/${module}.md
+  if [ $module = "Seminars" ]
   then
-    LINEEND="$"
-  else
-    LINEEND=`expr $LINEEND + $LINESTART - 1`
+    echo "Seminars can't be processed yet."
+    return 1
   fi
-  sed -n "${LINESTART},${LINEEND}p" ${FILE} > ${MD}
-else
-  echo "Module ${1} not found."
-  exit 254
+  echo "Getting module: ${module}"
+  start=$(grep --line-number "^# ${module}" $FILE | awk --field-separator=: '{print $1}')
+  linestart=$(expr ${start} + 1)
+  sed -n "${linestart},\$p" $FILE > $TEMP
+  lineend=$(grep --max-count 1 --line-number "^# .*" $TEMP | awk --field-separator=: '{print $1}')
+  if [ -z ${lineend} ]
+  then
+    end="$"
+  else
+    end=$(expr $lineend + $start - 1)
+  fi
+  sed -n "${start},${end}p" ${FILE} > ${out}
+  added="${added} ${out}"
+}
+
+while getopts "m:at:p" flag
+do
+  case $flag in
+    m)
+      if [ ! -z $all ]
+      then
+        usage
+      fi
+      module=$OPTARG
+      ;;
+    a)
+      if [ ! -z $module ]
+      then
+        usage
+      fi
+      all=1
+      ;;
+    t)
+      tree=$OPTARG
+      ;;
+    p)
+      git=1
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+
+url="${URL}/${tree:-${DEFAULT_TREE}}.txt"
+
+trap 'echo "Removing temp files"; rm -f ${FILE} ${TEMP}' INT TERM EXIT
+wget --quiet --no-check-certificate --output-document=${FILE} -- ${url}
+
+if [ ! -z $all ]
+then
+  IFS_BAK=$IFS
+  IFS="
+"
+  for i in `grep "^# " $FILE`
+  do
+    module=`echo $i | awk --field-separator=' ' '{print $2}'`
+    getmodule $module
+  done
+  IFS=$IFS_BACK
 fi
 
-rm ${FILE}
+if [ ! -z $module ]
+then
+  getmodule $module
+fi
 
-git add ${MD}
-git commit -m "[auto] Add notes from `date`"
-git push
+if [ ! -z $git ]
+then
+  for f in ${added}
+  do
+    git add ${f}
+    git commit -m "[auto] Add notes from $(date)"
+    git push
+  done
+fi
