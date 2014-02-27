@@ -4,6 +4,7 @@ URL="https://gingkoapp.com"
 DEFAULT_TREE="aber-level-m"
 FILE=".notes"
 TEMP=".temp"
+SEMINAR=".seminars"
 DIR="modules"
 added=""
 
@@ -15,10 +16,7 @@ usage() {
 getmodule() {
   module=$1
   out=${DIR}/${module}.md
-  if [ $module = "Seminars" ]
-  then
-    return 2
-  fi
+
   start=$(grep --line-number "^# ${module}" $FILE | awk --field-separator=: '{print $1}')
   linestart=$(expr ${start} + 1)
   sed -n "${linestart},\$p" $FILE > $TEMP
@@ -31,6 +29,28 @@ getmodule() {
   fi
   sed -n "${start},${end}p" ${FILE} > ${out}
   added="${added} ${out}"
+
+  if [ $module = "Seminars" ]
+  then
+    getseminar ${out}
+    rm -f ${out}
+  fi
+}
+
+getseminar() {
+#  sems=$1
+#  curl --silent --output ${SEMINAR} http://www.aber.ac.uk/en/cs/guest-seminars/seminars-recent/
+#  cat ${SEMINAR} | tr '\n' ' ' | sed s/"  "/" "/g > ${TEMP}
+#
+#  IFS_BAK=$IFS
+#  IFS="
+#"
+#  for i in $(grep "^## " $sems)
+#  do
+#    seminar_name=$(echo $i | sed s/"^## "/""/)
+#    echo "${seminar_name}"
+#  done
+  echo "Not handling seminars yet"
 }
 
 while getopts "m:at:p" flag
@@ -69,7 +89,7 @@ fi
 
 url="${URL}/${tree:-${DEFAULT_TREE}}.txt"
 
-trap 'rm -f ${FILE} ${TEMP}' INT TERM EXIT
+trap 'rm -f ${FILE} ${TEMP} ${SEMINAR}' INT TERM EXIT
 wget --quiet --no-check-certificate --output-document=${FILE} -- ${url}
 
 if [ ! -z $all ]
