@@ -31,3 +31,5 @@ html/
 
 .notes
 .temp
+.meta.xml
+*.epub
